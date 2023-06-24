@@ -1,0 +1,53 @@
+# Учетные записи системы контроля версий
+.svn
+.git
+
+# Сборка и промежуточные файлы
+dist/
+*.tmp
+*.bak
+*.swp
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.idea/
+
+# Зависимости
+node_modules/
+
+# Логи
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Каталог, используемый npm для сохранения установленных пакетов
+node_modules/
+
+# Архивы и сжатые файлы
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Log файлы
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Игнорировать сгенерированные файлы
+/jspm_packages/
+
+# Игнорировать основные файлы
+.env
+.idea/
+.DS_Store
