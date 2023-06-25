@@ -1,0 +1,124 @@
+/* -----BASE----- */
+@import url('https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+/* -----HEADER----- */
+
+header {
+    background-color: #EDF2EC;
+    height: 8.375rem;
+    padding: 2.62rem 6.81rem 2.62rem 6.94rem;
+    font-family: "Inika";
+}
+
+.header__container {
+    width: 76.25rem;
+    height: 3.125rem;
+    margin: 0 auto;
+}
+
+.header__navbar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.948rem;
+    height: 1.315rem;
+}
+
+.navbar-logo p {
+    font-size: 1rem;
+    align-self: flex-end;
+}
+
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 2.88rem;
+    font-size: 1rem;
+}
+
+.navbar-nav p:nth-child(1) {
+    color: #E06733;
+    font-weight: 700;
+}
+
+.navbar-nav p.active {
+    color: #E06733;
+    font-weight: 700;
+}
+
+/* -----SECTION WELCOME----- */
+
+.welcome {
+    background-color: #EDF2EC;
+    height: 33.25rem;
+    padding: 3.88rem 6.81rem 3.92rem 6.81rem;
+    font-family: "Inter";
+}
+
+.welcome-container {
+    width: 76.375rem;
+    height: 25.46rem;
+}
+
+.welcome__section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.welcome-picture {
+    width: 28.04969rem;
+    height: 25.45988rem;    
+}
+
+.welcome-greeting {
+    width: 34.3125rem;
+    height: 21.25rem;   
+}
+
+.welcome-greeting h1{
+    font-size: 2.813rem;
+    font-weight: 700;
+    color: #717171;
+    line-height: 3.125rem;
+}
+
+.welcome-greeting span {
+    color: #499A18;
+}
+
+.welcome-greeting p {
+    color: #636060;
+    font-size: 1.25rem;
+    margin-top: 2.63rem;
+}
+
+.welcome-btn { 
+    margin-top: 3.87rem;
+    width: 9.875rem;
+    height: 2.75rem;
+    background: transparent;
+    border-radius: 10px;
+    border: 2px solid #E06733;
+}
