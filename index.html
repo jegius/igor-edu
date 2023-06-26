@@ -7,39 +7,110 @@
     <title>Plants</title>
 </head>
 <body>
-    <header>
-        <div class="header__container">
+    <header class="header">
+        <div class="header__container main">
             <div class="header__navbar">
                 <div class="navbar-logo">
-                    <img src="./img/logo_vector.svg" alt="логотип листочков">
-                    <p>Plants</p>
+                    <div class="logo-image"></div>
+                    <span>Plants</span>
                 </div>
-                <div class="navbar-nav">
-                    <p>Home</p>
-                    <p>About us</p>
-                    <p>Service</p>
-                    <p>Price</p>
-                    <p>Contacts</p>
-                </div>
+                <nav>
+                  <ul>
+                    <a class="active">Home</a>
+                    <a>About us</a>
+                    <a>Service</a>
+                    <a>Price</a>
+                    <a>Contacts</a>
+                  </ul>
+                </nav>
             </div>
         </div>
     </header>
     <section class="welcome">
-        <div class="welcome-container">
+        <div class="welcome-container main">
             <div class="welcome__section">
-                <div class="welcome-picture">
-                   <img src="./img/leafs.svg" alt="">
-                </div>
+                <div class="welcome-picture"></div>
                 <div class="welcome-greeting">
                     <h1>We grow <span>plants</span> and give you oxygen</h1>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                    <button class="welcome-btn">LEARN MORE</button>
+                    <input type="button" class="welcome-btn" value="LEARN MORE">
                 </div>
             </div>
         </div>
     </section>
-
-
+            <!-- about section -->
+    <section class="about">
+        <div class="about-container main">
+            <div class="about__inner">
+                <div class="about-text">
+                    <h1>We are <span>professional<br> experienced</span> gardeners</h1>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                </div>
+                <div class="about-image"></div>
+            </div>
+        </div>
+    </section>
+            <!-- service section -->
+    <section class="service">
+        <div class="service-container main">
+            <div class="service-content">
+                <h3>Service and our<br>projects</h3>
+                <div class="services-btns">
+                    <input type="button" class="service-btn" value="Gardens">
+                    <input type="button" class="service-btn" value="Lawn">
+                    <input type="button" class="service-btn" value="Planting">
+                </div>
+            </div>
+                <div class="service-cards">
+                    <div class="service-cards__first-row service-cards__row">
+                        <div class="service-card">
+                            <div class="card-image"></div>
+                            <div class="underimage__card-text">
+                                <h2>Garden care</h2>
+                                <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="card-image"></div>
+                            <div class="underimage__card-text">
+                                <h2>Planting</h2>
+                                <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="card-image"></div>
+                            <div class="underimage__card-text">
+                                <h2>Lawn care</h2>
+                                <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-cards__second-row  service-cards__row">
+                        <div class="service-card">
+                            <div class="card-image"></div>
+                            <div class="underimage__card-text">
+                                <h2>Planting</h2>
+                                <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            </div>    
+                        </div>
+                        <div class="service-card">
+                            <div class="card-image"></div>
+                            <div class="underimage__card-text">
+                                <h2>Garden care</h2>
+                                <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="card-image"></div>
+                            <div class="underimage__card-text">
+                                <h2>Planting</h2>
+                                <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
     <script src="./app.js"></script>
 </body>
 </html>

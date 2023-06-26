@@ -12,19 +12,33 @@ html {
     font-size: 16px;
 }
 
+.main {
+    max-width: 76.375rem;
+    margin: 0 auto;
+}
+
+:root {
+    --white: #ffffff;
+    --orangeColor: #E06733;
+    --mainBackgroundGreen: #EDF2EC;
+    --primaryTextGreenColor: #499A18;
+    --paragraphGreyColor: #636060;
+    --mainGreyColor: #717171;
+    --navLinks: #010201;
+    --borderCards: #E3E1D5;
+}
+
 /* -----HEADER----- */
 
-header {
-    background-color: #EDF2EC;
+.header {
+    background-color: var(--mainBackgroundGreen);
     height: 8.375rem;
     padding: 2.62rem 6.81rem 2.62rem 6.94rem;
     font-family: "Inika";
 }
 
 .header__container {
-    width: 76.25rem;
     height: 3.125rem;
-    margin: 0 auto;
 }
 
 .header__navbar {
@@ -37,47 +51,58 @@ header {
 
 .navbar-logo {
     display: flex;
-    align-items: center;
     justify-content: center;
     width: 4.948rem;
     height: 1.315rem;
+    align-items: flex-end;
 }
 
-.navbar-logo p {
+.logo-image {
+    background-image: url(./img/logo_vector.svg);
+    height: 1.25rem;
+    width: 1.25rem;
+    background-repeat: no-repeat;
+    margin-bottom: 0.25rem;
+}
+
+.navbar-logo span {
     font-size: 1rem;
-    align-self: flex-end;
 }
 
 
-.navbar-nav {
+nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    column-gap: 2.88rem;
     font-size: 1rem;
 }
 
-.navbar-nav p:nth-child(1) {
-    color: #E06733;
-    font-weight: 700;
+nav ul {
+    display: flex;
+    list-style: none;
+    column-gap: 2.88rem;
 }
 
-.navbar-nav p.active {
-    color: #E06733;
+nav ul a {
+    color: var(--navLinks);
+}
+
+
+nav ul a.active {
+    color: var(--orangeColor);
     font-weight: 700;
 }
 
 /* -----SECTION WELCOME----- */
 
 .welcome {
-    background-color: #EDF2EC;
+    background-color: var(--mainBackgroundGreen);
     height: 33.25rem;
     padding: 3.88rem 6.81rem 3.92rem 6.81rem;
     font-family: "Inter";
 }
 
 .welcome-container {
-    width: 76.375rem;
     height: 25.46rem;
 }
 
@@ -90,7 +115,9 @@ header {
 .welcome-picture {
     width: 28.04969rem;
     height: 25.45988rem;    
+    background-image: url(./img/leafs.svg);
 }
+
 
 .welcome-greeting {
     width: 34.3125rem;
@@ -100,16 +127,16 @@ header {
 .welcome-greeting h1{
     font-size: 2.813rem;
     font-weight: 700;
-    color: #717171;
+    color: var(--mainGreyColor);
     line-height: 3.125rem;
 }
 
 .welcome-greeting span {
-    color: #499A18;
+    color: var(--primaryTextGreenColor);
 }
 
 .welcome-greeting p {
-    color: #636060;
+    color: var(--paragraphGreyColor);
     font-size: 1.25rem;
     margin-top: 2.63rem;
 }
@@ -119,6 +146,149 @@ header {
     width: 9.875rem;
     height: 2.75rem;
     background: transparent;
-    border-radius: 10px;
-    border: 2px solid #E06733;
+    border-radius: 0.625rem;
+    border: 0.125rem solid var(--orangeColor);
+}
+
+.welcome-btn:hover {
+    background-color: var(--orangeColor);
+    color: var(--white);
+    transition: 0.3s all;
+}
+
+/* -----ABOUT SECTION----- */
+
+.about {
+    border-color: var(--white);
+    padding: 5.8125rem 6.8125rem 5.875rem 6.8125rem;
+}
+
+.about-container {
+    height: 29.938rem;
+}
+
+.about__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-text {
+    max-width: 37.8125rem;
+    height: 21.875rem;  
+}
+
+.about-text h1 {
+    color: var(--primaryTextGreenColor);
+    font-size: 2.5rem;
+    font-family: "Inika";
+    line-height: 3.258rem;
+    font-weight: 400;
+}
+
+.about-text span {
+    color: var(--orangeColor);
+}
+
+.about-text p {
+    margin-top: 2.5rem;
+    color: var(--paragraphGreyColor);
+    font-size: 1.25rem;
+    font-family: "Inter";
+    line-height: 1.875rem;
+}
+
+.about-image {
+    background-image: url(./img/housePlant.svg);
+     width: 29rem;  /*пришлось задать width а не max-width так как картинка пропадает  */
+    height: 29.9375rem;
+}
+
+/* -----SERVICE----- */
+
+.service {
+    background-color: var(--mainBackgroundGreen);
+    padding-top: 2.5rem;
+    padding-bottom: 7.56rem;
+}
+
+.service-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 62.938rem;
+    height: 5.875rem;
+    font-family: "Inika";
+}
+
+.service-content h3 {
+    color: var(--primaryTextGreenColor);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 3.258rem;
+}
+
+.service-btn {
+    background: transparent;
+    width: 10.063rem;  /*  тут тоже захардкодил так как начинают сужаться, */
+    height: 3.125rem;
+    border: 0.063rem solid var(--orangeColor);
+    color: var(--orangeColor);
+    border-radius: 0.313rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-left: 2.37rem;
+}
+
+.service-btn:hover {
+    background-color: var(--orangeColor);
+    color: var(--white);
+    transition: 0.3s all;
+}
+
+.service-cards {
+    margin-top: 5.62rem;
+}
+
+.service-cards__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 7.31rem;
+}
+
+.service-cards__second-row {
+    margin-top: 3.44rem;
+}
+
+.service-card {
+    width: 20.625rem;
+    height: 28.125rem;
+    font-family: "Inter";
+}
+
+.card-image {
+    border-radius: 1.25rem 1.25rem 0rem 0rem;
+    width: 20.56269rem;
+    height: 21.875rem;
+}
+
+.service-card h2 {
+    margin-top: 0.63rem;
+    font-size: 1.25rem;
+    color: var(--orangeColor);
+    font-weight: 700;
+    text-align: center;
+}
+
+.service-card p {
+    margin-top: 0.62rem;
+    text-align: center;
+}
+
+.underimage__card-text {
+    border-radius: 0rem 0rem 1.25rem 1.25rem;
+    border: 0.063rem solid var(--borderCards);
+    width: 20.625rem;
+    height: 6.25rem;
 }
