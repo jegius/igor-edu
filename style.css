@@ -390,3 +390,121 @@ nav ul a.active {
     margin-left: 31rem;  /* скорее всего это неправильное решение и похоже на костыль*/
 }
 
+/*-----CONTACTS----- */
+
+/* если честно совсем не понял как сделать эту секцию */
+
+.contacts {
+    background-color: var(--mainBackgroundGreen);
+    padding-top: 3.75rem;
+}
+
+.contacts-greeting {
+    color: var(--primaryTextGreenColor);
+    font-size: 2.5rem;
+    font-family: "Inika";
+    font-weight: 700;
+    text-align: center;
+}
+
+.picture-plus-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.contacts__picture {
+    width: 25rem;
+    height: 31.06163rem;
+    background-image: url(./img/contactImages/contact_woman\ 1.svg);
+}
+
+.dropdown__contact {
+    width: 28.125rem;
+    height: 3.125rem;
+    background: #D6E7D2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20rem;
+}
+
+.dropdown__contact-city {
+    color: #717171;
+    font-size: 1.25rem;
+    font-family: "Inter";
+    letter-spacing: 0.0625rem;
+    margin-left: 1.25rem;
+}
+
+.dropdown__contact-arrow {
+    background-image: url(./img/contactImages/accordion_contacts.svg);
+    width: 1rem;
+    height: 1rem;
+    margin-right: 2.19rem;
+}
+
+/* -----FOOTER----- */
+
+.footer {
+    background-color: var(--white);
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer__left-side {
+    display: flex;
+    column-gap: 1.25rem;
+    font-size: 1.25rem;
+    font-family: "Inter";
+    align-items: center;
+}
+
+.copyright {
+    background-image: url(./img/contactImages/copyright.svg);
+    width: 1.188rem;
+    height: 3.125rem;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.center-text {
+    font-size: 1.25rem;
+    font-family: "Inter";
+    }
+
+.footer__right-side {
+   display: flex;
+   column-gap: 1.25rem;
+}
+
+.footer__right-side a {
+    width: 2rem;
+    height: 2rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-decoration: none
+}
+
+.inst-img {
+    background-image: url(./img/contactImages/InstImg.svg);
+}
+
+.facebook-img {
+    background-image: url(./img/contactImages/facebookImg.svg);
+}
+
+.twitter-img {
+    background-image: url(./img/contactImages/twitterImg.svg);
+}
+
+.pinterest-img {
+    background-image: url(./img/contactImages/pinterestImg.svg);
+}
