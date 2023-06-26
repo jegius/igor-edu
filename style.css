@@ -26,6 +26,20 @@ html {
     --mainGreyColor: #717171;
     --navLinks: #010201;
     --borderCards: #E3E1D5;
+    --onePixel: 0.063rem;
+    --twentyBR: 1.25rem
+}
+
+.allBtns {
+    border: 0.063rem solid var(--orangeColor);
+    background: transparent;
+    color: var(--orangeColor);
+}
+
+.allBtns:hover {
+    background: var(--orangeColor);
+    color: var(--white);
+    transition: .3s all;
 }
 
 /* -----HEADER----- */
@@ -292,3 +306,87 @@ nav ul a.active {
     width: 20.625rem;
     height: 6.25rem;
 }
+
+/*-----PRICES-----*/
+
+.prices {
+    background-color: var(--white);
+    padding-top: 2.5rem;
+    padding-bottom: 7.19rem;
+}
+
+.prices-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.prices__left-side h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: "Inter";
+}
+
+.prices-dropdowns {
+    margin-top: 3.75rem;
+    width: 20.75rem;
+    height: 17.62569rem;
+    border-radius: 20px;
+    border: var(--onePixel) solid var(--borderCards);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 2rem;
+}
+
+.dropdown-button {
+    background-color: #EDF2EC;
+    width: 15.625rem;
+    height: 3.12513rem;
+    border-radius: var(--twentyBR);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1.25rem;
+    font-family: Inter;
+    font-weight: 700;
+}
+
+.dropdown__accordion-img {
+    background-image: url(./img/accordion_btn.svg);
+    width: 1rem;
+    height: 1rem;
+}
+
+.prices__right-side h1 {
+    text-align: right;
+    font-size: 2.5rem;
+    font-family: Inter;
+    font-weight: 700;
+    line-height: 3.125rem;
+}
+
+.prices__right-side span {
+    color: var(--primaryTextGreenColor);
+}
+
+.price-btn {
+    margin-top: 2.38rem;
+    width: 10.125rem;
+    height: 3.12513rem;
+    border-radius: 0.313rem;
+    font-size: 1.25rem;
+    font-family: "Inika";
+    font-weight: 700;
+    margin-left: 30rem;
+}
+
+.price-image {
+    margin-top: 2.44rem;
+    width: 9.5rem;
+    height: 10.937rem;  
+    background-image: url(./img/smallLeafs.svg);
+    margin-left: 31rem;  /* скорее всего это неправильное решение и похоже на костыль*/
+}
+
