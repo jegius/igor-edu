@@ -97,12 +97,12 @@ nav ul {
     column-gap: 2.88rem;
 }
 
-nav ul a {
+.nav-link {
     color: var(--navLinks);
 }
 
 
-nav ul a.active {
+.nav-link_active {
     color: var(--orangeColor);
     font-weight: 700;
 }
