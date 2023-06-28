@@ -3,9 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
@@ -31,10 +31,11 @@ html {
     --dropdownColor: #717171;
 }
 
-.allBtns {
+.all-buttons {
     border: 0.063rem solid var(--orangeColor);
     background: transparent;
     color: var(--orangeColor);
+    cursor: pointer;
 }
 
 .allBtns:hover {
@@ -509,12 +510,14 @@ html {
    column-gap: 1.25rem;
 }
 
+
 .footer__social-media-link {
     width: 2rem;
     height: 2rem;
     background-repeat: no-repeat;
     background-position: center;
-    text-decoration: none
+    text-decoration: none;
+    list-style: none;
 }
 
 .inst {
