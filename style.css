@@ -332,6 +332,10 @@ html {
     justify-content: space-between;
 }
 
+.prices__left-side {
+    min-height: 25,3125rem;
+}
+
 .prices__left-side h1 {
     font-size: 2.5rem;
     font-weight: 700;
@@ -360,7 +364,7 @@ html {
     align-items: center;
     justify-content: space-around;
     font-size: 1.25rem;
-    font-family: Inter;
+    font-family: 'Inter';
     font-weight: 700;
 }
 
@@ -370,10 +374,17 @@ html {
     height: 1rem;
 }
 
-.prices__right-side h1 {
+.prices__right-side {
+    background-image: url(./img/smallLeafs.svg);
+    background-repeat: no-repeat;
+    min-height: 25.3125rem;
+    background-position: right bottom;
+}
+
+.prices__right-side__title {
     text-align: right;
     font-size: 2.5rem;
-    font-family: Inter;
+    font-family: 'Inter';
     font-weight: 700;
     line-height: 3.125rem;
 }
@@ -384,26 +395,25 @@ html {
 
 .price-btn {
     margin-top: 2.38rem;
-    width: 10.125rem;
-    height: 3.12513rem;
+    padding: 0.75rem 2.12rem 0.75rem 1.88rem;
     border-radius: 0.313rem;
     font-size: 1.25rem;
     font-family: "Inika";
     font-weight: 700;
-    margin-left: 30rem;
+    float: right;
 }
 
-.price-image {
+/* .price-image {
     margin-top: 2.44rem;
     width: 9.5rem;
     height: 10.937rem;  
     background-image: url(./img/smallLeafs.svg);
-    margin-left: 31rem;  /* скорее всего это неправильное решение и похоже на костыль*/
-}
+    margin-left: 31rem; 
+} */
 
 /*-----CONTACTS----- */
 
-/* если честно совсем не понял как сделать эту секцию */
+
 
 .contacts {
     background-color: var(--mainBackgroundGreen);
