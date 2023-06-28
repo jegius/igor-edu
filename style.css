@@ -157,12 +157,13 @@ html {
 
 .welcome-btn { 
     margin-top: 3.87rem;
-    width: 9.875rem;
-    height: 2.75rem;
+    padding: 0.87rem 1.69rem;
     background: transparent;
     border-radius: 0.625rem;
     border: 0.125rem solid var(--orangeColor);
     transition: background-color .3s ease-in, color 0.3s ease-out;
+    cursor: pointer;
+    font-family: "Inter"
 }
 
 .welcome-btn:hover {
@@ -248,7 +249,7 @@ html {
 
 .service-btn {
     background: transparent;
-    width: 10.063rem;  /*  тут тоже захардкодил так как начинают сужаться, */
+    min-width: 10.063rem;  /*  тут тоже захардкодил так как начинают сужаться, */
     height: 3.125rem;
     border: 0.063rem solid var(--orangeColor);
     color: var(--orangeColor);
