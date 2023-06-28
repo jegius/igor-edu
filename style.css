@@ -27,7 +27,8 @@ html {
     --navLinks: #010201;
     --borderCards: #E3E1D5;
     --onePixel: 0.063rem;
-    --twentyBR: 1.25rem
+    --twentyBR: 1.25rem;
+    --dropdownColor: #717171;
 }
 
 .allBtns {
@@ -413,8 +414,6 @@ html {
 
 /*-----CONTACTS----- */
 
-
-
 .contacts {
     background-color: var(--mainBackgroundGreen);
     padding-top: 3.75rem;
@@ -437,14 +436,14 @@ html {
 .contacts__picture {
     width: 25rem;
     height: 31.06163rem;
-    background-image: url(./img/contactImages/contact_woman\ 1.svg);
+    background-image: url(./img/contactImages/contact_woman1.svg);
 }
 
 .dropdown__contact {
     width: 28.125rem;
     height: 3.125rem;
     background: #D6E7D2;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -452,7 +451,7 @@ html {
 }
 
 .dropdown__contact-city {
-    color: #717171;
+    color: var(--dropdownColor);
     font-size: 1.25rem;
     font-family: "Inter";
     letter-spacing: 0.0625rem;
@@ -501,12 +500,12 @@ html {
     font-family: "Inter";
     }
 
-.footer__right-side {
+.footer__social-media {
    display: flex;
    column-gap: 1.25rem;
 }
 
-.footer__right-side a {
+.footer__social-media-link {
     width: 2rem;
     height: 2rem;
     background-repeat: no-repeat;
@@ -514,18 +513,18 @@ html {
     text-decoration: none
 }
 
-.inst-img {
+.inst {
     background-image: url(./img/contactImages/InstImg.svg);
 }
 
-.facebook-img {
+.facebook {
     background-image: url(./img/contactImages/facebookImg.svg);
 }
 
-.twitter-img {
+.twitter {
     background-image: url(./img/contactImages/twitterImg.svg);
 }
 
-.pinterest-img {
+.pinterest {
     background-image: url(./img/contactImages/pinterestImg.svg);
 }
