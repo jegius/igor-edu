@@ -12,7 +12,7 @@ html {
     font-size: 16px;
 }
 
-.main {
+.centered {
     max-width: 76.375rem;
     margin: 0 auto;
 }
@@ -79,19 +79,19 @@ html {
     margin-bottom: 0.25rem;
 }
 
-.navbar-logo span {
+.logo-brandname {
     font-size: 1rem;
 }
 
 
-nav {
+.nav {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
 }
 
-nav ul {
+.nav__inner {
     display: flex;
     list-style: none;
     column-gap: 2.88rem;
@@ -162,19 +162,19 @@ nav ul {
     background: transparent;
     border-radius: 0.625rem;
     border: 0.125rem solid var(--orangeColor);
+    transition: background-color .3s ease-in, color 0.3s ease-out;
 }
 
 .welcome-btn:hover {
     background-color: var(--orangeColor);
     color: var(--white);
-    transition: 0.3s all;
 }
 
 /* -----ABOUT SECTION----- */
 
 .about {
     border-color: var(--white);
-    padding: 5.8125rem 6.8125rem 5.875rem 6.8125rem;
+    padding: 5.8125rem 6.81rem 5.875rem 6.81rem;
 }
 
 .about-container {
@@ -192,19 +192,21 @@ nav ul {
     height: 21.875rem;  
 }
 
-.about-text h1 {
+.about-text__title {
     color: var(--primaryTextGreenColor);
     font-size: 2.5rem;
     font-family: "Inika";
     line-height: 3.258rem;
     font-weight: 400;
+    width: 28.9375rem;
+    height: 6.375rem;
 }
 
-.about-text span {
+.about-text__colorized {
     color: var(--orangeColor);
 }
 
-.about-text p {
+.about-text__content {
     margin-top: 2.5rem;
     color: var(--paragraphGreyColor);
     font-size: 1.25rem;
@@ -235,11 +237,13 @@ nav ul {
     font-family: "Inika";
 }
 
-.service-content h3 {
+.service-content__title {
     color: var(--primaryTextGreenColor);
     font-size: 2.5rem;
     font-weight: 400;
     line-height: 3.258rem;
+    width: 19.125rem;
+    height: 5.875rem;
 }
 
 .service-btn {
