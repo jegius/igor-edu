@@ -236,6 +236,7 @@ html {
     max-width: 62.938rem;
     height: 5.875rem;
     font-family: "Inika";
+    column-gap: 8.88rem;
 }
 
 .service-content__title {
@@ -247,16 +248,21 @@ html {
     height: 5.875rem;
 }
 
+.services-btns {
+    display: flex;
+    min-width: 34,9375rem;
+    column-gap: 2.38rem;
+}
+
 .service-btn {
     background: transparent;
-    min-width: 10.063rem;  /*  тут тоже захардкодил так как начинают сужаться, */
+    min-width: 10.063rem; 
     height: 3.125rem;
     border: 0.063rem solid var(--orangeColor);
     color: var(--orangeColor);
     border-radius: 0.313rem;
     font-size: 1.25rem;
     font-weight: 400;
-    margin-left: 2.37rem;
 }
 
 .service-btn:hover {
