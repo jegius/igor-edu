@@ -12,10 +12,15 @@ html {
     font-size: 16px;
 }
 
-.centered {
+._centered {
     max-width: 76.375rem;
     margin: 0 auto;
 }
+
+._with-padding {
+    padding: 2.62rem 6.81rem 2.62rem 6.94rem;
+}
+
 
 :root {
     --white: #ffffff;
@@ -47,12 +52,10 @@ html {
     transition: .3s all;
 }
 
-.section {
-       padding: 2.62rem 6.81rem 2.62rem 6.94rem;
-}
+
 /* -----HEADER----- */
 
-.header__section {
+.header {
     background-color: var(--mainBackgroundGreen);
     font-family: "Inika";
 }
@@ -69,12 +72,14 @@ html {
     justify-content: space-between;
 }
 
+
+
 .navbar-logo {
-    display: flex;
-    justify-content: center;
     width: 4.948rem;
     height: 1.315rem;
     align-items: flex-end;
+    display: flex;
+    justify-content: center;
 }
 
 .logo-image {
@@ -90,7 +95,7 @@ html {
 }
 
 
-.nav {
+.header__nav {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -116,14 +121,10 @@ html {
 
 /* -----SECTION WELCOME----- */
 
-.welcome__section {
+.welcome {
     background-color: var(--mainBackgroundGreen);
     height: 33.25rem;
     font-family: "Inter";
-}
-
-.welcome-container {
-    height: 25.46rem;
 }
 
 .welcome__inner {
@@ -177,8 +178,8 @@ html {
 
 /* -----ABOUT SECTION----- */
 
-.about__section {
-    border-color: var(--white);
+.about {
+    background-color: var(--white);
 }
 
 .about-container {
@@ -191,12 +192,12 @@ html {
     justify-content: space-between;
 }
 
-.about-text {
+.about__text {
     max-width: 37.8125rem;
     height: 21.875rem;  
 }
 
-.about-text__title {
+.about__text-title {
     color: var(--primaryTextGreenColor);
     font-size: 2.5rem;
     font-family: "Inika";
@@ -206,11 +207,11 @@ html {
     height: 6.375rem;
 }
 
-.about-text__colorized {
+.about__text_colorized {
     color: var(--orangeColor);
 }
 
-.about-text__content {
+.about__text-content {
     margin-top: 2.5rem;
     color: var(--paragraphGreyColor);
     font-size: 1.25rem;
@@ -218,7 +219,7 @@ html {
     line-height: 1.875rem;
 }
 
-.about-image {
+.about__image {
     background-image: url(../img/about_houseplant.png);
      width: 29rem; 
     height: 29.9375rem;
@@ -226,11 +227,11 @@ html {
 
 /* -----SERVICE----- */
 
-.service__section {
+.service {
     background-color: var(--mainBackgroundGreen);
 }
 
-.service-content {
+.service__content {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -240,7 +241,7 @@ html {
     column-gap: 8.88rem;
 }
 
-.service-content__title {
+.service__content-title {
     color: var(--primaryTextGreenColor);
     font-size: 2.5rem;
     font-weight: 400;
@@ -249,7 +250,7 @@ html {
     height: 5.875rem;
 }
 
-.services-btns {
+.service__btns {
     display: flex;
     min-width: 34,9375rem;
     column-gap: 2.38rem;
@@ -272,43 +273,36 @@ html {
     transition: 0.3s all;
 }
 
-.service-cards {
+.service__cards {
     margin-top: 5.62rem;
+    display: flex;
+    row-gap: 3.44rem;
+    column-gap: 7.15rem;
+    flex-wrap: wrap;
 }
 
-.service-card:nth-child(1)  .card-image {
+.service-card__image {
+    width: 20.56269rem;
+    height: 21.875rem;
+}
+
+.service-card:nth-child(1) .service-card__image {
     background-image: url(../img/servicesCards/service_picture0.png);
 }
-
-.service-card:nth-child(2)  .card-image {
+.service-card:nth-child(2) .service-card__image {
     background-image: url(../img/servicesCards/service_picture1.png);
 }
-
- .service-card:nth-child(3)  .card-image {
+.service-card:nth-child(3) .service-card__image {
     background-image: url(../img/servicesCards/service_picture2.png);
 }
-
-.service-cards__second-row  .service-card:nth-child(1)  .card-image {
+.service-card:nth-child(4) .service-card__image {
     background-image: url(../img/servicesCards/service_picture3.png);
 }
-
-.service-cards__second-row  .service-card:nth-child(2)  .card-image {
+.service-card:nth-child(5) .service-card__image {
     background-image: url(../img/servicesCards/service_picture4.png);
 }
-
-.service-cards__second-row  .service-card:nth-child(3)  .card-image {
+.service-card:nth-child(6) .service-card__image {
     background-image: url(../img/servicesCards/service_picture5.png);
-}
-
-.service-cards__row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    column-gap: 7.31rem;
-}
-
-.service-cards__second-row {
-    margin-top: 3.44rem;
 }
 
 .service-card {
@@ -317,13 +311,13 @@ html {
     font-family: "Inter";
 }
 
-.card-image {
+.service__card-image {
     border-radius: 1.25rem 1.25rem 0rem 0rem;
     width: 20.56269rem;
     height: 21.875rem;
 }
 
-.service-card h2 {
+.underImage__title {
     margin-top: 0.63rem;
     font-size: 1.25rem;
     color: var(--orangeColor);
@@ -331,12 +325,12 @@ html {
     text-align: center;
 }
 
-.service-card p {
+.underImage__description {
     margin-top: 0.62rem;
     text-align: center;
 }
 
-.underimage__card-text {
+.service-card__underImage {
     border-radius: 0rem 0rem 1.25rem 1.25rem;
     border: 0.063rem solid var(--borderCards);
     width: 20.625rem;
@@ -345,11 +339,11 @@ html {
 
 /*-----PRICES-----*/
 
-.prices__section {
+.prices {
     background-color: var(--white);
 }
 
-.prices-inner {
+.prices__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -411,6 +405,8 @@ html {
     font-family: 'Inter';
     font-weight: 700;
     line-height: 3.125rem;
+    max-width: 28.25rem;
+    max-height: 6.4375rem;
 }
 
 .prices__right-side span {
@@ -429,8 +425,10 @@ html {
 
 /*-----CONTACTS----- */
 
-.contacts__section {
+.contacts{
     background-color: var(--mainBackgroundGreen);
+    padding-bottom: 0;
+
 }
 
 .contacts-container {
@@ -490,11 +488,11 @@ html {
 
 /* -----FOOTER----- */
 
-.footer__section {
+.footer {
     background-color: var(--white);
 }
 
-.footer-inner {
+.footer__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -526,14 +524,20 @@ html {
    column-gap: 1.25rem;
 }
 
+.footer__social-media-element {
+    height: 2rem;
+    width: 2rem;
+    list-style: none;
+}
 
 .footer__social-media-link {
-    width: 2rem;
-    height: 2rem;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
     background-repeat: no-repeat;
     background-position: center;
-    text-decoration: none;
-    list-style: none;
+    cursor: pointer;
+    display: block;
 }
 
 .inst {
