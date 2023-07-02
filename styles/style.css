@@ -47,12 +47,13 @@ html {
     transition: .3s all;
 }
 
+.section {
+       padding: 2.62rem 6.81rem 2.62rem 6.94rem;
+}
 /* -----HEADER----- */
 
-.header {
+.header__section {
     background-color: var(--mainBackgroundGreen);
-    height: 8.375rem;
-    padding: 2.62rem 6.81rem 2.62rem 6.94rem;
     font-family: "Inika";
 }
 
@@ -115,10 +116,9 @@ html {
 
 /* -----SECTION WELCOME----- */
 
-.welcome {
+.welcome__section {
     background-color: var(--mainBackgroundGreen);
     height: 33.25rem;
-    padding: 3.88rem 6.81rem 3.92rem 6.81rem;
     font-family: "Inter";
 }
 
@@ -126,7 +126,7 @@ html {
     height: 25.46rem;
 }
 
-.welcome__section {
+.welcome__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -177,9 +177,8 @@ html {
 
 /* -----ABOUT SECTION----- */
 
-.about {
+.about__section {
     border-color: var(--white);
-    padding: 5.8125rem 6.81rem 5.875rem 6.81rem;
 }
 
 .about-container {
@@ -227,10 +226,8 @@ html {
 
 /* -----SERVICE----- */
 
-.service {
+.service__section {
     background-color: var(--mainBackgroundGreen);
-    padding-top: 2.5rem;
-    padding-bottom: 7.56rem;
 }
 
 .service-content {
@@ -348,10 +345,8 @@ html {
 
 /*-----PRICES-----*/
 
-.prices {
+.prices__section {
     background-color: var(--white);
-    padding-top: 2.5rem;
-    padding-bottom: 7.19rem;
 }
 
 .prices-inner {
@@ -434,10 +429,8 @@ html {
 
 /*-----CONTACTS----- */
 
-.contacts {
+.contacts__section {
     background-color: var(--mainBackgroundGreen);
-    padding-top: 3.75rem;
-    padding: 3.31rem 6.81rem 0 6.81rem; 
 }
 
 .contacts-container {
@@ -497,10 +490,8 @@ html {
 
 /* -----FOOTER----- */
 
-.footer {
+.footer__section {
     background-color: var(--white);
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
 }
 
 .footer-inner {
