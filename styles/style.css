@@ -1,0 +1,557 @@
+/* -----BASE----- */
+@import url('https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+._centered {
+    max-width: 76.375rem;
+    margin: 0 auto;
+}
+
+._with-padding {
+    padding: 2.62rem 6.81rem 2.62rem 6.94rem;
+}
+
+
+:root {
+    --white: #ffffff;
+    --orangeColor: #E06733;
+    --mainBackgroundGreen: #EDF2EC;
+    --primaryTextGreenColor: #499A18;
+    --paragraphGreyColor: #636060;
+    --mainGreyColor: #717171;
+    --navLinks: #010201;
+    --borderCards: #E3E1D5;
+    --onePixel: 0.063rem;
+    --twentyBR: 1.25rem;
+    --dropdownColor: #717171;
+    --onePixelBorder: 0.063rem solid #E06733;
+    --twoPixelBorder:  0.125rem solid #E06733;
+}
+
+.all-buttons {
+    border: var(--onePixelBorder);
+    background: transparent;
+    color: var(--orangeColor);
+    cursor: pointer;
+    transition: background-color .3s ease-in, color .3s ease-out;
+}
+
+.all-buttons:hover {
+    background: var(--orangeColor);
+    color: var(--white);
+    transition: .3s all;
+}
+
+
+/* -----HEADER----- */
+
+.header {
+    background-color: var(--mainBackgroundGreen);
+    font-family: "Inika";
+}
+
+.header__container {
+    height: 3.125rem;
+}
+
+.header__navbar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+.navbar-logo {
+    width: 4.948rem;
+    height: 1.315rem;
+    align-items: flex-end;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-image {
+    background-image: url(../img/logo_vector.svg);
+    height: 1.25rem;
+    width: 1.25rem;
+    background-repeat: no-repeat;
+    margin-bottom: 0.25rem;
+}
+
+.logo-brandname {
+    font-size: 1rem;
+}
+
+
+.header__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.nav__inner {
+    display: flex;
+    list-style: none;
+    column-gap: 2.88rem;
+}
+
+.nav-link {
+    color: var(--navLinks);
+    text-decoration: none;
+}
+
+
+.nav-link_active {
+    color: var(--orangeColor);
+    font-weight: 700;
+}
+
+/* -----SECTION WELCOME----- */
+
+.welcome {
+    background-color: var(--mainBackgroundGreen);
+    height: 33.25rem;
+    font-family: "Inter";
+}
+
+.welcome__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.welcome-picture {
+    width: 28.04969rem;
+    height: 25.45988rem;    
+    background-image: url(../img/leafs/welcome_leafs.png);
+}
+
+
+.welcome-greeting {
+    width: 34.3125rem;
+    height: 21.25rem;   
+}
+
+.welcome-greeting h1{
+    font-size: 2.813rem;
+    font-weight: 700;
+    color: var(--mainGreyColor);
+    line-height: 3.125rem;
+}
+
+.welcome-greeting span {
+    color: var(--primaryTextGreenColor);
+}
+
+.welcome-greeting p {
+    color: var(--paragraphGreyColor);
+    font-size: 1.25rem;
+    margin-top: 2.63rem;
+}
+
+.welcome-btn { 
+    margin-top: 3.87rem;
+    padding: 0.87rem 1.69rem;
+    background: transparent;
+    border-radius: 0.625rem;
+    border: var(--twoPixelBorder);
+    font-family: "Inter";
+}
+
+.welcome-btn:hover {
+    background-color: var(--orangeColor);
+    color: var(--white);
+}
+
+/* -----ABOUT SECTION----- */
+
+.about {
+    background-color: var(--white);
+}
+
+.about-container {
+    height: 29.938rem;
+}
+
+.about__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about__text {
+    max-width: 37.8125rem;
+    height: 21.875rem;  
+}
+
+.about__text-title {
+    color: var(--primaryTextGreenColor);
+    font-size: 2.5rem;
+    font-family: "Inika";
+    line-height: 3.258rem;
+    font-weight: 400;
+    width: 28.9375rem;
+    height: 6.375rem;
+}
+
+.about__text_colorized {
+    color: var(--orangeColor);
+}
+
+.about__text-content {
+    margin-top: 2.5rem;
+    color: var(--paragraphGreyColor);
+    font-size: 1.25rem;
+    font-family: "Inter";
+    line-height: 1.875rem;
+}
+
+.about__image {
+    background-image: url(../img/about_houseplant.png);
+     width: 29rem; 
+    height: 29.9375rem;
+}
+
+/* -----SERVICE----- */
+
+.service {
+    background-color: var(--mainBackgroundGreen);
+}
+
+.service__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 62.938rem;
+    height: 5.875rem;
+    font-family: "Inika";
+    column-gap: 8.88rem;
+}
+
+.service__content-title {
+    color: var(--primaryTextGreenColor);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 3.258rem;
+    width: 19.125rem;
+    height: 5.875rem;
+}
+
+.service__btns {
+    display: flex;
+    min-width: 34,9375rem;
+    column-gap: 2.38rem;
+}
+
+.service-btn {
+    background: transparent;
+    min-width: 10.063rem; 
+    height: 3.125rem;
+    border: var(--onePixelBorder);
+    color: var(--orangeColor);
+    border-radius: 0.313rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.service-btn:hover {
+    background-color: var(--orangeColor);
+    color: var(--white);
+    transition: 0.3s all;
+}
+
+.service__cards {
+    margin-top: 5.62rem;
+    display: flex;
+    row-gap: 3.44rem;
+    column-gap: 7.15rem;
+    flex-wrap: wrap;
+}
+
+.service-card__image {
+    width: 20.56269rem;
+    height: 21.875rem;
+}
+
+.service-card:nth-child(1) .service-card__image {
+    background-image: url(../img/servicesCards/service_picture0.png);
+}
+.service-card:nth-child(2) .service-card__image {
+    background-image: url(../img/servicesCards/service_picture1.png);
+}
+.service-card:nth-child(3) .service-card__image {
+    background-image: url(../img/servicesCards/service_picture2.png);
+}
+.service-card:nth-child(4) .service-card__image {
+    background-image: url(../img/servicesCards/service_picture3.png);
+}
+.service-card:nth-child(5) .service-card__image {
+    background-image: url(../img/servicesCards/service_picture4.png);
+}
+.service-card:nth-child(6) .service-card__image {
+    background-image: url(../img/servicesCards/service_picture5.png);
+}
+
+.service-card {
+    width: 20.625rem;
+    height: 28.125rem;
+    font-family: "Inter";
+}
+
+.service__card-image {
+    border-radius: 1.25rem 1.25rem 0rem 0rem;
+    width: 20.56269rem;
+    height: 21.875rem;
+}
+
+.underImage__title {
+    margin-top: 0.63rem;
+    font-size: 1.25rem;
+    color: var(--orangeColor);
+    font-weight: 700;
+    text-align: center;
+}
+
+.underImage__description {
+    margin-top: 0.62rem;
+    text-align: center;
+}
+
+.service-card__underImage {
+    border-radius: 0rem 0rem 1.25rem 1.25rem;
+    border: 0.063rem solid var(--borderCards);
+    width: 20.625rem;
+    height: 6.25rem;
+}
+
+/*-----PRICES-----*/
+
+.prices {
+    background-color: var(--white);
+}
+
+.prices__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.prices__left-side {
+    min-height: 25,3125rem;
+}
+
+.prices__left-side h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: "Inter";
+}
+
+.prices-dropdowns {
+    margin-top: 3.75rem;
+    width: 20.75rem;
+    height: 17.62569rem;
+    border-radius: 20px;
+    border: var(--onePixel) solid var(--borderCards);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 2rem;
+}
+
+.dropdown-button {
+    background-color: #EDF2EC;
+    width: 15.625rem;
+    height: 3.12513rem;
+    border-radius: var(--twentyBR);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1.25rem;
+    font-family: 'Inter';
+    font-weight: 700;
+}
+
+.dropdown__accordion-img {
+    background-image: url(../img/accordion_btn_prices.svg);
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
+
+.prices__right-side {
+    background-image: url(../img/leafs/prices_leafs.png);
+    background-repeat: no-repeat;
+    min-height: 25.3125rem;
+    background-position: right bottom;
+}
+
+.prices__right-side__title {
+    text-align: right;
+    font-size: 2.5rem;
+    font-family: 'Inter';
+    font-weight: 700;
+    line-height: 3.125rem;
+    max-width: 28.25rem;
+    max-height: 6.4375rem;
+}
+
+.prices__right-side span {
+    color: var(--primaryTextGreenColor);
+}
+
+.price-btn {
+    margin-top: 2.38rem;
+    padding: 0.75rem 2.12rem 0.75rem 1.88rem;
+    border-radius: 0.313rem;
+    font-size: 1.25rem;
+    font-family: "Inika";
+    font-weight: 700;
+    float: right;
+}
+
+/*-----CONTACTS----- */
+
+.contacts{
+    background-color: var(--mainBackgroundGreen);
+    padding-bottom: 0;
+
+}
+
+.contacts-container {
+    background-image: url(../img/contact_woman.png);
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    min-height: 31.06163rem;;
+}
+
+.contacts-greeting {
+    color: var(--primaryTextGreenColor);
+    font-size: 2.5rem;
+    font-family: "Inika";
+    font-weight: 700;
+    text-align: center;
+}
+
+.dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+
+.dropdown__contact {
+    width: 28.125rem;
+    height: 3.125rem;
+    background: #D6E7D2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-bottom: 20rem;
+    display: flex;
+    align-items: center;
+    margin-top: 2.31rem;
+    margin-left: 44rem;
+}
+
+.dropdown__contact-city {
+    color: var(--dropdownColor);
+    font-size: 1.25rem;
+    font-family: "Inter";
+    letter-spacing: 0.0625rem;
+    margin-left: 1.25rem;
+}
+
+.dropdown__contact-city::after {
+    content:  '';
+    background-image: url(../img/contact_accordion-btn.svg);
+    width: 1rem;
+    height: 1rem;
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-left: 22rem;
+    cursor: pointer;
+}
+
+
+/* -----FOOTER----- */
+
+.footer {
+    background-color: var(--white);
+}
+
+.footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer__left-side {
+    display: flex;
+    column-gap: 1.25rem;
+    font-size: 1.25rem;
+    font-family: "Inter";
+    align-items: center;
+}
+
+.copyright {
+    width: 1.188rem;
+    height: 3.125rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../img/footerImages/copyright_logo.svg);
+}
+
+.center-text {
+    font-size: 1.25rem;
+    font-family: "Inter";
+    }
+
+.footer__social-media {
+   display: flex;
+   column-gap: 1.25rem;
+}
+
+.footer__social-media-element {
+    height: 2rem;
+    width: 2rem;
+    list-style: none;
+}
+
+.footer__social-media-link {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    display: block;
+}
+
+.inst {
+    background-image: url(../img/footerImages/instagram_image.svg);
+}
+
+.facebook {
+    background-image: url(../img/footerImages/facebook_image.svg);
+}
+
+.twitter {
+    background-image: url(../img/footerImages/twitter_image.svg);
+}
+
+.pinterest {
+    background-image: url(../img/footerImages/pinterest_image.svg);
+}
