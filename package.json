@@ -1,0 +1,26 @@
+{
+  "name": "igor-edu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.25",
+    "@storybook/addon-links": "^7.0.25",
+    "@storybook/blocks": "^7.0.25",
+    "@storybook/web-components": "^7.0.25",
+    "@storybook/web-components-vite": "^7.0.25",
+    "lit": "^2.7.5",
+    "lit-html": "^2.7.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.25"
+  }
+}
