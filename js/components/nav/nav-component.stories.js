@@ -37,7 +37,7 @@ const TemplateWithScrollDetection = ()  => html`
         .header {
             top: 1rem;
             left: 0;
-            position: fixed;
+            position: sticky;
             z-index: 2;
         }
         
