@@ -1,4 +1,6 @@
 import template from './link-component.template.js';
+import events from "../api/events.js";
+import {addListeners, removeListeners, select} from "../api/helpers";
 
 const linkAttributes = {
     LINK_TEXT: 'link-text',
@@ -12,6 +14,10 @@ export class LinkComponent extends HTMLElement {
     }
     #href;
     #link;
+
+    #listeners = [
+        [select.bind(this, '.link'), 'click', this.#addEventListeners.bind(this)]
+    ]
 
     #ATTRIBUTE_MAPPING = new Map([
         [linkAttributes.LINK_TEXT, LinkComponent.#setText],
@@ -30,7 +36,7 @@ export class LinkComponent extends HTMLElement {
 
     connectedCallback() {
         this.#render();
-        this.#link.addEventListener('click', this.#addEventListeners.bind(this));
+        this.#listeners.forEach(addListeners.bind(this));
 
         for (let attrName of this.constructor.observedAttributes) {
             if (this.hasAttribute(attrName)) {
@@ -65,12 +71,14 @@ export class LinkComponent extends HTMLElement {
     }
 
     #addEventListeners(event) {
-        const element = document.querySelector(this.#href);
+        const element = this.#href !== '#' ? document.querySelector(this.#href) : null;
 
         if (element) {
             event.preventDefault();
             element.scrollIntoView({ behavior: 'smooth' });
         }
+
+        this.dispatchEvent(new CustomEvent(events.LINK_CLICKED, {bubbles: true, detail: this}));
     }
 
     static #setActive(element, isActive) {
@@ -82,7 +90,7 @@ export class LinkComponent extends HTMLElement {
     }
 
     disconnectedCallback() {
-        removeEventListener(this.#link, this.#addEventListeners.bind(this))
+        this.#listeners.forEach(removeListeners);
     }
 
     #render() {

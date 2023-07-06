@@ -11,6 +11,12 @@ import '../link/link-component.styles.js'
 export default {
     title: 'NavComponent',
     tags: ['autodocs'],
+    argTypes: {
+        scrollDetection: {
+            control: {type: 'select'},
+            options: ['true', 'false'],
+        },
+    },
 };
 
 const Template = () => html`
@@ -25,6 +31,48 @@ const TemplateWithLinks = () => html`
     </nav-element>
 `
 
+
+const TemplateWithScrollDetection = ()  => html`
+    <style>
+        .header {
+            top: 1rem;
+            left: 0;
+            position: fixed;
+            z-index: 2;
+        }
+        
+        .section {
+            height: 50rem;
+        }
+        
+        .section:nth-child(odd) {
+            background-color: #eee;
+        }
+        
+        .wrapper {
+            height: 20rem;
+            overflow-y: scroll;
+            position: relative;
+        }
+    </style>
+    <div class="wrapper _scrollable">
+        <div class="header">
+            <nav-element>
+                <link-element is-active="true" link-text="first" href="#first"></link-element>
+                <link-element is-active="false" link-text="second" href="#second"></link-element>
+                <link-element is-active="false" link-text="third" href="#third"></link-element>
+            </nav-element>
+        </div>
+        <div class="section" id="first"></div>
+        <div class="section" id="second"></div>
+        <div class="section" id="third"></div>
+    </div>
+    
+    
+`
+
 export const Default = Template.bind({});
 
 export const WithLinks = TemplateWithLinks.bind({});
+
+export const WithScrollDetection = TemplateWithScrollDetection.bind({});
