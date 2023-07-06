@@ -36,3 +36,20 @@ export function throttle(func, limit) {
         }
     }
 }
+
+export function debounce(func, delay) {
+    let debounceTimer;
+    return function(...args) {
+        const context = this;
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => func.apply(context, args), delay);
+    }
+}
+
+
+export function doOverlap(baseRect, overlapRect, bottomPadding = 0) {
+    return !(baseRect.right < overlapRect.left ||
+        baseRect.left > overlapRect.right ||
+        baseRect.bottom < overlapRect.top + bottomPadding ||
+        baseRect.top + bottomPadding > overlapRect.bottom);
+}

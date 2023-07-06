@@ -1,5 +1,5 @@
 import template from "../nav/nav-component.template.js";
-import {addListeners, compose, mapToLinkElement, removeListeners, select, throttle} from "../api/helpers.js";
+import {addListeners, compose, mapToLinkElement, removeListeners, select, doOverlap, debounce} from "../api/helpers.js";
 import events from "../api/events.js";
 import {LinkComponent} from "../link/link-component";
 
@@ -10,7 +10,7 @@ export class NavComponent extends HTMLElement {
     #listeners = [
         [select.bind(this), events.LINK_CLICKED, this.#subscribeOnLinkClick.bind(this)],
         [select.bind(this, 'slot'), events.ON_SLOT_CHANGE, this.#onSlotChange.bind(this)],
-        [select.bind(this, '._scrollable', window.document), events.SCROLL, throttle(this.#compareSectionPosition.bind(this), 0)],
+        [select.bind(this, '._scrollable', window.document), events.SCROLL, debounce(this.#compareSectionPosition.bind(this), 100)],
     ]
     #linksToSections;
 
@@ -30,15 +30,9 @@ export class NavComponent extends HTMLElement {
     }
 
     #compareSectionPosition() {
-        function doOverlap(baseRect, overlapRect) {
-            return !(baseRect.right < overlapRect.left ||
-                baseRect.left > overlapRect.right ||
-                baseRect.bottom < overlapRect.top + 10 ||
-                baseRect.top + 10 > overlapRect.bottom);
-        }
-
+        const BOTTOM_PADDING = 10;
         const mapToRect = ([key, section]) => [key, section?.getBoundingClientRect()]
-        const findOverlap = ([, rect]) => doOverlap(rect, rootRect);
+        const findOverlap = ([, rect]) => doOverlap(rect, rootRect, BOTTOM_PADDING);
 
         const root = document.querySelector('._scrollable') ?? window;
         const rootRect = root.getBoundingClientRect();
