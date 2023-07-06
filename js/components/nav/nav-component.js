@@ -52,7 +52,7 @@ export class NavComponent extends HTMLElement {
             const linkId = activeLink.closest('li').getAttribute('index')
             activeLink.setAttribute('is-active', 'true');
 
-            this.#selectLinkByIndex(linkId);
+            this.#makeAllLinksInActiveExcludeIndex(linkId);
         }
     }
 
@@ -101,10 +101,10 @@ export class NavComponent extends HTMLElement {
             .closest('li')
             .getAttribute('index');
 
-        this.#selectLinkByIndex(parentLiIndex);
+        this.#makeAllLinksInActiveExcludeIndex(parentLiIndex);
     }
 
-    #selectLinkByIndex(index) {
+    #makeAllLinksInActiveExcludeIndex(index) {
         const allNodes = this
             .shadowRoot
             .querySelectorAll('li');
