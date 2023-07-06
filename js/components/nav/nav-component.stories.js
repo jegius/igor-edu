@@ -40,19 +40,24 @@ const TemplateWithScrollDetection = ()  => html`
             position: sticky;
             z-index: 2;
         }
-        
+
         .section {
             height: 50rem;
+            border: .068rem dashed #69a2ea;
+            border-radius: 4rem;
+            margin-top: 2rem;
         }
-        
+
         .section:nth-child(odd) {
             background-color: #eee;
         }
-        
+
         .wrapper {
+            padding: 2rem;
             height: 20rem;
             overflow-y: scroll;
             position: relative;
+            box-shadow: 0 0 .5rem .3rem #eee inset;
         }
     </style>
     <div class="wrapper _scrollable">
@@ -67,8 +72,8 @@ const TemplateWithScrollDetection = ()  => html`
         <div class="section" id="second"></div>
         <div class="section" id="third"></div>
     </div>
-    
-    
+
+
 `
 
 export const Default = Template.bind({});
