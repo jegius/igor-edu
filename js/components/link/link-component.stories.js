@@ -29,14 +29,36 @@ const Template = (args) => {
 
 const TemplateWithScroll = (args) => html`
     <style>
-        .divider {
+        ._divider {
             height: 150rem;
         }
-    </style>
 
-    <link-element is-active=${args.isActive} link-text=${args.linkText} href=${args.href}></link-element>
-    <div class="divider"></div>
-    <div id="test"></div>
+        .section {
+            height: 50rem;
+            border: .068rem dashed #69a2ea;
+            border-radius: 4rem;
+            margin-top: 2rem;
+        }
+
+        .section:nth-child(even) {
+            background-color: #eee;
+        }
+
+        .wrapper {
+            padding: 2rem;
+            height: 20rem;
+            overflow-y: scroll;
+            position: relative;
+            box-shadow: 0 0 .5rem .3rem #eee inset;
+        }
+        
+    </style>
+    <div class="wrapper">
+
+        <link-element is-active=${args.isActive} link-text=${args.linkText} href=${args.href}></link-element>
+        <div class="section _divider"></div>
+        <div class="section" id="test"></div>
+    </div>
 `
 
 export const Default = Template.bind({});
