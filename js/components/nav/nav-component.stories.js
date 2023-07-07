@@ -11,12 +11,6 @@ import '../link/link-component.styles.js'
 export default {
     title: 'NavComponent',
     tags: ['autodocs'],
-    argTypes: {
-        scrollDetection: {
-            control: {type: 'select'},
-            options: ['true', 'false'],
-        },
-    },
 };
 
 const Template = () => html`
