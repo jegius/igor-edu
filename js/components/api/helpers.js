@@ -1,4 +1,4 @@
-import {LinkComponent} from "../link/link-component";
+import {LinkComponent} from "../link/link-component.js";
 
 export function compose(...innerFunctions) {
     return function(value) {

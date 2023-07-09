@@ -1,6 +1,6 @@
 import template from './link-component.template.js';
 import events from "../api/events.js";
-import {addListeners, removeListeners, select} from "../api/helpers";
+import {addListeners, removeListeners, select} from "../api/helpers.js";
 
 const linkAttributes = {
     LINK_TEXT: 'link-text',
