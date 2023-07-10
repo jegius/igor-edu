@@ -1,8 +1,9 @@
 import template from "./button-component.template.js";
 
 const buttonAttributes = {
-  BUTTON_TEXT: "button-text",
+  BUTTON_TEXT: "text",
   IS_ACTIVE: "active",
+  EVENT: "event",
 };
 
 export class ButtonComponent extends HTMLElement {
@@ -21,7 +22,7 @@ export class ButtonComponent extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["button-text", "active", "event"];
+    return Object.values(buttonAttributes);
   }
 
   connectedCallback() {
@@ -34,13 +35,6 @@ export class ButtonComponent extends HTMLElement {
     const callback = this.#ATTRIBUTE_MAPPING.get(name);
     callback.call(this, this, newValue);
   }
-
-
-
-  //   if (name === "event") {
-  //     this.#handleEvent(newValue);
-  //   }
-  // }
 
   static #setText(element, newText) {
     element.innerText = newText;
@@ -56,24 +50,10 @@ export class ButtonComponent extends HTMLElement {
     }
   }
 
-  #handleEvent(eventString) {
-    const [eventName, eventBody] = eventString.split("-");
-
-    this.addEventListener("click", () => {
-      const event = new CustomEvent(eventName, { detail: eventBody });
-      this.dispatchEvent(event);
-    });
-  }
-
   #render() {
     const templateElem = document.createElement("template");
     templateElem.innerHTML = template;
 
     this.shadowRoot.appendChild(templateElem.content.cloneNode(true));
-
-    const btnText = this.getAttribute("button-text");
-    if (btnText) {
-      ButtonComponent.#setText(this, btnText);
-    }
   }
 }
