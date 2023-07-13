@@ -8,22 +8,24 @@ export default `
             cursor: pointer;
             transition: background-color .3s ease-in, color .3s ease-out;
             padding: 0.75rem 2rem;
+            border-radius: .625rem;
         }
 
         .button:hover {
-            background: var(--orangeColor);
+            background-color: var(--orange);
             color: var(--white);
             transition: .3s all;
+            transform: scale(1.1);
         }
 
         ._active {
-            background: var(--orangeColor);
+            background: var(--orange);
             color: var(--white);
             transition: .3s all;
         }
 
         ._active:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
     </style>
 `;
