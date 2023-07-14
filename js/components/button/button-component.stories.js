@@ -41,3 +41,13 @@ Default.args = {
   eventBody: "hello",
   eventName: "click",
 };
+
+
+export const Active = Template.bind({});
+
+Active.args = {
+  isActive: "true",
+  buttonText: "Click me",
+  eventBody: "hello",
+  eventName: "click",
+}

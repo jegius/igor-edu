@@ -14,6 +14,8 @@ export class ButtonComponent extends HTMLElement {
     return "button-component";
   }
   #button;
+  #eventBody;
+  #eventName;
   #listeners = [
     [select.bind(this, ".button"), "click", this.#addEventListeners.bind(this)],
   ];
@@ -60,11 +62,17 @@ export class ButtonComponent extends HTMLElement {
   }
 
   static #setEventBody(element, eventBody) {
-    element.setAttribute("event-body", eventBody);
+    if (this.#eventBody) {
+      try {
+        this.#eventBody = JSON.parse(eventBody);
+      } catch (error) {
+        console.error(`${error} - "Invalid JSON format"`);
+      }
+    }
   }
 
   static #setEventName(element, eventName) {
-    element.setAttribute("event-name", eventName);
+    if (this.#eventName) this.#eventName = eventName;
   }
 
   static #setText(element, newText) {
@@ -82,9 +90,9 @@ export class ButtonComponent extends HTMLElement {
 
   #addEventListeners(event) {
     this.dispatchEvent(
-      new CustomEvent(this.getAttribute("event-name"), {
+      new CustomEvent(this.#eventName, {
         bubbles: true,
-        detail: JSON.stringify(this.getAttribute("event-body")),
+        detail: this.#eventBody,
       })
     );
   }
