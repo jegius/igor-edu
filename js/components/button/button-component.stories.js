@@ -33,6 +33,26 @@ const Template = (args) => {
   `;
 };
 
+const TemplateWithOnlyEventName = (args) => {
+  document.addEventListener(args.eventName, action(args.eventName));
+  return html`
+    <button-component
+      text=${args.buttonText}
+      active=${args.isActive}
+      event-name=${args.eventName}
+    ></button-component>
+  `;
+}
+
+const TemplateWithoutEvents = (args) => {
+  return html`
+    <button-component
+      text=${args.buttonText}
+      active=${args.isActive}
+    ></button-component>
+  `;
+}
+
 export const Default = Template.bind({});
 
 Default.args = {
@@ -50,4 +70,20 @@ Active.args = {
   buttonText: "Click me",
   eventBody: "hello",
   eventName: "click",
+}
+
+export const OnlyEventName = TemplateWithOnlyEventName.bind({});
+
+OnlyEventName.args = {
+  isActive: "false",
+  buttonText: "Click me",
+  eventName: "click",
+}
+
+
+export const WithoutEvents = TemplateWithoutEvents.bind({});
+
+WithoutEvents.args = {
+  isActive: "false",
+  buttonText: "Click me",
 }
