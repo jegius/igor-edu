@@ -1,7 +1,7 @@
 import template from "../nav/nav-component.template.js";
 import {addListeners, compose, mapToLinkElement, removeListeners, select, doOverlap, debounce} from "../api/helpers.js";
 import events from "../api/events.js";
-import {LinkComponent} from "../link/link-component";
+import {LinkComponent} from "../link/link-component.js";
 
 
 export class NavComponent extends HTMLElement {

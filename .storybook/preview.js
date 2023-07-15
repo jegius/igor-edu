@@ -1,5 +1,6 @@
 import {NavComponent} from "../js/components/nav/nav-component.js";
 import {LinkComponent} from "../js/components/link/link-component.js";
+import {ButtonComponent} from "../js/components/button/button-component.js";
 
 /** @type { import('@storybook/web-components').Preview } */
 const preview = {
@@ -14,5 +15,5 @@ const preview = {
   },
 };
 
-[NavComponent, LinkComponent].map(component => customElements.define(component.name, component));
+[NavComponent, LinkComponent, ButtonComponent].map(component => customElements.define(component.name, component));
 export default preview;
