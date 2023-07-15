@@ -59,7 +59,7 @@ Default.args = {
   isActive: "false",
   buttonText: "Click me",
   eventBody: JSON.stringify({name: "random"}),
-  eventName: "click",
+  eventName: "DefaultEventName",
 };
 
 
@@ -69,7 +69,7 @@ Active.args = {
   isActive: "true",
   buttonText: "Click me",
   eventBody: JSON.stringify({name: "random"}),
-  eventName: "click",
+  eventName: "ACtiveEventName",
 }
 
 export const OnlyEventName = TemplateWithOnlyEventName.bind({});
@@ -77,7 +77,7 @@ export const OnlyEventName = TemplateWithOnlyEventName.bind({});
 OnlyEventName.args = {
   isActive: "false",
   buttonText: "Click me",
-  eventName: "click",
+  eventName: "OnlyEventNameCase",
 }
 
 
