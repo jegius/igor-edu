@@ -23,8 +23,8 @@ export class ButtonComponent extends HTMLElement {
   #ATTRIBUTE_MAPPING = new Map([
     [buttonAttributes.BUTTON_TEXT, ButtonComponent.#setText],
     [buttonAttributes.IS_ACTIVE, ButtonComponent.#setActive],
-    [buttonAttributes.EVENT_BODY, ButtonComponent.#setEventBody],
-    [buttonAttributes.EVENT_NAME, ButtonComponent.#setEventName],
+    [buttonAttributes.EVENT_BODY, this.#setEventBody.bind(this)],
+    [buttonAttributes.EVENT_NAME, this.#setEventName.bind(this)],
   ]);
 
   constructor() {
@@ -61,7 +61,7 @@ export class ButtonComponent extends HTMLElement {
     }
   }
 
-  static #setEventBody(element, eventBody) {
+  #setEventBody(element, eventBody) {
     if (eventBody) {
       try {
         this.#eventBody = JSON.parse(eventBody);
@@ -71,7 +71,7 @@ export class ButtonComponent extends HTMLElement {
     }
   }
 
-  static #setEventName(element, eventName) {
+  #setEventName(element, eventName) {
     if (eventName) {
       this.#eventName = eventName;
     }

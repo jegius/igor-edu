@@ -1,5 +1,5 @@
 import { html } from "lit-html";
-import {action} from '@storybook/addon-actions';
+import { action } from "@storybook/addon-actions";
 import "./button-component.js";
 import { ButtonComponent } from "./button-component.js";
 import "./button-component.template.js";
@@ -42,7 +42,7 @@ const TemplateWithOnlyEventName = (args) => {
       event-name=${args.eventName}
     ></button-component>
   `;
-}
+};
 
 const TemplateWithoutEvents = (args) => {
   return html`
@@ -51,26 +51,25 @@ const TemplateWithoutEvents = (args) => {
       active=${args.isActive}
     ></button-component>
   `;
-}
+};
 
 export const Default = Template.bind({});
 
 Default.args = {
   isActive: "false",
   buttonText: "Click me",
-  eventBody: JSON.stringify({name: "random"}),
+  eventBody: JSON.stringify({ name: "random" }),
   eventName: "DefaultEventName",
 };
-
 
 export const Active = Template.bind({});
 
 Active.args = {
   isActive: "true",
   buttonText: "Click me",
-  eventBody: JSON.stringify({name: "random"}),
+  eventBody: JSON.stringify({ name: "random" }),
   eventName: "ACtiveEventName",
-}
+};
 
 export const OnlyEventName = TemplateWithOnlyEventName.bind({});
 
@@ -78,12 +77,11 @@ OnlyEventName.args = {
   isActive: "false",
   buttonText: "Click me",
   eventName: "OnlyEventNameCase",
-}
-
+};
 
 export const WithoutEvents = TemplateWithoutEvents.bind({});
 
 WithoutEvents.args = {
   isActive: "false",
   buttonText: "Click me",
-}
+};
