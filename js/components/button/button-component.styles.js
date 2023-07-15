@@ -6,7 +6,7 @@ export default `
             background: transparent;
             color: var(--orangeColor);
             cursor: pointer;
-            transition: background-color .3s ease-in, color .3s ease-out, transform .3s ease-in;
+            transition: background-color 0.15s ease-in, color 0.15s ease-out, transform 0.15s ease-in;
             padding: 0.75rem 2rem;
             border-radius: .625rem;
         }
@@ -14,7 +14,7 @@ export default `
         .button:hover {
             background-color: var(--orange);
             color: var(--white);
-            transform: scale(1.1);
+            transform: scale(1.025);
         }
 
         ._active {
