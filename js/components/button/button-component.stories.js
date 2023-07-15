@@ -21,8 +21,18 @@ export default {
   },
 };
 
+let savedAction = new Map();
+
 const Template = (args) => {
-  document.addEventListener(args.eventName, action(args.eventName));
+  if (savedAction.has(args.eventName)) {
+    document.removeEventListener(
+      args.eventName,
+      savedAction.get(args.eventName)
+    );
+  }
+
+  savedAction.set(args.eventName, action(args.eventName));
+  document.addEventListener(args.eventName, savedAction.get(args.eventName));
   return html`
     <button-component
       text=${args.buttonText}
@@ -34,7 +44,16 @@ const Template = (args) => {
 };
 
 const TemplateWithOnlyEventName = (args) => {
-  document.addEventListener(args.eventName, action(args.eventName));
+  if (savedAction.has(args.eventName)) {
+    document.removeEventListener(
+      args.eventName,
+      savedAction.get(args.eventName)
+    );
+  }
+
+  savedAction.set(args.eventName, action(args.eventName));
+  document.addEventListener(args.eventName, savedAction.get(args.eventName));
+
   return html`
     <button-component
       text=${args.buttonText}
