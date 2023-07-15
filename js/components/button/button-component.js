@@ -62,7 +62,7 @@ export class ButtonComponent extends HTMLElement {
   }
 
   static #setEventBody(element, eventBody) {
-    if (this.#eventBody) {
+    if (eventBody) {
       try {
         this.#eventBody = JSON.parse(eventBody);
       } catch (error) {
@@ -72,7 +72,9 @@ export class ButtonComponent extends HTMLElement {
   }
 
   static #setEventName(element, eventName) {
-    if (this.#eventName) this.#eventName = eventName;
+    if (eventName) {
+      this.#eventName = eventName;
+    }
   }
 
   static #setText(element, newText) {

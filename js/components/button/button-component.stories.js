@@ -58,7 +58,7 @@ export const Default = Template.bind({});
 Default.args = {
   isActive: "false",
   buttonText: "Click me",
-  eventBody: "hello",
+  eventBody: JSON.stringify({name: "random"}),
   eventName: "click",
 };
 
@@ -68,7 +68,7 @@ export const Active = Template.bind({});
 Active.args = {
   isActive: "true",
   buttonText: "Click me",
-  eventBody: "hello",
+  eventBody: JSON.stringify({name: "random"}),
   eventName: "click",
 }
 
