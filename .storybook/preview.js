@@ -1,6 +1,7 @@
-import {NavComponent} from "../js/components/nav/nav-component.js";
-import {LinkComponent} from "../js/components/link/link-component.js";
-import {ButtonComponent} from "../js/components/button/button-component.js";
+import { NavComponent } from "../js/components/nav/nav-component.js";
+import { LinkComponent } from "../js/components/link/link-component.js";
+import { ButtonComponent } from "../js/components/button/button-component.js";
+import { LogoComponent } from "../js/components/logo/logo-component.js";
 
 /** @type { import('@storybook/web-components').Preview } */
 const preview = {
@@ -15,5 +16,7 @@ const preview = {
   },
 };
 
-[NavComponent, LinkComponent, ButtonComponent].map(component => customElements.define(component.name, component));
+[NavComponent, LinkComponent, ButtonComponent, LogoComponent].map((component) =>
+  customElements.define(component.name, component)
+);
 export default preview;
