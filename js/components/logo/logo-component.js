@@ -58,7 +58,7 @@ export class LogoComponent extends HTMLElement {
       }
       if (name === "custom-styles") {
         const stylesCallback = this.#ATTRIBUTE_MAPPING.get(name);
-        stylesCallback(this, newValue)
+        stylesCallback(this, newValue);
       }
     }
   }
@@ -80,7 +80,7 @@ export class LogoComponent extends HTMLElement {
   }
 
   #setText(element, newText) {
-    console.log(element)
+    console.log(element);
     if (element) {
       element.innerText = newText;
     }
