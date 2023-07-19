@@ -1,4 +1,4 @@
-import template from "./logo-component.template.js";
+import generateTemplate from "./logo-component.template.js";
 import { utils } from "../api/helpers.js";
 
 const logoAttributes = {
@@ -17,13 +17,14 @@ export class LogoComponent extends HTMLElement {
     return Object.values(logoAttributes);
   }
 
-  #navbarLogo;
+  #Logo;
+  #Image;
 
   #ATTRIBUTE_MAPPING = new Map([
     [logoAttributes.IMAGE_URL, this.#setImage.bind(this)],
     [logoAttributes.HREF, this.#setHref.bind(this)],
     [logoAttributes.TEXT, this.#setText.bind(this)],
-    [logoAttributes.CUSTOM_STYLES, this.#setCustomStyles.bind(this)],
+    [logoAttributes.CUSTOM_STYLES, this.#applyStyles.bind(this)],
   ]);
 
   constructor() {
@@ -45,7 +46,7 @@ export class LogoComponent extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (newValue !== oldValue) {
       const callback = this.#ATTRIBUTE_MAPPING.get(name);
-      if (this.#navbarLogo) {
+      if (this.#Logo) {
         callback(this, newValue);
       }
     }
@@ -59,6 +60,7 @@ export class LogoComponent extends HTMLElement {
   #setImage(element, newSrc) {
     const imageNode = element.shadowRoot.querySelector(".logo-image");
     imageNode.style.background = `url(${newSrc})`;
+    this.#Image = newSrc;
   }
 
   #setText(element, newText) {
@@ -66,17 +68,19 @@ export class LogoComponent extends HTMLElement {
     textNode.innerText = newText;
   }
 
-  #setCustomStyles(element, styles) {
-    const style = document.createElement("style");
-    style.innerHTML = styles;
-    element.appendChild(style);
+  #applyStyles(element, customStyles) {
+    if (element.shadowRoot.querySelector("style")) {
+      this.shadowRoot.innerHTML = "";
+      this.#render(customStyles);
+    }
+    this.#setImage(element, this.#Image);
   }
 
-  #render() {
+  #render(customStyles) {
     const templateElem = document.createElement("template");
-    templateElem.innerHTML = template;
+    templateElem.innerHTML = generateTemplate(customStyles);
 
     this.shadowRoot.appendChild(templateElem.content.cloneNode(true));
-    this.#navbarLogo = this.shadowRoot.querySelector(".navbar-logo");
+    this.#Logo = this.shadowRoot.querySelector(".logo");
   }
 }
