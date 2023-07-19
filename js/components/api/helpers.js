@@ -53,3 +53,11 @@ export function doOverlap(baseRect, overlapRect, bottomPadding = 0) {
     baseRect.top + bottomPadding > overlapRect.bottom
   );
 }
+
+export function utils(value, flag) {
+  if (flag) {
+    value.classList.add("_clickable");
+  } else {
+    value.classList.remove("_clickable");
+  }
+}

@@ -7,6 +7,7 @@ export default `
         align-items: flex-end;
         display: flex;
         justify-content: center;
+        cursor: default;
     }
     
     .logo-image {
@@ -18,6 +19,10 @@ export default `
     
     .logo-brandname {
         font-size: 1rem;
+    }
+
+    ._clickable {
+        cursor: pointer;
     }
     </style>
 `;

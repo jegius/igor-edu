@@ -1,4 +1,5 @@
 import template from "./logo-component.template.js";
+import { utils } from "../api/helpers.js";
 
 const logoAttributes = {
   IMAGE_URL: "image-url",
@@ -15,8 +16,8 @@ export class LogoComponent extends HTMLElement {
   static get observedAttributes() {
     return Object.values(logoAttributes);
   }
-  #logoImage;
-  #logoText;
+
+  #navbarLogo;
 
   #ATTRIBUTE_MAPPING = new Map([
     [logoAttributes.IMAGE_URL, this.#setImage.bind(this)],
@@ -43,47 +44,26 @@ export class LogoComponent extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (newValue !== oldValue) {
-      if (name === "image-url") {
-        // далее если будут подходящие коллбеки планирую через || добавлять нвоые условия в if
-        const imageCallback = this.#ATTRIBUTE_MAPPING.get(name);
-        imageCallback(this.#logoImage, newValue);
-      }
-      if (name === "href") {
-        const hrefCallback = this.#ATTRIBUTE_MAPPING.get(name);
-        hrefCallback(this, newValue); // в теории можно переписать ан свитч кейс
-      }
-      if (name === "text") {
-        const textCallback = this.#ATTRIBUTE_MAPPING.get(name);
-        textCallback(this.#logoText, newValue);
-      }
-      if (name === "custom-styles") {
-        const stylesCallback = this.#ATTRIBUTE_MAPPING.get(name);
-        stylesCallback(this, newValue);
+      const callback = this.#ATTRIBUTE_MAPPING.get(name);
+      if (this.#navbarLogo) {
+        callback(this, newValue);
       }
     }
   }
 
   #setHref(element, newHref) {
-    if (element) {
-      if (element.getAttribute("href") != "") {
-        element.style.cursor = "pointer";
-      } else {
-        element.style.cursor = "default";
-      }
-      element.setAttribute("href", newHref);
-    }
+    const isClickable = !!element.getAttribute("href");
+    element.setAttribute("href", newHref);
+    utils(element, isClickable);
   }
   #setImage(element, newSrc) {
-    if (element) {
-      element.style.background = `url(${newSrc})`;
-    }
+    const imageNode = element.shadowRoot.querySelector(".logo-image");
+    imageNode.style.background = `url(${newSrc})`;
   }
 
   #setText(element, newText) {
-    console.log(element);
-    if (element) {
-      element.innerText = newText;
-    }
+    const textNode = element.shadowRoot.querySelector(".logo-brandname");
+    textNode.innerText = newText;
   }
 
   #setCustomStyles(element, styles) {
@@ -97,7 +77,6 @@ export class LogoComponent extends HTMLElement {
     templateElem.innerHTML = template;
 
     this.shadowRoot.appendChild(templateElem.content.cloneNode(true));
-    this.#logoImage = this.shadowRoot.querySelector(".logo-image");
-    this.#logoText = this.shadowRoot.querySelector(".logo-brandname");
+    this.#navbarLogo = this.shadowRoot.querySelector(".navbar-logo");
   }
 }

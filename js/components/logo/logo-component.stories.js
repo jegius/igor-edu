@@ -27,7 +27,7 @@ export const Default = Template.bind({});
 
 Default.args = {
   imageUrl: "../../img/logo_vector.svg",
-  href: "",
+  href: "#",
   text: "Plants",
   customStyles: "background-color: yellow",
 };
