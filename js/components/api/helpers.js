@@ -54,10 +54,10 @@ export function doOverlap(baseRect, overlapRect, bottomPadding = 0) {
   );
 }
 
-export function utils(value, flag) {
+export function utils(node, flag) {
   if (flag) {
-    value.classList.add("_clickable");
+    node.classList.add("_clickable");
   } else {
-    value.classList.remove("_clickable");
+    node.classList.remove("_clickable");
   }
 }

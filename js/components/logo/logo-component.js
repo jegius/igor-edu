@@ -2,7 +2,6 @@ import generateTemplate from "./logo-component.template.js";
 import { utils } from "../api/helpers.js";
 
 const logoAttributes = {
-  IMAGE_URL: "image-url",
   HREF: "href",
   TEXT: "text",
   CUSTOM_STYLES: "custom-styles",
@@ -19,9 +18,10 @@ export class LogoComponent extends HTMLElement {
 
   #Logo;
   #Image;
+  #customStyles;
+  #Href;
 
   #ATTRIBUTE_MAPPING = new Map([
-    [logoAttributes.IMAGE_URL, this.#setImage.bind(this)],
     [logoAttributes.HREF, this.#setHref.bind(this)],
     [logoAttributes.TEXT, this.#setText.bind(this)],
     [logoAttributes.CUSTOM_STYLES, this.#applyStyles.bind(this)],
@@ -34,6 +34,7 @@ export class LogoComponent extends HTMLElement {
 
   connectedCallback() {
     this.#render();
+   
 
     for (let attrName of this.constructor.observedAttributes) {
       if (this.hasAttribute(attrName)) {
@@ -53,14 +54,12 @@ export class LogoComponent extends HTMLElement {
   }
 
   #setHref(element, newHref) {
-    const isClickable = !!element.getAttribute("href");
-    element.setAttribute("href", newHref);
-    utils(element, isClickable);
-  }
-  #setImage(element, newSrc) {
-    const imageNode = element.shadowRoot.querySelector(".logo-image");
-    imageNode.style.background = `url(${newSrc})`;
-    this.#Image = newSrc;
+    this.#Href = element.shadowRoot.querySelector(".logo-href");
+    this.#Href.setAttribute("href", newHref);
+    const isClickable =
+      !!this.#Href.hasAttribute("href") &&
+      this.#Href.getAttribute("href") !== "";
+    utils(this.#Href, isClickable);
   }
 
   #setText(element, newText) {
@@ -69,11 +68,15 @@ export class LogoComponent extends HTMLElement {
   }
 
   #applyStyles(element, customStyles) {
-    if (element.shadowRoot.querySelector("style")) {
-      this.shadowRoot.innerHTML = "";
-      this.#render(customStyles);
+    this.#customStyles = customStyles;
+    this.#render(this.#customStyles);
+  }
+
+  #cleanNodes(node) {
+    while (node.hasChildNodes()) {
+      node.removeChild(node.lastChild);
     }
-    this.#setImage(element, this.#Image);
+    return node;
   }
 
   #render(customStyles) {
@@ -82,5 +85,9 @@ export class LogoComponent extends HTMLElement {
 
     this.shadowRoot.appendChild(templateElem.content.cloneNode(true));
     this.#Logo = this.shadowRoot.querySelector(".logo");
+    this.#Href = this.shadowRoot.querySelector(".logo-href");
+    this.#cleanNodes(this.shadowRoot).appendChild(
+      templateElem.content.cloneNode(true)
+    );
   }
 }

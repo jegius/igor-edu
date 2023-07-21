@@ -18,16 +18,50 @@ const Template = (args) => {
       href=${args.href}
       text=${args.text}
       custom-styles=${args.customStyles}
-      >hello</logo-component
-    >
+    ></logo-component>
   `;
+};
+
+const TextTemplate = (args) => {
+  return html`
+  <logo-component text=${args.text}></logo-component`;
+};
+
+const HrefTemplate = (args) => {
+  return html`
+  <logo-component href=${args.href}></logo-component
+  `;
+};
+
+const CustomStylesTemplate = (args) => {
+  return html` <logo-component custom-styles=${args.customStyles}></logo-component>`;
 };
 
 export const Default = Template.bind({});
 
 Default.args = {
-  imageUrl: "../../img/logo_vector.svg",
-  href: "#",
+  href: "vk",
   text: "Plants",
-  customStyles: "background-color: yellow",
+  customStyles:
+    " .logo-image  {background-image: url(../../img/logo_vector.svg)}",
+};
+
+export const Text = TextTemplate.bind({});
+
+Text.args = {
+  text: "Plants",
+};
+
+export const Href = HrefTemplate.bind({});
+
+Href.args = {
+  href: "#",
+};
+
+
+export const Styles = CustomStylesTemplate.bind({});
+
+Styles.args = {
+  customStyles: ".logo { border:1px solid black } .logo-image  {background-image: url(../../img/logo_vector.svg)}",
+
 };
