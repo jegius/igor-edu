@@ -1,6 +1,7 @@
 import generateTemplate from "./logo-component.template.js";
 import { installingTheClass } from "../api/helpers.js";
 import { classes } from "../api/classes.js";
+import { cleanNodes } from "../api/helpers.js";
 
 const logoAttributes = {
   HREF: "href",
@@ -45,7 +46,7 @@ export class LogoComponent extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (newValue !== oldValue) {
       const callback = this.#ATTRIBUTE_MAPPING.get(name);
-      if (this.#logo) {
+      if (this.#href) {
         callback(this, newValue);
       }
     }
@@ -68,26 +69,14 @@ export class LogoComponent extends HTMLElement {
     this.#render(this.#customStyles);
   }
 
-  #cleanNodes(node) {
-    while (node.hasChildNodes()) {
-      this.#cleanNodes(node.lastChild)
-      node.removeChild(node.lastChild);
-    }
-    return node;
-  }
-
   #render(customStyles) {
-    const templateElem = document.createElement("template");
-    templateElem.innerHTML = generateTemplate(customStyles);
+    const template = document.createElement("template");
+    template.innerHTML = generateTemplate(customStyles);
 
-    this.shadowRoot.appendChild(templateElem.content.cloneNode(true));
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
     this.#logo = this.shadowRoot.querySelector(".logo");
     this.#href = this.shadowRoot.querySelector(".logo-href");
 
-    this
-      .#cleanNodes(this.shadowRoot)
-      .appendChild(
-        templateElem.content.cloneNode(true)
-    );
+    cleanNodes(this.shadowRoot).appendChild(template.content.cloneNode(true));
   }
 }

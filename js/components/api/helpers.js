@@ -62,3 +62,11 @@ export function installingTheClass(node, flag, ourClass) {
     node.classList.remove(ourClass);
   }
 }
+
+export function cleanNodes(node) {
+  while (node.hasChildNodes()) {
+    cleanNodes(node.lastChild);
+    node.removeChild(node.lastChild);
+  }
+  return node;
+}
