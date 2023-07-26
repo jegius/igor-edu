@@ -1,7 +1,6 @@
 import generateTemplate from "./logo-component.template.js";
 import { utils } from "../api/helpers.js";
 import { classes } from "../api/classes.js";
-console.log(classes.CLICKABLE)
 
 const logoAttributes = {
   HREF: "href",
@@ -57,9 +56,7 @@ export class LogoComponent extends HTMLElement {
   #setHref(element, newHref) {
     this.#href = element.shadowRoot.querySelector(".logo-href");
     this.#href.setAttribute("href", newHref);
-    const isClickable =
-      !!this.#href.hasAttribute("href") &&
-      this.#href.getAttribute("href") !== "";
+    const isClickable = !!newHref;
     utils(this.#href, isClickable, classes.CLICKABLE);
   }
 

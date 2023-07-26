@@ -6,7 +6,6 @@ export default function generateStyles(customStyles) {
             text-decoration: none;
             color:black;
             cursor: default;
-            display: block;
             width: 4.948rem;
             height: 1.315rem;
         }
