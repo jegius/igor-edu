@@ -1,5 +1,7 @@
 import generateTemplate from "./logo-component.template.js";
 import { utils } from "../api/helpers.js";
+import { classes } from "../api/classes.js";
+console.log(classes.CLICKABLE)
 
 const logoAttributes = {
   HREF: "href",
@@ -16,10 +18,10 @@ export class LogoComponent extends HTMLElement {
     return Object.values(logoAttributes);
   }
 
-  #Logo;
+  #logo;
   #Image;
   #customStyles;
-  #Href;
+  #href;
 
   #ATTRIBUTE_MAPPING = new Map([
     [logoAttributes.HREF, this.#setHref.bind(this)],
@@ -34,7 +36,6 @@ export class LogoComponent extends HTMLElement {
 
   connectedCallback() {
     this.#render();
-   
 
     for (let attrName of this.constructor.observedAttributes) {
       if (this.hasAttribute(attrName)) {
@@ -47,19 +48,19 @@ export class LogoComponent extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (newValue !== oldValue) {
       const callback = this.#ATTRIBUTE_MAPPING.get(name);
-      if (this.#Logo) {
+      if (this.#logo) {
         callback(this, newValue);
       }
     }
   }
 
   #setHref(element, newHref) {
-    this.#Href = element.shadowRoot.querySelector(".logo-href");
-    this.#Href.setAttribute("href", newHref);
+    this.#href = element.shadowRoot.querySelector(".logo-href");
+    this.#href.setAttribute("href", newHref);
     const isClickable =
-      !!this.#Href.hasAttribute("href") &&
-      this.#Href.getAttribute("href") !== "";
-    utils(this.#Href, isClickable);
+      !!this.#href.hasAttribute("href") &&
+      this.#href.getAttribute("href") !== "";
+    utils(this.#href, isClickable, classes.CLICKABLE);
   }
 
   #setText(element, newText) {
@@ -84,8 +85,8 @@ export class LogoComponent extends HTMLElement {
     templateElem.innerHTML = generateTemplate(customStyles);
 
     this.shadowRoot.appendChild(templateElem.content.cloneNode(true));
-    this.#Logo = this.shadowRoot.querySelector(".logo");
-    this.#Href = this.shadowRoot.querySelector(".logo-href");
+    this.#logo = this.shadowRoot.querySelector(".logo");
+    this.#href = this.shadowRoot.querySelector(".logo-href");
     this.#cleanNodes(this.shadowRoot).appendChild(
       templateElem.content.cloneNode(true)
     );
