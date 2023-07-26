@@ -55,7 +55,7 @@ export function doOverlap(baseRect, overlapRect, bottomPadding = 0) {
   );
 }
 
-export function utils(node, flag, ourClass) {
+export function installingTheClass(node, flag, ourClass) {
   if (flag) {
     node.classList.add(ourClass);
   } else {

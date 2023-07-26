@@ -1,5 +1,5 @@
 import generateTemplate from "./logo-component.template.js";
-import { utils } from "../api/helpers.js";
+import { installingTheClass } from "../api/helpers.js";
 import { classes } from "../api/classes.js";
 
 const logoAttributes = {
@@ -57,7 +57,7 @@ export class LogoComponent extends HTMLElement {
     this.#href = element.shadowRoot.querySelector(".logo-href");
     this.#href.setAttribute("href", newHref);
     const isClickable = !!newHref;
-    utils(this.#href, isClickable, classes.CLICKABLE);
+    installingTheClass(this.#href, isClickable, classes.CLICKABLE);
   }
 
   #setText(element, newText) {
@@ -84,8 +84,11 @@ export class LogoComponent extends HTMLElement {
     this.shadowRoot.appendChild(templateElem.content.cloneNode(true));
     this.#logo = this.shadowRoot.querySelector(".logo");
     this.#href = this.shadowRoot.querySelector(".logo-href");
-    this.#cleanNodes(this.shadowRoot).appendChild(
-      templateElem.content.cloneNode(true)
+
+    this
+      .#cleanNodes(this.shadowRoot)
+      .appendChild(
+        templateElem.content.cloneNode(true)
     );
   }
 }
