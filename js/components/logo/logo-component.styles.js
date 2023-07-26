@@ -2,12 +2,12 @@ export default function generateStyles(customStyles) {
   return `
   <style>
       @import url('../common.css');
-        .logo-href {
-            text-decoration: none;
-            color:black;
-            cursor: default;
-            width: 4.948rem;
-            height: 1.315rem;
+         .logo-href {
+          text-decoration: none;
+          color:black;
+          cursor: default;
+          width: 4.948rem;
+          height: 1.315rem;
         }
 
       .logo {
@@ -16,7 +16,6 @@ export default function generateStyles(customStyles) {
           align-items: flex-end;
           display: flex;
           justify-content: center;
-        
       }
       
       .logo-image {

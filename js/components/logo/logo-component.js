@@ -18,7 +18,6 @@ export class LogoComponent extends HTMLElement {
   }
 
   #logo;
-  #Image;
   #customStyles;
   #href;
 
@@ -35,7 +34,6 @@ export class LogoComponent extends HTMLElement {
 
   connectedCallback() {
     this.#render();
-
     for (let attrName of this.constructor.observedAttributes) {
       if (this.hasAttribute(attrName)) {
         const attrValue = this.getAttribute(attrName);
@@ -72,6 +70,7 @@ export class LogoComponent extends HTMLElement {
 
   #cleanNodes(node) {
     while (node.hasChildNodes()) {
+      this.#cleanNodes(node.lastChild)
       node.removeChild(node.lastChild);
     }
     return node;
