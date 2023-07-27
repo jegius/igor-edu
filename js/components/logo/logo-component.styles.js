@@ -7,7 +7,6 @@ export default function generateStyles(customStyles) {
           display: block;
           text-decoration: none;
           color:black;
-          cursor: default;
         }
 
       .logo {
@@ -27,10 +26,6 @@ export default function generateStyles(customStyles) {
       
       .logo-brandname {
           font-size: 1rem;
-      }
-  
-      ._clickable {
-          cursor: pointer;
       }
 
       ${customStyles ?? customStyles}
