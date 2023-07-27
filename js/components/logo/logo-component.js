@@ -1,4 +1,7 @@
-import generateTemplate from "./logo-component.template.js";
+import {
+  generateTemplateWithTagA,
+  generateTemplateWithoutTagA,
+} from "./logo-component.template.js";
 import { installingTheClass } from "../api/helpers.js";
 import { classes } from "../api/classes.js";
 import { cleanNodes } from "../api/helpers.js";
@@ -46,17 +49,20 @@ export class LogoComponent extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (newValue !== oldValue) {
       const callback = this.#ATTRIBUTE_MAPPING.get(name);
-      if (this.#href) {
+      if (this.#logo) {
         callback(this, newValue);
       }
     }
   }
 
   #setHref(element, newHref) {
-    this.#href = element.shadowRoot.querySelector(".logo-href");
-    this.#href.setAttribute("href", newHref);
-    const isClickable = !!newHref;
-    installingTheClass(this.#href, isClickable, classes.CLICKABLE);
+    if (element.shadowRoot.querySelector(".logo-href")) {
+      this.#href = element.shadowRoot.querySelector(".logo-href");
+      this.#href.setAttribute("href", newHref);
+      const isClickable = !!newHref;
+      installingTheClass(this.#href, isClickable, classes.CLICKABLE);
+    }
+    this.#render();
   }
 
   #setText(element, newText) {
@@ -71,12 +77,17 @@ export class LogoComponent extends HTMLElement {
 
   #render(customStyles) {
     const template = document.createElement("template");
-    template.innerHTML = generateTemplate(customStyles);
+    template.innerHTML = generateTemplateWithTagA(customStyles);
 
     this.shadowRoot.appendChild(template.content.cloneNode(true));
     this.#logo = this.shadowRoot.querySelector(".logo");
     this.#href = this.shadowRoot.querySelector(".logo-href");
-
+    console.log(!!this.getAttribute("href"));
+    if (!!this.getAttribute("href")) {
+      template.innerHTML = generateTemplateWithTagA(customStyles);
+    } else {
+      template.innerHTML = generateTemplateWithoutTagA(customStyles);
+    }
     cleanNodes(this.shadowRoot).appendChild(template.content.cloneNode(true));
   }
 }

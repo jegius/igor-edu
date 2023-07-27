@@ -4,8 +4,7 @@ export default function generateStyles(customStyles) {
       @import url('../common.css');
 
       .logo-href {
-          width: 4.948rem;
-          height: 1.315rem;
+          display: block;
           text-decoration: none;
           color:black;
           cursor: default;

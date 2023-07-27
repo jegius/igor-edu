@@ -34,7 +34,9 @@ const HrefTemplate = (args) => {
 };
 
 const CustomStylesTemplate = (args) => {
-  return html` <logo-component custom-styles=${args.customStyles}></logo-component>`;
+  return html` <logo-component
+    custom-styles=${args.customStyles}
+  ></logo-component>`;
 };
 
 export const Default = Template.bind({});
@@ -43,7 +45,7 @@ Default.args = {
   href: "vk",
   text: "Plants",
   customStyles:
-    " .logo-image  {background-image: url(../../img/logo_vector.svg)}",
+    " .logo-href {  width: 4.948rem;   height: 1.315rem;} .logo-image  {background-image: url(../../img/logo_vector.svg)}",
 };
 
 export const Text = TextTemplate.bind({});
@@ -58,10 +60,9 @@ Href.args = {
   href: "#",
 };
 
-
 export const Styles = CustomStylesTemplate.bind({});
 
 Styles.args = {
-  customStyles: ".logo { border:1px solid black } .logo-image  {background-image: url(../../img/logo_vector.svg)}",
-
+  customStyles:
+    ".logo { border:1px solid black } .logo-image  {background-image: url(../../img/logo_vector.svg)}",
 };
