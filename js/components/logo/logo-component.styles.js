@@ -2,12 +2,10 @@ export default function generateStyles(customStyles) {
   return `
   <style>
       @import url('../common.css');
-
       .logo-href {
           display: block;
           text-decoration: none;
           color:black;
-          cursor: default;
         }
 
       .logo {
@@ -25,14 +23,9 @@ export default function generateStyles(customStyles) {
           margin-bottom: 0.25rem;
       }
       
-      .logo-brandname {
+      .logo-brand-name {
           font-size: 1rem;
       }
-  
-      ._clickable {
-          cursor: pointer;
-      }
-
       ${customStyles ?? customStyles}
       </style>
     `;

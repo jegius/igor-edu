@@ -1,9 +1,7 @@
 import {
-  generateTemplateWithTagA,
-  generateTemplateWithoutTagA,
+  generateTemplateWithLink,
+  generateTemplateWithoutLink,
 } from "./logo-component.template.js";
-import { installingTheClass } from "../api/helpers.js";
-import { classes } from "../api/classes.js";
 import { cleanNodes } from "../api/helpers.js";
 
 const logoAttributes = {
@@ -24,6 +22,7 @@ export class LogoComponent extends HTMLElement {
   #logo;
   #customStyles;
   #href;
+  #logoText;
 
   #ATTRIBUTE_MAPPING = new Map([
     [logoAttributes.HREF, this.#setHref.bind(this)],
@@ -56,38 +55,32 @@ export class LogoComponent extends HTMLElement {
   }
 
   #setHref(element, newHref) {
-    if (element.shadowRoot.querySelector(".logo-href")) {
-      this.#href = element.shadowRoot.querySelector(".logo-href");
-      this.#href.setAttribute("href", newHref);
-      const isClickable = !!newHref;
-      installingTheClass(this.#href, isClickable, classes.CLICKABLE);
-    }
-    this.#render();
+    this.#href = newHref;
+    this.#render(this.#customStyles, this.#href);
   }
 
   #setText(element, newText) {
-    const textNode = element.shadowRoot.querySelector(".logo-brandname");
-    textNode.innerText = newText;
+    this.#logoText = newText;
+    this.#render(this.#customStyles, this.#href, this.#logoText);
   }
 
   #applyStyles(element, customStyles) {
     this.#customStyles = customStyles;
-    this.#render(this.#customStyles);
+    this.#render(this.#customStyles, this.#href);
   }
 
-  #render(customStyles) {
+  #render(customStyles, href = this.#href, text = this.#logoText) {
     const template = document.createElement("template");
-    template.innerHTML = generateTemplateWithTagA(customStyles);
+    template.innerHTML = generateTemplateWithLink(customStyles);
 
     this.shadowRoot.appendChild(template.content.cloneNode(true));
     this.#logo = this.shadowRoot.querySelector(".logo");
-    this.#href = this.shadowRoot.querySelector(".logo-href");
-    console.log(!!this.getAttribute("href"));
-    if (!!this.getAttribute("href")) {
-      template.innerHTML = generateTemplateWithTagA(customStyles);
-    } else {
-      template.innerHTML = generateTemplateWithoutTagA(customStyles);
-    }
+
+    const templateGenerator = href
+      ? generateTemplateWithLink
+      : generateTemplateWithoutLink;
+
+    template.innerHTML = templateGenerator(customStyles, href, text);
     cleanNodes(this.shadowRoot).appendChild(template.content.cloneNode(true));
   }
 }
