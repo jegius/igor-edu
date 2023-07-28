@@ -1,4 +1,5 @@
 import { LinkComponent } from "../link/link-component.js";
+import { classes } from "./classes.js";
 
 export function compose(...innerFunctions) {
   return function (value) {
@@ -52,4 +53,20 @@ export function doOverlap(baseRect, overlapRect, bottomPadding = 0) {
     baseRect.bottom < overlapRect.top + bottomPadding ||
     baseRect.top + bottomPadding > overlapRect.bottom
   );
+}
+
+export function installingTheClass(node, flag, ourClass) {
+  if (flag) {
+    node.classList.add(ourClass);
+  } else {
+    node.classList.remove(ourClass);
+  }
+}
+
+export function cleanNodes(node) {
+  while (node.hasChildNodes()) {
+    cleanNodes(node.lastChild);
+    node.removeChild(node.lastChild);
+  }
+  return node;
 }
