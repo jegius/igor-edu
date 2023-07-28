@@ -19,7 +19,6 @@ export class LogoComponent extends HTMLElement {
     return Object.values(logoAttributes);
   }
 
-  #logo;
   #customStyles;
   #href;
   #logoText;
@@ -48,9 +47,7 @@ export class LogoComponent extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (newValue !== oldValue) {
       const callback = this.#ATTRIBUTE_MAPPING.get(name);
-      if (this.#logo) {
-        callback(this, newValue);
-      }
+      callback(this, newValue);
     }
   }
 
@@ -75,10 +72,6 @@ export class LogoComponent extends HTMLElement {
     text = this.#logoText
   ) {
     const template = document.createElement("template");
-    template.innerHTML = generateTemplateWithLink(customStyles);
-
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
-    this.#logo = this.shadowRoot.querySelector(".logo");
 
     const templateGenerator = href
       ? generateTemplateWithLink

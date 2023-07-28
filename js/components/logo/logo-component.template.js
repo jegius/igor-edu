@@ -1,6 +1,6 @@
 import generateStyles from "./logo-component.styles.js";
 
-export function generateTemplateWithLink(customStyles, href, text) {
+export function generateTemplateWithLink(customStyles, href, text = "") {
   return `
           ${generateStyles(customStyles)}
           <a class="logo-href" href="${href}">
@@ -12,7 +12,7 @@ export function generateTemplateWithLink(customStyles, href, text) {
         `;
 }
 
-export function generateTemplateWithoutLink(customStyles, href, text) {
+export function generateTemplateWithoutLink(customStyles, _, text = "") {
   return `
           ${generateStyles(customStyles)}
             <div class="logo">
