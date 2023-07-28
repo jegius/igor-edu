@@ -54,19 +54,19 @@ export class LogoComponent extends HTMLElement {
     }
   }
 
-  #setHref(element, newHref) {
+  #setHref(_, newHref) {
     this.#href = newHref;
-    this.#render(this.#customStyles, newHref);
+    this.#render();
   }
 
-  #setText(element, newText) {
+  #setText(_, newText) {
     this.#logoText = newText;
-    this.#render(this.#customStyles, this.#href, newText);
+    this.#render();
   }
 
-  #applyStyles(element, customStyles) {
+  #applyStyles(_, customStyles) {
     this.#customStyles = customStyles;
-    this.#render(customStyles, this.#href);
+    this.#render();
   }
 
   #render(

@@ -29,7 +29,7 @@ const TextTemplate = (args) => {
 
 const HrefTemplate = (args) => {
   return html`
-  <logo-component href=${args.href}></logo-component
+  <logo-component href=${args.href} text="${args.text}" custom-styles="${args.styles}"></logo-component
   `;
 };
 
@@ -58,6 +58,9 @@ export const Href = HrefTemplate.bind({});
 
 Href.args = {
   href: "#",
+  text: "Plants",
+  styles:
+    " .logo-href {  width: 4.948rem;   height: 1.315rem;} .logo-image  {background-image: url(../../img/logo_vector.svg)}",
 };
 
 export const Styles = CustomStylesTemplate.bind({});
