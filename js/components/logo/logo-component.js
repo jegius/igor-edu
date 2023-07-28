@@ -56,20 +56,24 @@ export class LogoComponent extends HTMLElement {
 
   #setHref(element, newHref) {
     this.#href = newHref;
-    this.#render(this.#customStyles, this.#href);
+    this.#render(this.#customStyles, newHref);
   }
 
   #setText(element, newText) {
     this.#logoText = newText;
-    this.#render(this.#customStyles, this.#href, this.#logoText);
+    this.#render(this.#customStyles, this.#href, newText);
   }
 
   #applyStyles(element, customStyles) {
     this.#customStyles = customStyles;
-    this.#render(this.#customStyles, this.#href);
+    this.#render(customStyles, this.#href);
   }
 
-  #render(customStyles, href = this.#href, text = this.#logoText) {
+  #render(
+    customStyles = this.#customStyles,
+    href = this.#href,
+    text = this.#logoText
+  ) {
     const template = document.createElement("template");
     template.innerHTML = generateTemplateWithLink(customStyles);
 
