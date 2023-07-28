@@ -16,7 +16,7 @@ const Template = (args) => {
     <logo-component
       image-url=${args.imageUrl}
       href=${args.href}
-      text=${args.text}
+      text=${args.text ? args.text : ""}
       custom-styles=${args.customStyles}
     ></logo-component>
   `;
@@ -24,18 +24,23 @@ const Template = (args) => {
 
 const TextTemplate = (args) => {
   return html`
-  <logo-component text=${args.text}></logo-component`;
+  <logo-component text=${args.text ? args.text : ""} custom-styles="${
+    args.styles
+  }" href="${args.href}"></logo-component`;
 };
 
 const HrefTemplate = (args) => {
   return html`
-  <logo-component href=${args.href} text="${args.text}" custom-styles="${args.styles}"></logo-component
+  <logo-component href=${args.href} text="${
+    args.text ? args.text : ""
+  }" custom-styles="${args.styles}"></logo-component
   `;
 };
 
 const CustomStylesTemplate = (args) => {
   return html` <logo-component
     custom-styles=${args.customStyles}
+    text="${args.text}"
   ></logo-component>`;
 };
 
@@ -52,6 +57,9 @@ export const Text = TextTemplate.bind({});
 
 Text.args = {
   text: "Plants",
+  href: "random href",
+  styles:
+    " .logo-href {  width: 4.948rem;   height: 1.315rem;} .logo-image  {background-image: url(../../img/logo_vector.svg)}",
 };
 
 export const Href = HrefTemplate.bind({});
@@ -68,4 +76,5 @@ export const Styles = CustomStylesTemplate.bind({});
 Styles.args = {
   customStyles:
     ".logo { border:1px solid black } .logo-image  {background-image: url(../../img/logo_vector.svg)}",
+  text: "Plants",
 };
