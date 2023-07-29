@@ -1,4 +1,4 @@
-export default function generateStyles() {
+export default function generateStyles(titleSecondaryStyles) {
   return `
   <style>
     @import url('../common.css');
@@ -8,9 +8,9 @@ export default function generateStyles() {
         color: var(--mainGreyColor);
         line-height: 3.125rem;
     }
-    
-    .undertitle-text {
-        color: var(--primaryTextGreenColor);
+
+    .title__secondary {
+        ${titleSecondaryStyles}
     }
     </style>
     `;

@@ -12,11 +12,14 @@ export default {
 };
 
 const Template = (args) => {
-  return html` <title-component></title-component> `;
+  return html`
+    <title-component level="${args.level}" text=${args.text}></title-component>
+  `;
 };
 
 export const Default = Template.bind({});
 
 Default.args = {
-  text: "hello",
+  level: 1,
+  text: `We grow plants and <span>hello</span> give you oxygen`,
 };

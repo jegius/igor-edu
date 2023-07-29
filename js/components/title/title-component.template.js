@@ -1,9 +1,21 @@
 import generateStyles from "./title-component.styles.js";
 
-export function generateTemplate() {
+export function generateTemplate(level, text = "") {
+  const div = document.createElement("div");
+  div.innerHTML = text;
+  const processedNode = (nodes) => {
+    nodes.forEach((node) => {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.tagName === "SPAN" || node.tagName === "B") {
+          node.classList.add("title__secondary");
+        }
+        processedNode(node.childNodes);
+      }
+    });
+  };
+  processedNode(div.childNodes);
   return `
-        ${generateStyles()}
-        <h1 class="title">We grow <span>plants</span> and give you oxygen</h1>
-        <p class="undertitle-text ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-    `;
+          ${generateStyles()}
+          <h${level} class="title">${div.innerHTML}</h${level}>
+        `;
 }
