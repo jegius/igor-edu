@@ -1,6 +1,14 @@
 import generateStyles from "./title-component.styles.js";
 
-export function generateTemplate(level, text = "") {
+export function generateTemplate(
+  primaryColor,
+  secondaryColor,
+  contentPosition,
+  level,
+  text = "",
+  contentSize,
+  titleSize
+) {
   const div = document.createElement("div");
   div.innerHTML = text;
   const processedNode = (nodes) => {
@@ -15,7 +23,13 @@ export function generateTemplate(level, text = "") {
   };
   processedNode(div.childNodes);
   return `
-          ${generateStyles()}
+          ${generateStyles(
+            primaryColor,
+            secondaryColor,
+            contentPosition,
+            contentSize,
+            titleSize
+          )}
           <h${level} class="title">${div.innerHTML}</h${level}>
         `;
 }
