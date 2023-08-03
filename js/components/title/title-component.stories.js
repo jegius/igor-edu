@@ -11,9 +11,12 @@ export default {
 
 const Template = (args) => {
   return html`
-    <title-component level="${args.level}" custom-styles=${args.customStyles}>
-      We grow plants and <span class="title__secondary">hello</span> give you
-      oxygen
+    <title-component
+      level="${args.level}"
+      custom-styles=${args.customStyles}
+      text=${args.text}
+    >
+      <span slot="title__secondary">plants</span>
     </title-component>
   `;
 };
@@ -22,5 +25,7 @@ export const Default = Template.bind({});
 
 Default.args = {
   level: 1,
-  customStyles: ".title: {color: red}",
+  customStyles:
+    "  .title { font-size: 2.813rem; font-weight: 700; color: var(--grey);  line-height: 3.125rem; text-align: left}",
+  text: "We grow <span><slot name='title__secondary'></slot></span> and give you oxygen",
 };

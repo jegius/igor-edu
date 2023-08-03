@@ -4,6 +4,7 @@ import { generateTemplate } from "./title-component.template.js";
 const titleAttributes = {
   LEVEL: "level",
   CUSTOM_STYLES: "custom-styles",
+  TEXT: "text",
 };
 
 export class TitleComponent extends HTMLElement {
@@ -17,6 +18,7 @@ export class TitleComponent extends HTMLElement {
   #ATTRIBUTE_MAPPING = new Map([
     [titleAttributes.LEVEL, this.#setLevel.bind(this)],
     [titleAttributes.CUSTOM_STYLES, this.#setCustomStyles.bind(this)],
+    [titleAttributes.TEXT, this.#setText.bind(this)],
   ]);
 
   connectedCallback() {
@@ -46,6 +48,10 @@ export class TitleComponent extends HTMLElement {
   #setCustomStyles(_, customStyles) {
     this.#customStyles = customStyles;
     this.#render();
+  }
+
+  #setText(element, newText) {
+    element.shadowRoot.querySelector(".title").innerHTML = newText;
   }
 
   #render(customStyles = this.#customStyles, level = this.#level) {
