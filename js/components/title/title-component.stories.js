@@ -16,7 +16,7 @@ const Template = (args) => {
       custom-styles=${args.customStyles}
       text=${args.text}
     >
-      <span slot="title__secondary">plants</span>
+      <span>plants</span>
     </title-component>
   `;
 };
@@ -26,6 +26,6 @@ export const Default = Template.bind({});
 Default.args = {
   level: 1,
   customStyles:
-    "  .title { font-size: 2.813rem; font-weight: 700; color: var(--grey);  line-height: 3.125rem; text-align: left}",
-  text: "We grow <span><slot name='title__secondary'></slot></span> and give you oxygen",
+    "  .title { font-size: 2.813rem;   text-align: left}; .title__secondary {color: pink}",
+  text: "We grow <slot class='title__secondary'></slot> and give you oxygen",
 };

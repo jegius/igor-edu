@@ -41,8 +41,13 @@ export class TitleComponent extends HTMLElement {
   }
 
   #setLevel(_, newLevel) {
-    this.#level = newLevel;
-    this.#render();
+    if (newLevel <= 6) {
+      this.#level = newLevel;
+      this.#render();
+    } else {
+      this.#level = 1;
+      this.#render();
+    }
   }
 
   #setCustomStyles(_, customStyles) {
