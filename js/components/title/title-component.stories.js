@@ -15,9 +15,8 @@ const Template = (args) => {
       level="${args.level}"
       custom-styles=${args.customStyles}
       text=${args.text}
+      ><span class="title__secondary">plants</span><b>test</b></title-component
     >
-      <span>plants</span>
-    </title-component>
   `;
 };
 

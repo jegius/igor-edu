@@ -14,6 +14,7 @@ export class TitleComponent extends HTMLElement {
   }
   #customStyles;
   #level;
+  #slot;
 
   #ATTRIBUTE_MAPPING = new Map([
     [titleAttributes.LEVEL, this.#setLevel.bind(this)],
@@ -41,13 +42,8 @@ export class TitleComponent extends HTMLElement {
   }
 
   #setLevel(_, newLevel) {
-    if (newLevel <= 6) {
-      this.#level = newLevel;
-      this.#render();
-    } else {
-      this.#level = 1;
-      this.#render();
-    }
+    this.#level = newLevel <= 6 ? newLevel : 1;
+    this.#render();
   }
 
   #setCustomStyles(_, customStyles) {
@@ -56,7 +52,27 @@ export class TitleComponent extends HTMLElement {
   }
 
   #setText(element, newText) {
-    element.shadowRoot.querySelector(".title").innerHTML = newText;
+    this.#slot = element.shadowRoot.querySelector("slot");
+    if (this.#slot) {
+      this.#slot.addEventListener("slotchange", this.slotChange.bind(this));
+    }
+    
+  }
+
+  slotChange() {
+    if (this.#slot) {
+      const slotContent = this.shadowRoot.querySelector("slot").assignedNodes();
+      this.shadowRoot.querySelector(".title").innerHTML = "";
+      const wrapper = document.createElement(`h${this.#level}`);
+      const contents = [];
+      slotContent.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          contents.push(node.innerHTML);
+        }
+      });
+      wrapper.innerHTML = contents.join(" ");
+      this.shadowRoot.append(wrapper);
+    }
   }
 
   #render(customStyles = this.#customStyles, level = this.#level) {
