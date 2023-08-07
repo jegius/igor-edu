@@ -26,5 +26,5 @@ Default.args = {
   level: 1,
   customStyles:
     "  .title { font-size: 2.813rem;   text-align: left}; .title__secondary {color: pink}",
-  text: "We grow <slot class='title__secondary'></slot> and give you oxygen",
+  text: "hello",
 };

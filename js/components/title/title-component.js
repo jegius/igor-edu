@@ -1,5 +1,13 @@
 import { cleanNodes } from "../api/helpers.js";
 import { generateTemplate } from "./title-component.template.js";
+import {
+  addListeners,
+  removeListeners,
+  select,
+  compose,
+} from "../api/helpers.js";
+import events from "../api/events.js";
+import { ArgTypes, argsHash } from "@storybook/blocks";
 
 const titleAttributes = {
   LEVEL: "level",
@@ -12,9 +20,17 @@ export class TitleComponent extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
   }
+  #text;
   #customStyles;
   #level;
   #slot;
+  #listeners = [
+    [
+      select.bind(this, "slot"),
+      events.ON_SLOT_CHANGE,
+      this.#slotChange.bind(this),
+    ],
+  ];
 
   #ATTRIBUTE_MAPPING = new Map([
     [titleAttributes.LEVEL, this.#setLevel.bind(this)],
@@ -24,6 +40,7 @@ export class TitleComponent extends HTMLElement {
 
   connectedCallback() {
     this.#render();
+    this.#listeners.forEach(addListeners);
   }
 
   static get observedAttributes() {
@@ -52,32 +69,46 @@ export class TitleComponent extends HTMLElement {
   }
 
   #setText(element, newText) {
-    this.#slot = element.shadowRoot.querySelector("slot");
-    if (this.#slot) {
-      this.#slot.addEventListener("slotchange", this.slotChange.bind(this));
-    }
-    
+    this.#text = newText;
+    this.#listeners.forEach(addListeners);
   }
 
-  slotChange() {
-    if (this.#slot) {
-      const slotContent = this.shadowRoot.querySelector("slot").assignedNodes();
-      this.shadowRoot.querySelector(".title").innerHTML = "";
-      const wrapper = document.createElement(`h${this.#level}`);
-      const contents = [];
-      slotContent.forEach((node) => {
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          contents.push(node.innerHTML);
-        }
-      });
-      wrapper.innerHTML = contents.join(" ");
-      this.shadowRoot.append(wrapper);
+  #slotChange(event) {
+    const target = event.target;
+
+    function createH1Container(providedNodes) {
+      const titleContainer = document.createElement("h1");
+      titleContainer.classList.add("title");
+      return { providedNodes, titleContainer };
     }
+
+    function createFullComponentText({ providedNodes, titleContainer }) {
+      titleContainer.innerHTML = this.#text;
+      providedNodes.forEach((node, i) => {
+        titleContainer.append(node.cloneNode(true));
+      });
+      this.#slot.innerHTML = titleContainer;
+    }
+    function nodeFilter(node) {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        return node;
+      }
+    }
+    const assignedNodes = target.assignedNodes().filter(nodeFilter);
+    compose(
+      createH1Container,
+      createFullComponentText.bind(this)
+    )(assignedNodes);
+  }
+
+  disconnectedCallback() {
+    this.#listeners.forEach(removeListeners);
   }
 
   #render(customStyles = this.#customStyles, level = this.#level) {
     const template = document.createElement("template");
     template.innerHTML = generateTemplate(customStyles, level);
+    this.#slot = this.shadowRoot.querySelector("slot");
 
     cleanNodes(this.shadowRoot).appendChild(template.content.cloneNode(true));
   }
