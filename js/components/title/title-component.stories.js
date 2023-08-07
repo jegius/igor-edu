@@ -26,5 +26,5 @@ Default.args = {
   level: 1,
   customStyles:
     "  .title { font-size: 2.813rem;   text-align: left}; .title__secondary {color: pink}",
-  text: "hello",
+  text: "we grow <span class='title__secondary'>plants</span> for &&",
 };

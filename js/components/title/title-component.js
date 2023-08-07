@@ -84,10 +84,11 @@ export class TitleComponent extends HTMLElement {
 
     function createFullComponentText({ providedNodes, titleContainer }) {
       titleContainer.innerHTML = this.#text;
-      providedNodes.forEach((node, i) => {
-        titleContainer.append(node.cloneNode(true));
-      });
-      this.#slot.innerHTML = titleContainer;
+      const slot = this.shadowRoot.querySelector("slot");
+      if (slot) {
+        slot.remove();
+        this.shadowRoot.append(titleContainer);
+      }
     }
     function nodeFilter(node) {
       if (node.nodeType === Node.ELEMENT_NODE) {
