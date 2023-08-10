@@ -55,6 +55,7 @@ export class TitleComponent extends HTMLElement {
   }
 
   #setCustomStyles(_, customStyles) {
+    console.log(customStyles)
     this.#customStyles = customStyles;
     this.#render();
   }
