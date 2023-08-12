@@ -70,3 +70,7 @@ export function cleanNodes(node) {
   }
   return node;
 }
+
+export function replaceUnicode(target) {
+  return target.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+}
