@@ -4,6 +4,7 @@ const imageAttributes = {
   URL: "url",
   IMAGE_HEIGHT: "image-height",
   IMAGE_WIDTH: "image-width",
+  SHOW_DISABLE: "showDisable",
 };
 
 export class ImageComponent extends HTMLElement {
@@ -43,6 +44,7 @@ export class ImageComponent extends HTMLElement {
 
   #setUrl(_, newUrl) {
     this.#src = newUrl;
+    console.log(newUrl + " " + "new url");
   }
 
   #setHeight(elem, newHeight) {

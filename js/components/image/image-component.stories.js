@@ -10,7 +10,7 @@ export default {
 };
 
 const Template = (args) => {
-  return ` <image-component url=${args.url} image-height=${args.height} image-width=${args.width}></image-component> `;
+  return ` <image-component url=${args.url} image-height=${args.height} image-width=${args.width} showDisable="${args.showDisable}" ></image-component> `;
 };
 
 export const Default = Template.bind(this);
@@ -19,4 +19,5 @@ Default.args = {
   url: "../../../img/about_houseplant.png",
   height: "20",
   width: "20",
+  showDisable: "true",
 };
