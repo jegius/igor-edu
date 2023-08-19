@@ -47,10 +47,12 @@ export class ImageComponent extends HTMLElement {
 
   #setHeight(elem, newHeight) {
     this.#imgHeight = newHeight;
+    console.log(newHeight);
   }
 
   #setWidth(elem, newWidth) {
     this.#imgWidth = newWidth;
+    console.log(newWidth);
   }
 
   #render(

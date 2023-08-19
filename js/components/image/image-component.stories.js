@@ -17,6 +17,6 @@ export const Default = Template.bind(this);
 
 Default.args = {
   url: "../../../img/about_houseplant.png",
-  height: "20rem",
-  width: "20rem",
+  height: "20",
+  width: "20",
 };
