@@ -4,10 +4,10 @@ export default function generateStyles(src, imgHeight, imgWidth) {
         @import url('../common.css');
         .about__image {
             background-image: url(${
-              src ? src : "../../../img/servicesCards/error_img.jpg"
+               src ?? "../../../img/servicesCards/error_img.jpg"
             });
-            min-width: ${imgWidth ? imgWidth + "rem" : "100%"}; 
-            min-height: ${imgHeight ? imgHeight + "rem" : "100%"};
+            min-width: ${imgWidth}; 
+            min-height: ${imgHeight};
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center

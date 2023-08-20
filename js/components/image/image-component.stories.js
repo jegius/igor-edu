@@ -3,6 +3,7 @@ import "./image-component.styles.js";
 import "./image-component.template.js";
 import "../common.css";
 import { ImageComponent } from "./image-component.js";
+import { html } from "lit-html";
 
 export default {
   title: "ImageComponent",
@@ -10,14 +11,46 @@ export default {
 };
 
 const Template = (args) => {
-  return ` <image-component url=${args.url} image-height=${args.height} image-width=${args.width} showDisable="${args.showDisable}" ></image-component> `;
+  return html `<image-component url=${args.url} image-height=${args.height} image-width=${args.width} ></image-component>`;
 };
 
-export const Default = Template.bind(this);
+export const Default = Template.bind({});
 
 Default.args = {
   url: "../../../img/about_houseplant.png",
   height: "20",
   width: "20",
   showDisable: "true",
+};
+
+const ImageTemplate = (args) => {
+  return html `<image-component  url=${args.url}></image-component>`;
+};
+
+export const Image = ImageTemplate.bind({});
+
+Image.args = {
+  url: "../../../img/about_houseplant.png",
+};
+
+const CustomSizeTemplate = (args) => {
+  return html`<image-component image-height=${args.height} image-width=${args.width}></image-component>`;
+};
+
+export const customSize = CustomSizeTemplate.bind({});
+
+customSize.args = {
+  height: "15",
+  width: "15",
+};
+
+const defaultSizeTemplate = (args) => {
+  return html`<image-component image-height=${args.height} image-width=${args.width}></image-component>`;
+};
+
+export const defaultSize = defaultSizeTemplate.bind({});
+
+defaultSize.args = {
+  height: "",
+  width: "",
 };

@@ -4,7 +4,6 @@ const imageAttributes = {
   URL: "url",
   IMAGE_HEIGHT: "image-height",
   IMAGE_WIDTH: "image-width",
-  SHOW_DISABLE: "showDisable",
 };
 
 export class ImageComponent extends HTMLElement {
@@ -44,17 +43,29 @@ export class ImageComponent extends HTMLElement {
 
   #setUrl(_, newUrl) {
     this.#src = newUrl;
-    console.log(newUrl + " " + "new url");
+    if (!newUrl) {
+      this.#src = null;
+    }
   }
 
   #setHeight(elem, newHeight) {
-    this.#imgHeight = newHeight;
-    console.log(newHeight + " " + "это высота");
+    if (!newHeight) {
+      this.#imgHeight = 100 + "%";
+    } else {
+      this.#imgHeight = newHeight + "rem";
+    }
+    console.log(newHeight + " " + "это newHeight");
+    console.log(this.#imgHeight + " " + "это this.#imgHeight");
   }
 
   #setWidth(elem, newWidth) {
-    this.#imgWidth = newWidth;
-    console.log(newWidth + " " + "Это ширины");
+    if (!newWidth) {
+      this.#imgWidth = 100 + "%";
+    } else {
+      this.#imgWidth = newWidth + "rem";
+    }
+    console.log(newWidth + " " + "это newWidth");
+    console.log(this.#imgWidth + " " + "это this.#imgWidth");
   }
 
   #render(
