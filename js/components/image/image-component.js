@@ -39,13 +39,27 @@ export class ImageComponent extends HTMLElement {
 
   connectedCallback() {
     this.#render();
+    for (let attrName of this.constructor.observedAttributes) {
+      if (this.hasAttribute(attrName)) {
+        const attrValue = this.getAttribute(attrName);
+        this.attributeChangedCallback(attrName, null, attrValue);
+      }
+    }
   }
 
-  #setUrl(_, newUrl) {
+  #showDisable(node) {
+    if (node.getAttribute("show-disable") == "true") {
+      this.#src = null;
+      this.#render();
+    }
+  }
+
+  #setUrl(element, newUrl) {
     this.#src = newUrl;
     if (!newUrl) {
       this.#src = null;
     }
+    this.#showDisable(element);
   }
 
   #setHeight(elem, newHeight) {
@@ -54,8 +68,6 @@ export class ImageComponent extends HTMLElement {
     } else {
       this.#imgHeight = newHeight + "rem";
     }
-    console.log(newHeight + " " + "это newHeight");
-    console.log(this.#imgHeight + " " + "это this.#imgHeight");
   }
 
   #setWidth(elem, newWidth) {
@@ -64,8 +76,6 @@ export class ImageComponent extends HTMLElement {
     } else {
       this.#imgWidth = newWidth + "rem";
     }
-    console.log(newWidth + " " + "это newWidth");
-    console.log(this.#imgWidth + " " + "это this.#imgWidth");
   }
 
   #render(
