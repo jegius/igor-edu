@@ -48,8 +48,8 @@ export class ImageComponent extends HTMLElement {
   }
 
   #showDisable(node) {
-    if (node.getAttribute("show-disable") == "true") {
-      this.#src = null;
+    if (node.getAttribute("show-disable") == "false" && this.#src === null) {
+      this.#src = " ";
       this.#render();
     }
   }
@@ -63,19 +63,11 @@ export class ImageComponent extends HTMLElement {
   }
 
   #setHeight(elem, newHeight) {
-    if (!newHeight) {
-      this.#imgHeight = 100 + "%";
-    } else {
-      this.#imgHeight = newHeight + "rem";
-    }
+    this.#imgHeight = newHeight ? `${newHeight}rem` : "100%";
   }
 
   #setWidth(elem, newWidth) {
-    if (!newWidth) {
-      this.#imgWidth = 100 + "%";
-    } else {
-      this.#imgWidth = newWidth + "rem";
-    }
+    this.#imgWidth = newWidth ? `${newWidth}rem` : "100%";
   }
 
   #render(
