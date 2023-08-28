@@ -74,3 +74,12 @@ export function cleanNodes(node) {
 export function replaceUnicode(target) {
   return target.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
 }
+
+export function checkUnitOfMeasurement(value) {
+  const regExp = /\d+rem$/gi;
+  if (regExp.test(value)) {
+    return value.match(regExp)[0];
+  } else {
+    return `${value.match(/\d+/) + "rem"}`;
+  }
+}

@@ -1,5 +1,5 @@
 import generateTemplate from "./image-component.template.js";
-import { cleanNodes } from "../api/helpers.js";
+import { cleanNodes, checkUnitOfMeasurement } from "../api/helpers.js";
 const imageAttributes = {
   URL: "url",
   IMAGE_HEIGHT: "image-height",
@@ -62,12 +62,14 @@ export class ImageComponent extends HTMLElement {
     this.#showDisable(element);
   }
 
-  #setHeight(elem, newHeight) {
-    this.#imgHeight = newHeight ? `${newHeight}rem` : "100%";
+  #setHeight(elem, newHeight = "100%") {
+    const height = checkUnitOfMeasurement.call(this, newHeight);
+    this.#imgHeight = height;
   }
 
-  #setWidth(elem, newWidth) {
-    this.#imgWidth = newWidth ? `${newWidth}rem` : "100%";
+  #setWidth(elem, newWidth = "100%") {
+    const width = checkUnitOfMeasurement.call(this, newWidth);
+    this.#imgWidth = width;
   }
 
   #render(
