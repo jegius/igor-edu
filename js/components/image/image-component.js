@@ -54,11 +54,53 @@ export class ImageComponent extends HTMLElement {
     }
   }
 
+  #compressImage(url) {
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const img = new Image();
+          img.onload = function () {
+            const maxWidth = img.width;
+            const maxHeight = img.height;
+            let newWidth = maxWidth;
+            let newHeight = maxHeight;
+            if (newWidth > newHeight) {
+              if (newWidth > maxWidth) {
+                newHeight *= maxWidth / newWidth;
+                newWidth = maxWidth;
+              }
+            } else {
+              if (newHeight > maxHeight) {
+                newWidth *= maxHeight / newHeight;
+                newHeight = maxHeight;
+              }
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, newWidth, newHeight);
+            canvas.toBlob(resolve, "image/jpeg");
+          };
+          img.onerror = function () {
+            reject(new Error("Ошибка загрузки изображения."));
+          };
+          img.src = URL.createObjectURL(blob);
+        })
+        .catch((error) => {
+          reject(new Error("Ошибка загрузки изображения."));
+        });
+    });
+  }
+
   #setUrl(element, newUrl) {
     this.#src = newUrl;
     if (!newUrl) {
       this.#src = null;
     }
+    this.#compressImage(newUrl);
+
     this.#showDisable(element);
   }
 
