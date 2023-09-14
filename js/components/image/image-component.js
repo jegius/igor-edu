@@ -6,6 +6,8 @@ const imageAttributes = {
   IMAGE_WIDTH: "image-width",
 };
 
+const hundredPercent = "100%";
+
 export class ImageComponent extends HTMLElement {
   constructor() {
     super();
@@ -15,6 +17,8 @@ export class ImageComponent extends HTMLElement {
   #imgHeight;
   #imgWidth;
   #src;
+  #data64;
+  #image;
 
   #ATTRIBUTE_MAPPING = new Map([
     [imageAttributes.URL, this.#setUrl.bind(this)],
@@ -54,62 +58,81 @@ export class ImageComponent extends HTMLElement {
     }
   }
 
-  #compressImage(url) {
+  async #compressImage(url) {
     return new Promise((resolve, reject) => {
-      fetch(url)
-        .then((response) => response.blob())
-        .then((blob) => {
-          const img = new Image();
-          img.onload = function () {
-            const maxWidth = img.width;
-            const maxHeight = img.height;
-            let newWidth = maxWidth;
-            let newHeight = maxHeight;
-            if (newWidth > newHeight) {
-              if (newWidth > maxWidth) {
-                newHeight *= maxWidth / newWidth;
-                newWidth = maxWidth;
-              }
-            } else {
-              if (newHeight > maxHeight) {
-                newWidth *= maxHeight / newHeight;
-                newHeight = maxHeight;
-              }
+      try {
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload = function () {
+          const maxWidth = img.width;
+          const maxHeight = img.height;
+          let newWidth = maxWidth;
+          let newHeight = maxHeight;
+          if (newWidth > newHeight) {
+            if (newWidth > maxWidth) {
+              newHeight *= maxWidth / newWidth;
+              newWidth = maxWidth;
             }
-            const canvas = document.createElement("canvas");
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, newWidth, newHeight);
-            canvas.toBlob(resolve, "image/jpeg");
-          };
-          img.onerror = function () {
-            reject(new Error("Ошибка загрузки изображения."));
-          };
-          img.src = URL.createObjectURL(blob);
-        })
-        .catch((error) => {
-          reject(new Error("Ошибка загрузки изображения."));
-        });
+          } else {
+            if (newHeight > maxHeight) {
+              newWidth *= maxHeight / newHeight;
+              newHeight = maxHeight;
+            }
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = newWidth;
+          canvas.height = newHeight;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, newWidth, newHeight);
+          canvas.toBlob(
+            (blob) => {
+              const reader = new FileReader();
+              reader.onloadend = function () {
+                const base64data = reader.result;
+                resolve(base64data);
+              };
+              reader.readAsDataURL(blob);
+            },
+            "image/png",
+            1
+          );
+        };
+        img.onerror = function () {
+          reject("Ошибка загрузки изображения");
+        };
+        img.src = url;
+      } catch (error) {
+        reject("Ошибка обработки изображения");
+      }
     });
   }
-
-  #setUrl(element, newUrl) {
+  async #setUrl(element, newUrl) {
     this.#src = newUrl;
     if (!newUrl) {
       this.#src = null;
     }
-    this.#compressImage(newUrl);
+
+    await this.#compressImage(newUrl).then((el) => {
+      const reg = /^data/;
+      if (reg.test(el)) {
+        this.#data64 = el;
+        this.#src = this.#data64;
+      } else {
+        this.#image = el;
+        this.#src = this.#image;
+      }
+      this.#render();
+    });
 
     this.#showDisable(element);
   }
 
-  #setHeight(elem, newHeight = "100%") {
+  #setHeight(elem, newHeight = hundredPercent) {
     const height = checkUnitOfMeasurement.call(this, newHeight);
     this.#imgHeight = height;
   }
 
-  #setWidth(elem, newWidth = "100%") {
+  #setWidth(elem, newWidth = hundredPercent) {
     const width = checkUnitOfMeasurement.call(this, newWidth);
     this.#imgWidth = width;
   }
