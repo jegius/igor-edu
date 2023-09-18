@@ -1,12 +1,16 @@
 import generateTemplate from "./image-component.template.js";
-import { cleanNodes, checkUnitOfMeasurement } from "../api/helpers.js";
+import {
+  cleanNodes,
+  checkUnitOfMeasurement,
+  compressImage,
+} from "../api/helpers.js";
 const imageAttributes = {
   URL: "url",
   IMAGE_HEIGHT: "image-height",
   IMAGE_WIDTH: "image-width",
 };
 
-const hundredPercent = "100%";
+const FULL_SPACE = "100%";
 
 export class ImageComponent extends HTMLElement {
   constructor() {
@@ -58,83 +62,31 @@ export class ImageComponent extends HTMLElement {
     }
   }
 
-  async #compressImage(url) {
-    return new Promise((resolve, reject) => {
-      try {
-        const img = new Image();
-        img.crossOrigin = "Anonymous";
-        img.onload = function () {
-          const maxWidth = img.width;
-          const maxHeight = img.height;
-          let newWidth = maxWidth;
-          let newHeight = maxHeight;
-          if (newWidth > newHeight) {
-            if (newWidth > maxWidth) {
-              newHeight *= maxWidth / newWidth;
-              newWidth = maxWidth;
-            }
-          } else {
-            if (newHeight > maxHeight) {
-              newWidth *= maxHeight / newHeight;
-              newHeight = maxHeight;
-            }
-          }
-          const canvas = document.createElement("canvas");
-          canvas.width = newWidth;
-          canvas.height = newHeight;
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0, newWidth, newHeight);
-          canvas.toBlob(
-            (blob) => {
-              const reader = new FileReader();
-              reader.onloadend = function () {
-                const base64data = reader.result;
-                resolve(base64data);
-              };
-              reader.readAsDataURL(blob);
-            },
-            "image/png",
-            1
-          );
-        };
-        img.onerror = function () {
-          reject("Ошибка загрузки изображения");
-        };
-        img.src = url;
-      } catch (error) {
-        reject("Ошибка обработки изображения");
-      }
-    });
-  }
   async #setUrl(element, newUrl) {
-    this.#src = newUrl;
+    const previousUrl = this.#src;
+
     if (!newUrl) {
       this.#src = null;
     }
-
-    await this.#compressImage(newUrl).then((el) => {
-      const reg = /^data/;
-      if (reg.test(el)) {
-        this.#data64 = el;
-        this.#src = this.#data64;
-      } else {
-        this.#image = el;
-        this.#src = this.#image;
+    if (newUrl !== previousUrl) {
+      try {
+        const compressedImage = await compressImage(newUrl);
+        this.#src = compressedImage;
+        this.#render();
+      } catch (error) {
+        console.log(error.message);
       }
-      this.#render();
-    });
+    }
 
     this.#showDisable(element);
   }
 
-  #setHeight(elem, newHeight = hundredPercent) {
-    const height = checkUnitOfMeasurement.call(this, newHeight);
-    this.#imgHeight = height;
+  #setHeight(_, newHeight = FULL_SPACE) {
+    this.#imgHeight = checkUnitOfMeasurement.call(this, newHeight);
   }
 
-  #setWidth(elem, newWidth = hundredPercent) {
-    const width = checkUnitOfMeasurement.call(this, newWidth);
-    this.#imgWidth = width;
+  #setWidth(_, newWidth = FULL_SPACE) {
+    this.#imgWidth = checkUnitOfMeasurement.call(this, newWidth);
   }
 
   #render(
