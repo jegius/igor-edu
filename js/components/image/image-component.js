@@ -21,8 +21,7 @@ export class ImageComponent extends HTMLElement {
   #imgHeight;
   #imgWidth;
   #src;
-  #data64;
-  #image;
+
 
   #ATTRIBUTE_MAPPING = new Map([
     [imageAttributes.URL, this.#setUrl.bind(this)],

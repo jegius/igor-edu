@@ -79,12 +79,10 @@ export function checkUnitOfMeasurement(value) {
   const regExp = /\d+rem$|\d+%$/gi;
 
   if (regExp.test(value)) {
-    console.log(value.match(regExp)[0]);
     return value.match(regExp)[0];
   } else if (value === "") {
     return "";
   } else {
-    console.log(`${value.match(/\d+/)}rem`);
     return `${value.match(/\d+/)}rem`;
   }
 }
