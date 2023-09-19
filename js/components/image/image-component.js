@@ -8,6 +8,7 @@ const imageAttributes = {
   URL: "url",
   IMAGE_HEIGHT: "image-height",
   IMAGE_WIDTH: "image-width",
+  FLAG: "flag",
 };
 
 const FULL_SPACE = "100%";
@@ -21,12 +22,13 @@ export class ImageComponent extends HTMLElement {
   #imgHeight;
   #imgWidth;
   #src;
-
+  #flag;
 
   #ATTRIBUTE_MAPPING = new Map([
     [imageAttributes.URL, this.#setUrl.bind(this)],
     [imageAttributes.IMAGE_HEIGHT, this.#setHeight.bind(this)],
     [imageAttributes.IMAGE_WIDTH, this.#setWidth.bind(this)],
+    [imageAttributes.FLAG, this.#setFlag.bind(this)],
   ]);
 
   static get name() {
@@ -54,30 +56,23 @@ export class ImageComponent extends HTMLElement {
     }
   }
 
-  #showDisable(node) {
-    if (node.getAttribute("show-disable") == "false" && this.#src === null) {
-      this.#src = " ";
-      this.#render();
-    }
-  }
-
   async #setUrl(element, newUrl) {
     const previousUrl = this.#src;
 
     if (!newUrl) {
-      this.#src = null;
+      return;
     }
-    if (newUrl !== previousUrl) {
-      try {
-        const compressedImage = await compressImage(newUrl);
-        this.#src = compressedImage;
-        this.#render();
-      } catch (error) {
-        console.log(error.message);
-      }
+    try {
+      const compressedImage = await compressImage(newUrl);
+      this.#src = compressedImage;
+      this.#render();
+    } catch (error) {
+      console.log(error.message);
     }
+  }
 
-    this.#showDisable(element);
+  #setFlag(_, newBoolean) {
+    this.#flag = newBoolean;
   }
 
   #setHeight(_, newHeight = FULL_SPACE) {
@@ -91,10 +86,11 @@ export class ImageComponent extends HTMLElement {
   #render(
     src = this.#src,
     imgHeight = this.#imgHeight,
-    imgWidth = this.#imgWidth
+    imgWidth = this.#imgWidth,
+    flag = this.#flag
   ) {
     const template = document.createElement("template");
-    template.innerHTML = generateTemplate(src, imgHeight, imgWidth);
+    template.innerHTML = generateTemplate(src, imgHeight, imgWidth, flag);
 
     cleanNodes(this.shadowRoot).appendChild(template.content.cloneNode(true));
   }

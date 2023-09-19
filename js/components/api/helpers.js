@@ -87,28 +87,19 @@ export function checkUnitOfMeasurement(value) {
   }
 }
 
+//-----ОТОБРАЖЕНИЕ КАРТИНКИ------//
+
 export async function compressImage(url) {
   return new Promise((resolve, reject) => {
     try {
       const img = new Image();
       const crossOrigin = "Anonymous";
+      const PNG_TYPE = "image/png";
 
       img.crossOrigin = crossOrigin;
-      img.onload = function () {
-        const [newWidth, newHeight] = setSizes(img);
-        const canvas = createCanvas(newWidth, newHeight);
+      img.onload = loadedImage.bind(null, img, resolve, PNG_TYPE);
+      img.onerror = rejectedBlob.bind(null, reject);
 
-        drawCanvasImage(canvas, img, newWidth, newHeight).toBlob(
-          (blob) => {
-            resolvdesBlob(resolve, blob);
-          },
-          "image/png",
-          1
-        );
-      };
-      img.onerror = function () {
-        rejectedBlob(reject);
-      };
       img.src = url;
     } catch (error) {
       reject(new Error("Ошибка при выполнении сжатия"));
@@ -116,11 +107,22 @@ export async function compressImage(url) {
   });
 }
 
+export function loadedImage(img, resolveCallback, typeOfImage) {
+  const [newWidth, newHeight] = setSizes(img);
+  const canvas = createCanvas(newWidth, newHeight);
+  const resolver = resolvedBlob.bind(null, resolveCallback);
+
+  drawCanvasImage(canvas, img, newWidth, newHeight).toBlob(
+    resolver,
+    typeOfImage,
+    1
+  );
+}
 export function rejectedBlob(rejectedCallback) {
   rejectedCallback(new Error("Ошибка при загрузки изображения"));
 }
 
-export function resolvdesBlob(resolveCallback, blob) {
+export function resolvedBlob(resolveCallback, blob) {
   const reader = new FileReader();
 
   reader.onloadend = function () {
