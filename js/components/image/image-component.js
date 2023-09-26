@@ -22,13 +22,13 @@ export class ImageComponent extends HTMLElement {
   #imgHeight;
   #imgWidth;
   #src;
-  #flag;
+  #enableDefaultImage;
 
   #ATTRIBUTE_MAPPING = new Map([
     [imageAttributes.URL, this.#setUrl.bind(this)],
     [imageAttributes.IMAGE_HEIGHT, this.#setHeight.bind(this)],
     [imageAttributes.IMAGE_WIDTH, this.#setWidth.bind(this)],
-    [imageAttributes.FLAG, this.#setFlag.bind(this)],
+    [imageAttributes.FLAG, this.#setDefaultImage.bind(this)],
   ]);
 
   static get name() {
@@ -68,8 +68,8 @@ export class ImageComponent extends HTMLElement {
     }
   }
 
-  #setFlag(_, newBoolean) {
-    this.#flag = newBoolean;
+  #setDefaultImage(_, newBoolean) {
+    this.#enableDefaultImage = newBoolean;
   }
 
   #setHeight(_, newHeight = FULL_SPACE) {
@@ -84,7 +84,7 @@ export class ImageComponent extends HTMLElement {
     src = this.#src,
     imgHeight = this.#imgHeight,
     imgWidth = this.#imgWidth,
-    flag = this.#flag
+    flag = this.#enableDefaultImage
   ) {
     const template = document.createElement("template");
     template.innerHTML = generateTemplate(src, imgHeight, imgWidth, flag);

@@ -78,10 +78,10 @@ export function replaceUnicode(target) {
 export function checkUnitOfMeasurement(value) {
   const regExp = /^\d+rem$|^\d+%$/gi;
 
-  if (!value) {
+  if (!value || !/\d/.test(value)) {
     return null;
   }
-
+  console.log(value.replace(/[^\d]/gi, "") + "rem");
   return regExp.test(value) ? value : value.replace(/[^\d]/gi, "") + "rem";
 }
 
