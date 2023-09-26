@@ -64,7 +64,7 @@ export class ImageComponent extends HTMLElement {
       this.#src = newUrl ? compressedImage : null;
       this.#render();
     } catch (error) {
-      console.log(error.message);
+      console.error(error);
     }
   }
 
