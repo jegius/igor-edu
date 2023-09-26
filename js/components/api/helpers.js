@@ -78,10 +78,9 @@ export function replaceUnicode(target) {
 export function checkUnitOfMeasurement(value) {
   const regExp = /^\d+rem$|^\d+%$/gi;
 
-  if (!value || !/\d/.test(value)) {
+  if (!/\d/.test(value)) {
     return null;
   }
-  console.log(value.replace(/[^\d]/gi, "") + "rem");
   return regExp.test(value) ? value : value.replace(/[^\d]/gi, "") + "rem";
 }
 
@@ -106,7 +105,7 @@ export async function compressImage(url) {
 }
 
 export function loadedImage(img, resolveCallback, typeOfImage) {
-  const qualityArgument = 1;
+  const QUALITY_ARGUMENT = 1;
   const [newWidth, newHeight] = setSizes(img);
   const canvas = createCanvas(newWidth, newHeight);
   const resolver = resolvedBlob.bind(null, resolveCallback);
@@ -114,7 +113,7 @@ export function loadedImage(img, resolveCallback, typeOfImage) {
   drawCanvasImage(canvas, img, newWidth, newHeight).toBlob(
     resolver,
     typeOfImage,
-    qualityArgument
+    QUALITY_ARGUMENT
   );
 }
 
