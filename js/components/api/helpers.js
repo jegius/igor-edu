@@ -76,18 +76,14 @@ export function replaceUnicode(target) {
 }
 
 export function checkUnitOfMeasurement(value) {
-  const regExp = /\d+rem$|\d+%$/gi;
+  const regExp = /^\d+rem$|^\d+%$/gi;
 
-  if (regExp.test(value)) {
-    return value.match(regExp)[0];
-  } else if (value === "") {
-    return "";
-  } else {
-    return `${value.match(/\d+/)}rem`;
+  if (!value) {
+    return null;
   }
-}
 
-//-----ОТОБРАЖЕНИЕ КАРТИНКИ------//
+  return regExp.test(value) ? value : value.replace(/[^\d]/gi, "") + "rem";
+}
 
 export async function compressImage(url) {
   return new Promise((resolve, reject) => {
@@ -98,7 +94,9 @@ export async function compressImage(url) {
 
       img.crossOrigin = crossOrigin;
       img.onload = loadedImage.bind(null, img, resolve, PNG_TYPE);
-      img.onerror = rejectedBlob.bind(null, reject);
+      img.onerror = () => {
+        reject(new Error("ошибка при загрузке изображения"));
+      };
 
       img.src = url;
     } catch (error) {
@@ -108,6 +106,7 @@ export async function compressImage(url) {
 }
 
 export function loadedImage(img, resolveCallback, typeOfImage) {
+  const qualityArgument = 1;
   const [newWidth, newHeight] = setSizes(img);
   const canvas = createCanvas(newWidth, newHeight);
   const resolver = resolvedBlob.bind(null, resolveCallback);
@@ -115,11 +114,8 @@ export function loadedImage(img, resolveCallback, typeOfImage) {
   drawCanvasImage(canvas, img, newWidth, newHeight).toBlob(
     resolver,
     typeOfImage,
-    1
+    qualityArgument
   );
-}
-export function rejectedBlob(rejectedCallback) {
-  rejectedCallback(new Error("Ошибка при загрузки изображения"));
 }
 
 export function resolvedBlob(resolveCallback, blob) {

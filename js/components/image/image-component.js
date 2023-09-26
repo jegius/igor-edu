@@ -59,12 +59,9 @@ export class ImageComponent extends HTMLElement {
   async #setUrl(element, newUrl) {
     const previousUrl = this.#src;
 
-    if (!newUrl) {
-      return;
-    }
     try {
       const compressedImage = await compressImage(newUrl);
-      this.#src = compressedImage;
+      this.#src = newUrl ? compressedImage : null;
       this.#render();
     } catch (error) {
       console.log(error.message);

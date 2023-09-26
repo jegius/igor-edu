@@ -8,8 +8,8 @@ export default function generateStyles(img, imgHeight, imgWidth, flag) {
             background-image: url(${`${
               img ?? (flag === "true" ? binaryErrorPicture : null)
             }`});
-            min-width: ${imgWidth}; 
-            min-height: ${imgHeight};
+            min-width: ${imgWidth ?? "100%"}; 
+            min-height: ${imgHeight ?? "100%"};
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center
