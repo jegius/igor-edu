@@ -84,10 +84,10 @@ export class ImageComponent extends HTMLElement {
     src = this.#src,
     imgHeight = this.#imgHeight,
     imgWidth = this.#imgWidth,
-    flag = this.#enableDefaultImage
+    enableDefaultImage = this.#enableDefaultImage
   ) {
     const template = document.createElement("template");
-    template.innerHTML = generateTemplate(src, imgHeight, imgWidth, flag);
+    template.innerHTML = generateTemplate(src, imgHeight, imgWidth, enableDefaultImage);
 
     cleanNodes(this.shadowRoot).appendChild(template.content.cloneNode(true));
   }
