@@ -8,6 +8,6 @@ export default function generateTemplate(
 ) {
   return `
         ${generateStyles(src, imgHeight, imgWidth, enableDefaultImage)}
-        <div class="about__image"></div>
+        <div class="image"></div>
     `;
 }

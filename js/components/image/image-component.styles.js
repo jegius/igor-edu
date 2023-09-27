@@ -4,7 +4,7 @@ export default function generateStyles(img, imgHeight, imgWidth, enableDefaultIm
   return `
         <style>
         @import url('../common.css');
-        .about__image {
+        .image {
             background-image: url(${`${
               img ?? (enableDefaultImage === "true" ? binaryErrorPicture : null)
             }`});
