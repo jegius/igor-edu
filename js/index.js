@@ -4,6 +4,7 @@ import { ButtonComponent } from "./components/button/button-component.js";
 import { LogoComponent } from "./components/logo/logo-component.js";
 import { TitleComponent } from "./components/title/title-component.js";
 import { ImageComponent } from "./components/image/image-component.js";
+import { HeaderComponent } from "./components/header/header-component.js";
 
 [
   ButtonComponent,
@@ -11,5 +12,6 @@ import { ImageComponent } from "./components/image/image-component.js";
   LinkComponent,
   LogoComponent,
   TitleComponent,
+  HeaderComponent,
   ImageComponent,
 ].map((component) => customElements.define(component.name, component));
