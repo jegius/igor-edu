@@ -1,4 +1,5 @@
 import { generateTemplate } from "./header-component.template.js";
+const imageSrc = "../../../img/logo__vector.svg";
 const headerAttributes = {
   POSITION: "position",
 };
@@ -10,6 +11,7 @@ export class HeaderComponent extends HTMLElement {
   }
 
   #position;
+  #imageSrc;
 
   #ATTRIBUTE_MAPPING = new Map([
     [headerAttributes.POSITION, this.#setPosition.bind(this)],
@@ -24,27 +26,25 @@ export class HeaderComponent extends HTMLElement {
   }
 
   static get observedAttributes() {
-    console.log(this.constructor.observerAttributes);
     return Object.values(headerAttributes);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log(name);
     if (oldValue !== newValue) {
       const callback = this.#ATTRIBUTE_MAPPING.get(name);
       callback(name, newValue);
     }
   }
 
-  #setPosition(element, position) {
+  #setPosition(_, position) {
     this.#position = position;
-    console.log(position + "привет");
+    this.#imageSrc = imageSrc;
   }
 
-  #render(position = this.#position) {
+  #render(position = this.#position, imageSrc = this.#imageSrc) {
     const template = document.createElement("template");
 
-    template.innerHTML = generateTemplate(position);
+    template.innerHTML = generateTemplate(position, imageSrc);
     this.shadowRoot.append(template.content.cloneNode(true));
   }
 }
