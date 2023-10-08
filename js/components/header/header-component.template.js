@@ -4,8 +4,8 @@ import "../link/link-component.js";
 import "../logo/logo-component.js";
 const linksArray = [
   ` <link-element is-active="true" link-text="first" href="#"></link-element>`,
-  ` <link-element is-active="true" link-text="seconds" href="#"></link-element>`,
-  ` <link-element is-active="true" link-text="third" href="#"></link-element>`,
+  ` <link-element is-active="false" link-text="seconds" href="#"></link-element>`,
+  ` <link-element is-active="false" link-text="third" href="#"></link-element>`,
 ];
 
 export function generateTemplate(position, imageSrc) {

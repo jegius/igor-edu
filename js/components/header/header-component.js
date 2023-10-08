@@ -22,6 +22,7 @@ export class HeaderComponent extends HTMLElement {
   }
 
   connectedCallback() {
+    this.#imageSrc = imageSrc;
     this.#render();
   }
 
@@ -38,7 +39,6 @@ export class HeaderComponent extends HTMLElement {
 
   #setPosition(_, position) {
     this.#position = position;
-    this.#imageSrc = imageSrc;
   }
 
   #render(position = this.#position, imageSrc = this.#imageSrc) {
