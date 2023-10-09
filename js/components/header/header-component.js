@@ -1,5 +1,6 @@
 import { generateTemplate } from "./header-component.template.js";
-const imageSrc = "../../../img/logo__vector.svg";
+// const imageSrc = "../../../img/logo_vector.svg";
+
 const headerAttributes = {
   POSITION: "position",
 };
@@ -10,41 +11,55 @@ export class HeaderComponent extends HTMLElement {
     this.attachShadow({ mode: "open" });
   }
 
-  #position;
   #imageSrc;
-
-  #ATTRIBUTE_MAPPING = new Map([
-    [headerAttributes.POSITION, this.#setPosition.bind(this)],
-  ]);
 
   static get name() {
     return "header-component";
   }
 
-  connectedCallback() {
-    this.#imageSrc = imageSrc;
-    this.#render();
+  async connectedCallback() {
+    try {
+      this.#addPositionByScroll();
+    } catch (error) {
+      console.log("ошибка");
+    }
+
+    const links = await this.#setProperties();
+    this.#render(links);
   }
 
   static get observedAttributes() {
     return Object.values(headerAttributes);
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (oldValue !== newValue) {
-      const callback = this.#ATTRIBUTE_MAPPING.get(name);
-      callback(name, newValue);
-    }
+  #addPositionByScroll() {
+    window.addEventListener("scroll", (e) => {
+      if (window.scrollY > 20) {
+        this.shadowRoot.querySelector(".header").classList.add("_fixed");
+      }
+
+      if (window.scrollY < 20) {
+        this.shadowRoot.querySelector(".header").classList.remove("_fixed");
+      }
+    });
   }
 
-  #setPosition(_, position) {
-    this.#position = position;
+  attributeChangedCallback(name, oldValue, newValue) {}
+
+  async #setProperties() {
+    const imageSrc = await fetch("../../../img/logo_vector.svg");
+    this.#imageSrc = imageSrc.url;
+    return [
+      ` <link-element  link-text="first" href="#"></link-element>`,
+      ` <link-element  link-text="seconds" href="#"></link-element>`,
+      ` <link-element  link-text="third" href="#"></link-element>`,
+    ];
   }
 
-  #render(position = this.#position, imageSrc = this.#imageSrc) {
+  #render(links, imageSrc = this.#imageSrc) {
     const template = document.createElement("template");
 
-    template.innerHTML = generateTemplate(position, imageSrc);
+    template.innerHTML = generateTemplate(links, imageSrc);
     this.shadowRoot.append(template.content.cloneNode(true));
   }
 }

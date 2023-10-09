@@ -18,11 +18,9 @@ export default {
 };
 
 const Template = (args) => {
-  return html`<header-component position=${args.position}></header-component>`;
+  return html`<header-component></header-component>`;
 };
 
 export const Default = Template.bind({});
 
-Default.args = {
-  position: "sticky",
-};
+Default.args = {};

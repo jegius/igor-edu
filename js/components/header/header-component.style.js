@@ -1,11 +1,10 @@
-export function generateStyles(position) {
+export function generateStyles() {
   return `
     <style>
     @import url('../common.css');  
     .header {
         background-color: var(--mainBackgroundGreen);
         font-family: "Inika";
-        position: ${position};
     }
     
     .header__inner {
@@ -15,6 +14,10 @@ export function generateStyles(position) {
         align-items: center;
         justify-content: space-between;
     }
-    <style>
+
+    ._fixed {
+        position: sticky;
+    }
+    </style>
     `;
 }
