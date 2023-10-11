@@ -50,9 +50,9 @@ export class HeaderComponent extends HTMLElement {
     const imageSrc = await fetch("../../../img/logo_vector.svg");
     this.#imageSrc = imageSrc.url;
     return [
-      ` <link-element  link-text="first" href="#"></link-element>`,
-      ` <link-element  link-text="seconds" href="#"></link-element>`,
-      ` <link-element  link-text="third" href="#"></link-element>`,
+      { text: "first", href: "#" },
+      { text: "second", href: "#" },
+      { text: "third", href: "#" },
     ];
   }
 
