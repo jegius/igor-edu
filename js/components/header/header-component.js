@@ -24,7 +24,7 @@ export class HeaderComponent extends HTMLElement {
       console.log("ошибка");
     }
 
-    const links = await this.#setProperties();
+    const links = await this.#getHeaderConfig();
     this.#render(links);
   }
 
@@ -46,7 +46,7 @@ export class HeaderComponent extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {}
 
-  async #setProperties() {
+  async #getHeaderConfig() {
     const imageSrc = await fetch("../../../img/logo_vector.svg");
     this.#imageSrc = imageSrc.url;
     return [
