@@ -1,8 +1,13 @@
 import { generateTemplate } from "./header-component.template.js";
-// const imageSrc = "../../../img/logo_vector.svg";
 
 const headerAttributes = {
   POSITION: "position",
+};
+
+const configAttributes = {
+  link: "link",
+  nav: "nav",
+  logo: "logo",
 };
 
 export class HeaderComponent extends HTMLElement {
@@ -11,7 +16,27 @@ export class HeaderComponent extends HTMLElement {
     this.attachShadow({ mode: "open" });
   }
 
-  #imageSrc;
+  #baseUrl = `http://localhost:6006/js/components/header/header-config.json`;
+
+  #CONFIG_MAPPING = new Map([
+    [configAttributes.nav, this.#renderingNav],
+    [configAttributes.logo, this.#renderingLogo],
+  ]);
+
+  #renderingNav(componentConfig) {
+    return ` <nav-element>
+        ${componentConfig.items
+          .map(
+            ({ text, url }) => `<link-element link-text=${text}
+          href=${url}></link-element>`
+          )
+          .join("")}
+    </nav-element>`;
+  }
+
+  #renderingLogo(componentConfig) {
+    return `  <logo-component  custom-styles="{background-image: url(${componentConfig.image})}"></logo-component>`;
+  }
 
   static get name() {
     return "header-component";
@@ -24,8 +49,8 @@ export class HeaderComponent extends HTMLElement {
       console.log("ошибка");
     }
 
-    const links = await this.#getHeaderConfig();
-    this.#render(links);
+    const config = await this.#getHeaderConfig();
+    this.#render(config);
   }
 
   static get observedAttributes() {
@@ -33,13 +58,24 @@ export class HeaderComponent extends HTMLElement {
   }
 
   #addPositionByScroll() {
-    window.addEventListener("scroll", (e) => {
-      if (window.scrollY > 20) {
-        this.shadowRoot.querySelector(".header").classList.add("_fixed");
+    const valueToChange = 20;
+    const classNameHeader = ".header";
+    const classModificatorFixed = "_fixed";
+    const eventName = "scroll";
+
+    window.addEventListener(eventName, (windowFunctionEvent) => {
+      if (window.scrollY > valueToChange) {
+        this.shadowRoot
+          .querySelector(classNameHeader)
+          .classList.add(classModificatorFixed);
+        this.shadowRoot.querySelector(classNameHeader).style.width = "95%";
       }
 
-      if (window.scrollY < 20) {
-        this.shadowRoot.querySelector(".header").classList.remove("_fixed");
+      if (window.scrollY < valueToChange) {
+        this.shadowRoot
+          .querySelector(classNameHeader)
+          .classList.remove(classModificatorFixed);
+        this.shadowRoot.querySelector(classNameHeader).style.width = "100%";
       }
     });
   }
@@ -47,19 +83,32 @@ export class HeaderComponent extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {}
 
   async #getHeaderConfig() {
-    const imageSrc = await fetch("../../../img/logo_vector.svg");
-    this.#imageSrc = imageSrc.url;
-    return [
-      { text: "first", href: "#" },
-      { text: "second", href: "#" },
-      { text: "third", href: "#" },
-    ];
+    const data = await fetch(this.#baseUrl, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const res = await data.json();
+    return res;
   }
 
-  #render(links, imageSrc = this.#imageSrc) {
+  #render(config) {
+    const arrayOfTags = [];
     const template = document.createElement("template");
 
-    template.innerHTML = generateTemplate(links, imageSrc);
+    config.forEach((component) => {
+      const { type } = component;
+      const renderer = this.#CONFIG_MAPPING.get(type);
+      if (renderer) {
+        arrayOfTags.push(renderer(component));
+      } else {
+        console.error(
+          `Тип компонента "${type}" не зарегистрирован в хедере. Пожалуйста, зарегистрируйте его.`
+        );
+      }
+    });
+
+    template.innerHTML = generateTemplate(arrayOfTags);
     this.shadowRoot.append(template.content.cloneNode(true));
   }
 }

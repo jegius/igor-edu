@@ -1,0 +1,27 @@
+[
+    {
+        "type": "logo",
+        "image": "http://localhost:6006/img/logo_vector.svg",
+        "text": "текст логотипа"
+    },
+    {
+        "type": "nav",
+        "items": [
+            {
+                "type": "link",
+                "text": "first",
+                "url": "#"
+            },
+            {
+                "type": "link",
+                "text": "second",
+                "url": "#"
+            },
+            {
+                "type": "link",
+                "text": "third",
+                "url": "#"
+            }
+        ]
+    }
+]

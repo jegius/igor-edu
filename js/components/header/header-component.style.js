@@ -1,10 +1,12 @@
 export function generateStyles() {
   return `
     <style>
-    @import url('../common.css');  
+    @import url('http://localhost:6006/common.css');  
     .header {
         background-color: var(--mainBackgroundGreen);
         font-family: "Inika";
+        margin: 0 auto;
+        transition: width .5s ease-in;
     }
     
     .header__inner {
@@ -17,6 +19,7 @@ export function generateStyles() {
 
     ._fixed {
         position: sticky;
+        width: 95%;
     }
     </style>
     `;
