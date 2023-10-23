@@ -19,6 +19,8 @@ export class HeaderComponent extends HTMLElement {
     this.attachShadow({ mode: 'open' })
   }
 
+  #scrollHandler
+
   #baseUrl = `http://localhost:6006/js/components/header/header-config.json`
 
   #CONFIG_MAPPING = new Map([
@@ -54,6 +56,12 @@ export class HeaderComponent extends HTMLElement {
 
     const config = await this.#getHeaderConfig()
     this.#render(config)
+  }
+
+  disconnectedCallback() {
+    const eventName = 'scroll'
+
+    window.removeEventListener(eventName)
   }
 
   static get observedAttributes() {
