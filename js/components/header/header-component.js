@@ -49,7 +49,7 @@ export class HeaderComponent extends HTMLElement {
     try {
       this.#addPositionByScroll()
     } catch (error) {
-      console.log('ошибка')
+      console.log('Ошибка при обработке события прокрутки: ' + error)
     }
 
     const config = await this.#getHeaderConfig()
@@ -85,8 +85,8 @@ export class HeaderComponent extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {}
 
-  async #getHeaderConfig() {
-    const data = await fetch(this.#baseUrl, {
+  async #getHeaderConfig(baseUrl = this.#baseUrl) {
+    const data = await fetch(baseUrl, {
       headers: {
         'Content-Type': 'application/json',
       },
