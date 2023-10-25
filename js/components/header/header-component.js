@@ -1,16 +1,8 @@
-import { LinkComponent } from '../link/link-component.js'
-import { LogoComponent } from '../logo/logo-component.js'
-import { NavComponent } from '../nav/nav-component.js'
 import { generateTemplate } from './header-component.template.js'
 
 const headerAttributes = {
   POSITION: 'position',
-}
-
-const configAttributes = {
-  link: 'link',
-  nav: 'nav',
-  logo: 'logo',
+  BASE_URL: 'base-url',
 }
 
 export class HeaderComponent extends HTMLElement {
@@ -19,29 +11,11 @@ export class HeaderComponent extends HTMLElement {
     this.attachShadow({ mode: 'open' })
   }
 
-  #scrollHandler
-
-  #baseUrl = `http://localhost:6006/js/components/header/header-config.json`
-
-  #CONFIG_MAPPING = new Map([
-    [configAttributes.nav, this.#renderingNav],
-    [configAttributes.logo, this.#renderingLogo],
+  #ATTRIBUTE_MAPPING = new Map([
+    [headerAttributes.BASE_URL, this.#getUrl.bind(this)],
   ])
 
-  #renderingNav(componentConfig) {
-    return ` <nav-element>
-        ${componentConfig.items
-          .map(
-            ({ text, url }) => `<link-element link-text=${text}
-          href=${url}></link-element>`
-          )
-          .join('')}
-    </nav-element>`
-  }
-
-  #renderingLogo(componentConfig) {
-    return `  <logo-component  custom-styles="{background-image: url(${componentConfig.image})}"></logo-component>`
-  }
+  #baseUrl
 
   static get name() {
     return 'header-component'
@@ -54,17 +28,23 @@ export class HeaderComponent extends HTMLElement {
       console.log('Ошибка при обработке события прокрутки: ' + error)
     }
 
-    const config = await this.#getHeaderConfig()
-    this.#render(config)
+    try {
+      const config = await this.#getHeaderConfig()
+      this.#render(config)
+    } catch (err) {
+      console.log(err)
+      this.#render()
+    }
   }
 
   disconnectedCallback() {
     const eventName = 'scroll'
 
-    window.removeEventListener(eventName)
+    window.removeEventListener(eventName, this.#addPositionByScroll)
   }
 
   static get observedAttributes() {
+    console.log(Object.values(headerAttributes))
     return Object.values(headerAttributes)
   }
 
@@ -75,23 +55,30 @@ export class HeaderComponent extends HTMLElement {
     const eventName = 'scroll'
 
     window.addEventListener(eventName, windowFunctionEvent => {
-      if (window.scrollY > valueToChange) {
-        this.shadowRoot
-          .querySelector(classNameHeader)
-          .classList.add(classModificatorFixed)
-        this.shadowRoot.querySelector(classNameHeader).style.width = '95%'
-      }
+      const isScrolled = window.scrollY > valueToChange
+      const header = this.shadowRoot.querySelector(classNameHeader)
 
-      if (window.scrollY < valueToChange) {
-        this.shadowRoot
-          .querySelector(classNameHeader)
-          .classList.remove(classModificatorFixed)
-        this.shadowRoot.querySelector(classNameHeader).style.width = '100%'
+      if (isScrolled) {
+        header.classList.add(classModificatorFixed)
+        header.style.width = '95%'
+      } else {
+        header.classList.remove(classModificatorFixed)
+        header.style.width = '100%'
       }
     })
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {}
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue !== newValue) {
+      const callback = this.#ATTRIBUTE_MAPPING.get(name)
+      callback(this, newValue)
+    }
+  }
+
+  #getUrl(_, newUrl) {
+    this.#baseUrl = newUrl
+    this.#getHeaderConfig()
+  }
 
   async #getHeaderConfig(baseUrl = this.#baseUrl) {
     const data = await fetch(baseUrl, {
@@ -99,31 +86,13 @@ export class HeaderComponent extends HTMLElement {
         'Content-Type': 'application/json',
       },
     })
-    const res = await data.json()
-    return res
+    return await data.json()
   }
 
   #render(config) {
-    const arrayOfTags = []
     const template = document.createElement('template')
 
-    config.forEach(component => {
-      const { type } = component
-      const renderer = this.#CONFIG_MAPPING.get(type)
-      if (renderer) {
-        arrayOfTags.push(renderer(component))
-      } else {
-        console
-          .error(
-            `Тип компонента "${type}" не зарегистрирован в хедере. Пожалуйста, зарегистрируйте его.`
-          )
-          [(NavComponent, LinkComponent, LogoComponent, HeaderComponent)].map(
-            component => customElements.define(component.name, component)
-          )
-      }
-    })
-
-    template.innerHTML = generateTemplate(arrayOfTags)
+    template.innerHTML = generateTemplate(config)
     this.shadowRoot.append(template.content.cloneNode(true))
   }
 }

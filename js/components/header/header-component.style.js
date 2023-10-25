@@ -1,7 +1,7 @@
 export function generateStyles() {
   return `
     <style>
-    @import url('http://localhost:6006/common.css');  
+     @import url('../common.css');
     .header {
         background-color: var(--mainBackgroundGreen);
         font-family: "Inika";
@@ -22,5 +22,5 @@ export function generateStyles() {
         width: 95%;
     }
     </style>
-    `;
+    `
 }
