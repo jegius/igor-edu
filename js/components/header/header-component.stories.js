@@ -21,17 +21,33 @@ export const Default = Template.bind({})
 
 const TestingScrollTemplate = args => {
   return html`<header-component base-url=${args.baseUrl}></header-component>
-    <div>Блок 1</div>
-    <div>Блок 2</div>
-    <div>Блок 3</div>
-    <div>Блок 4</div>
-    <div>Блок 5</div>
-    <div>Блок 6</div>
-    <div>Блок 7</div>
-    <div>Блок 8</div> `
+    <style>
+      .test-div {
+        font-size: 1.5rem;
+        text-align: center;
+        margin: 1rem;
+        background-color: rgb(244, 152, 173);
+      }
+    </style>
+
+    <div class="test-div">Элемент страницы 1</div>
+    <div class="test-div">Элемент страницы 2</div>
+    <div class="test-div">Элемент страницы 3</div>
+    <div class="test-div">Элемент страницы 4</div>
+    <div class="test-div">Элемент страницы 5</div>
+    <div class="test-div">Элемент страницы 6</div>
+    <div class="test-div">Элемент страницы 7</div>
+    <div class="test-div">Элемент страницы 8</div>
+    <div class="test-div">Элемент страницы 9</div> `
 }
 
 export const ScrollTest = TestingScrollTemplate.bind({})
+
+const WrongDataTemplate = args => {
+  return html`<header-component base-url=${args.baseUrl}></header-component>`
+}
+
+export const WrongData = WrongDataTemplate.bind({})
 
 Default.args = {
   baseUrl: `http://localhost:6006/js/components/header/header-config.json`,
@@ -39,4 +55,8 @@ Default.args = {
 
 ScrollTest.args = {
   baseUrl: `http://localhost:6006/js/components/header/header-config.json`,
+}
+
+WrongData.args = {
+  baseUrl: 'nothing',
 }

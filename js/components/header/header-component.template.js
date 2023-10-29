@@ -3,13 +3,13 @@ import '../logo/logo-component.js'
 import '../nav/nav-component.js'
 import { generateStyles } from './header-component.style'
 
-function renderingLogo(componentConfig) {
-  return `  <logo-component text=${componentConfig.text} custom-styles="{background-image: url(${componentConfig.image})}"></logo-component>`
+function renderingLogo({ text, image }) {
+  return `  <logo-component text=${text} custom-styles="{background-image: url(${image})}"></logo-component>`
 }
 
-function renderingNav(componentConfig) {
+function renderingNav({ items }) {
   return ` <nav-element>
-        ${componentConfig.items
+        ${items
           .map(
             ({ text, url }) => `<link-element link-text=${text}
           href=${url}></link-element>`
@@ -31,7 +31,14 @@ const CONFIG_MAPPING = new Map([
 
 export function generateTemplate(config) {
   if (!config) {
-    return `<div>Не удалось загрузить header</div>`
+    return `
+  ${generateStyles()}
+  <header class="header">
+        <div class="header__inner">
+            Ошибка при загрузке header 
+        </div>
+    </header>
+    `
   }
   const arrayOfTags = []
 
@@ -61,13 +68,6 @@ export function generateTemplate(config) {
     'logo-component',
   ]
 
-  // customComponentsArray.forEach(component => {
-  //   console.log(component)
-  //   if (customElements.get(component) === undefined) {
-  //     customElements.define(component)
-  //   }
-  // })
-
   config.forEach(configElement => {
     const type = configElement.type
 
@@ -78,12 +78,15 @@ export function generateTemplate(config) {
     })
   })
 
+  const elements = config.reduce((result, elementConfig) => {
+    return `${result}${CONFIG_MAPPING.get(elementConfig.type)(elementConfig)}`
+  }, '')
+
   return `
   ${generateStyles()}
   <header class="header">
         <div class="header__inner">
-                ${logoElement}
-                ${navElementWithLinks}
+                ${elements}
         </div>
     </header>
     `

@@ -1,8 +1,21 @@
 import { generateTemplate } from './header-component.template.js'
 
-const headerAttributes = {
-  POSITION: 'position',
+const HEADER_ATTRIBUTES = {
   BASE_URL: 'base-url',
+}
+
+const EVENT_ATTRIBUTES = {
+  SCROLL_EVENT: 'scroll',
+}
+
+const FUNCTION_ATTRIBUTES = {
+  scrollFunction: {
+    valueToChange: 20,
+    classNameHeader: '.header',
+    classModificatorFixed: '_fixed',
+    fullWidth: '100%',
+    cutWidth: '95%',
+  },
 }
 
 export class HeaderComponent extends HTMLElement {
@@ -12,7 +25,7 @@ export class HeaderComponent extends HTMLElement {
   }
 
   #ATTRIBUTE_MAPPING = new Map([
-    [headerAttributes.BASE_URL, this.#getUrl.bind(this)],
+    [HEADER_ATTRIBUTES.BASE_URL, this.#getUrl.bind(this)],
   ])
 
   #baseUrl
@@ -25,47 +38,48 @@ export class HeaderComponent extends HTMLElement {
     try {
       this.#addPositionByScroll()
     } catch (error) {
-      console.log('Ошибка при обработке события прокрутки: ' + error)
-    }
-
-    try {
-      const config = await this.#getHeaderConfig()
-      this.#render(config)
-    } catch (err) {
-      console.log(err)
-      this.#render()
+      console.error('Ошибка при обработке события прокрутки: ' + error)
     }
   }
 
   disconnectedCallback() {
-    const eventName = 'scroll'
+    window.removeEventListener(
+      EVENT_ATTRIBUTES.SCROLL_EVENT,
+      this.#addPositionByScroll
+    )
 
-    window.removeEventListener(eventName, this.#addPositionByScroll)
+    console.log('removed event')
   }
 
   static get observedAttributes() {
-    console.log(Object.values(headerAttributes))
-    return Object.values(headerAttributes)
+    return Object.values(HEADER_ATTRIBUTES)
   }
 
   #addPositionByScroll() {
-    const valueToChange = 20
-    const classNameHeader = '.header'
-    const classModificatorFixed = '_fixed'
-    const eventName = 'scroll'
+    window.addEventListener(
+      EVENT_ATTRIBUTES.SCROLL_EVENT,
+      this.#scrollFunction.bind(this)
+    )
+  }
 
-    window.addEventListener(eventName, windowFunctionEvent => {
-      const isScrolled = window.scrollY > valueToChange
-      const header = this.shadowRoot.querySelector(classNameHeader)
+  #scrollFunction() {
+    const isScrolled =
+      window.scrollY > FUNCTION_ATTRIBUTES.scrollFunction.valueToChange
+    const header = this.shadowRoot.querySelector(
+      FUNCTION_ATTRIBUTES.scrollFunction.classNameHeader
+    )
 
-      if (isScrolled) {
-        header.classList.add(classModificatorFixed)
-        header.style.width = '95%'
-      } else {
-        header.classList.remove(classModificatorFixed)
-        header.style.width = '100%'
-      }
-    })
+    if (isScrolled) {
+      header.classList.add(
+        FUNCTION_ATTRIBUTES.scrollFunction.classModificatorFixed
+      )
+      header.style.width = FUNCTION_ATTRIBUTES.scrollFunction.cutWidth
+    } else {
+      header.classList.remove(
+        FUNCTION_ATTRIBUTES.scrollFunction.classModificatorFixed
+      )
+      header.style.width = FUNCTION_ATTRIBUTES.scrollFunction.fullWidth
+    }
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -75,9 +89,14 @@ export class HeaderComponent extends HTMLElement {
     }
   }
 
-  #getUrl(_, newUrl) {
-    this.#baseUrl = newUrl
-    this.#getHeaderConfig()
+  async #getUrl(_, newUrl) {
+    try {
+      const config = await this.#getHeaderConfig(newUrl)
+      this.#render(config)
+    } catch (error) {
+      console.error(error)
+      this.#render()
+    }
   }
 
   async #getHeaderConfig(baseUrl = this.#baseUrl) {
@@ -86,6 +105,7 @@ export class HeaderComponent extends HTMLElement {
         'Content-Type': 'application/json',
       },
     })
+
     return await data.json()
   }
 
