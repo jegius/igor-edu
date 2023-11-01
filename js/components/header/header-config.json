@@ -10,17 +10,17 @@
             {
                 "type": "link",
                 "text": "first",
-                "url": "#"
+                "url": "#first"
             },
             {
                 "type": "link",
                 "text": "second",
-                "url": "#"
+                "url": "#second"
             },
             {
                 "type": "link",
                 "text": "third",
-                "url": "#"
+                "url": "#second"
             }
         ]
     }

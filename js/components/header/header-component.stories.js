@@ -22,41 +22,20 @@ export const Default = Template.bind({})
 const TestingScrollTemplate = args => {
   return html`<header-component base-url=${args.baseUrl}></header-component>
     <style>
-      .test-div {
-        font-size: 1.5rem;
-        text-align: center;
-        margin: 1rem;
-        background-color: rgb(244, 152, 173);
+      .section {
+        height: 50rem;
+        border: 0.068rem dashed #69a2ea;
+        border-radius: 4rem;
+        margin-top: 2rem;
+      }
+
+      .section:nth-child(odd) {
+        background-color: #eee;
       }
     </style>
-
-    <div class="test-div">Элемент страницы 1</div>
-    <div class="test-div">Элемент страницы 2</div>
-    <div class="test-div">Элемент страницы 3</div>
-    <div class="test-div">Элемент страницы 4</div>
-    <div class="test-div">Элемент страницы 5</div>
-    <div class="test-div">Элемент страницы 6</div>
-    <div class="test-div">Элемент страницы 7</div>
-    <div class="test-div">Элемент страницы 8</div>
-    <div class="test-div">Элемент страницы 9</div>
-    <div class="test-div">Элемент страницы 1</div>
-    <div class="test-div">Элемент страницы 2</div>
-    <div class="test-div">Элемент страницы 3</div>
-    <div class="test-div">Элемент страницы 4</div>
-    <div class="test-div">Элемент страницы 5</div>
-    <div class="test-div">Элемент страницы 6</div>
-    <div class="test-div">Элемент страницы 7</div>
-    <div class="test-div">Элемент страницы 8</div>
-    <div class="test-div">Элемент страницы 9</div>
-    <div class="test-div">Элемент страницы 1</div>
-    <div class="test-div">Элемент страницы 2</div>
-    <div class="test-div">Элемент страницы 3</div>
-    <div class="test-div">Элемент страницы 4</div>
-    <div class="test-div">Элемент страницы 5</div>
-    <div class="test-div">Элемент страницы 6</div>
-    <div class="test-div">Элемент страницы 7</div>
-    <div class="test-div">Элемент страницы 8</div>
-    <div class="test-div">Элемент страницы 9</div>`
+    <div class="section" id="first"></div>
+    <div class="section" id="second"></div>
+    <div class="section" id="third"></div> `
 }
 
 export const ScrollTest = TestingScrollTemplate.bind({})
