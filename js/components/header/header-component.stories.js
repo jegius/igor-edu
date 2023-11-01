@@ -38,7 +38,25 @@ const TestingScrollTemplate = args => {
     <div class="test-div">Элемент страницы 6</div>
     <div class="test-div">Элемент страницы 7</div>
     <div class="test-div">Элемент страницы 8</div>
-    <div class="test-div">Элемент страницы 9</div> `
+    <div class="test-div">Элемент страницы 9</div>
+    <div class="test-div">Элемент страницы 1</div>
+    <div class="test-div">Элемент страницы 2</div>
+    <div class="test-div">Элемент страницы 3</div>
+    <div class="test-div">Элемент страницы 4</div>
+    <div class="test-div">Элемент страницы 5</div>
+    <div class="test-div">Элемент страницы 6</div>
+    <div class="test-div">Элемент страницы 7</div>
+    <div class="test-div">Элемент страницы 8</div>
+    <div class="test-div">Элемент страницы 9</div>
+    <div class="test-div">Элемент страницы 1</div>
+    <div class="test-div">Элемент страницы 2</div>
+    <div class="test-div">Элемент страницы 3</div>
+    <div class="test-div">Элемент страницы 4</div>
+    <div class="test-div">Элемент страницы 5</div>
+    <div class="test-div">Элемент страницы 6</div>
+    <div class="test-div">Элемент страницы 7</div>
+    <div class="test-div">Элемент страницы 8</div>
+    <div class="test-div">Элемент страницы 9</div>`
 }
 
 export const ScrollTest = TestingScrollTemplate.bind({})

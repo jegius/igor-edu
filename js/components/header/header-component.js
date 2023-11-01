@@ -1,5 +1,5 @@
+import { generateStyles } from './header-component.style.js'
 import { generateTemplate } from './header-component.template.js'
-
 const HEADER_ATTRIBUTES = {
   BASE_URL: 'base-url',
 }
@@ -112,7 +112,27 @@ export class HeaderComponent extends HTMLElement {
   #render(config) {
     const template = document.createElement('template')
 
-    template.innerHTML = generateTemplate(config)
+    if (!config) {
+      template.innerHTML = `
+      ${generateStyles()}
+    <header class="header">
+      <div class="header__inner">
+        <div class='loader'>Загрузка содержимого страницы...</div>
+      </div>
+    </header>
+  `
+
+      setTimeout(() => {
+        this.shadowRoot.innerHTML = ` <header class="header">
+      <div class="header__inner">
+        <div>Не удалось загрузить header</div>
+      </div>
+    </header>`
+      }, 5000)
+    } else {
+      template.innerHTML = generateTemplate(config)
+    }
+
     this.shadowRoot.append(template.content.cloneNode(true))
   }
 }

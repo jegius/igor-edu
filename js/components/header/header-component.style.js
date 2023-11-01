@@ -21,6 +21,20 @@ export function generateStyles() {
         position: sticky;
         width: 95%;
     }
+
+    .loader {
+  display:inline-block;
+  font-family: monospace;
+  font-size: 1rem;
+  clip-path: inset(0 3ch 0 0);
+  animation: l 1s steps(4) infinite;
+}
+
+@keyframes l {
+  to {
+    clip-path: inset(0 -1ch 0 0)
+  }
+}
     </style>
     `
 }
