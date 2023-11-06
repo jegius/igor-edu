@@ -1,23 +1,23 @@
-import { html } from 'lit-html'
-import '../common.css'
-import '../link/link-component.js'
-import '../link/link-component.styles.js'
-import '../link/link-component.template.js'
-import '../nav/nav-component.js'
-import '../nav/nav-component.styles.js'
-import '../nav/nav-component.template.js'
-import './header-component.js'
+import { html } from 'lit-html';
+import '../common.css';
+import '../link/link-component.js';
+import '../link/link-component.styles.js';
+import '../link/link-component.template.js';
+import '../nav/nav-component.js';
+import '../nav/nav-component.styles.js';
+import '../nav/nav-component.template.js';
+import './header-component.js';
 
 export default {
   title: 'HeaderComponent',
   tags: ['autodocs'],
-}
+};
 
 const Template = args => {
-  return html`<header-component base-url=${args.baseUrl}></header-component> `
-}
+  return html`<header-component base-url=${args.baseUrl}></header-component> `;
+};
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 
 const TestingScrollTemplate = args => {
   return html`<header-component base-url=${args.baseUrl}></header-component>
@@ -28,32 +28,41 @@ const TestingScrollTemplate = args => {
         border-radius: 4rem;
         margin-top: 2rem;
       }
+      .wrapper {
+        padding: 2rem;
+        height: 20rem;
+        overflow-y: scroll;
+        position: relative;
+        box-shadow: 0 0 0.5rem 0.3rem #eee inset;
+      }
 
       .section:nth-child(odd) {
         background-color: #eee;
       }
     </style>
-    <div class="section" id="first"></div>
-    <div class="section" id="second"></div>
-    <div class="section" id="third"></div> `
-}
+    <div class="wrapper _scrollable">
+      <div class="section" id="first"></div>
+      <div class="section" id="second"></div>
+      <div class="section" id="third"></div>
+    </div>`;
+};
 
-export const ScrollTest = TestingScrollTemplate.bind({})
+export const ScrollTest = TestingScrollTemplate.bind({});
 
 const WrongDataTemplate = args => {
-  return html`<header-component base-url=${args.baseUrl}></header-component>`
-}
+  return html`<header-component base-url=${args.baseUrl}></header-component>`;
+};
 
-export const WrongData = WrongDataTemplate.bind({})
+export const WrongData = WrongDataTemplate.bind({});
 
 Default.args = {
   baseUrl: `http://localhost:6006/js/components/header/header-config.json`,
-}
+};
 
 ScrollTest.args = {
   baseUrl: `http://localhost:6006/js/components/header/header-config.json`,
-}
+};
 
 WrongData.args = {
   baseUrl: 'nothing',
-}
+};

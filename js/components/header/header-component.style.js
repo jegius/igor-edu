@@ -2,6 +2,7 @@ export function generateStyles() {
   return `
     <style>
      @import url('../common.css');
+
     .header {
         background-color: var(--mainBackgroundGreen);
         font-family: "Inika";
@@ -20,21 +21,22 @@ export function generateStyles() {
     ._fixed {
         position: sticky;
         width: 95%;
+        background-color: yellowgreen;
     }
 
     .loader {
-  display:inline-block;
-  font-family: monospace;
-  font-size: 1rem;
-  clip-path: inset(0 3ch 0 0);
-  animation: l 1s steps(4) infinite;
-}
+        display:inline-block;
+        font-family: monospace;
+        font-size: 1rem;
+        clip-path: inset(0 1.5rem 0 0);
+        animation: points 1.3s steps(4) infinite;
+     }
 
-@keyframes l {
-  to {
-    clip-path: inset(0 -1ch 0 0)
-  }
-}
+    @keyframes points {
+      to {
+        clip-path: inset(0 -.5rem 0 0)
+      }
+    }
     </style>
     `
 }

@@ -1,5 +1,4 @@
-import { LinkComponent } from "../link/link-component.js";
-import { classes } from "./classes.js";
+import { LinkComponent } from '../link/link-component.js';
 
 export function compose(...innerFunctions) {
   return function (value) {
@@ -21,8 +20,7 @@ export function select(className, context) {
   return node ?? root;
 }
 
-export const mapToLinkElement = (node) =>
-  node.querySelector(LinkComponent.name);
+export const mapToLinkElement = node => node.querySelector(LinkComponent.name);
 
 export function throttle(func, limit) {
   let inThrottle;
@@ -72,7 +70,7 @@ export function cleanNodes(node) {
 }
 
 export function replaceUnicode(target) {
-  return target.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+  return target.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 }
 
 export function checkUnitOfMeasurement(value) {
@@ -81,25 +79,25 @@ export function checkUnitOfMeasurement(value) {
   if (!/\d/.test(value)) {
     return null;
   }
-  return regExp.test(value) ? value : value.replace(/[^\d]/gi, "") + "rem";
+  return regExp.test(value) ? value : value.replace(/[^\d]/gi, '') + 'rem';
 }
 
 export async function compressImage(url) {
   return new Promise((resolve, reject) => {
     try {
       const img = new Image();
-      const crossOrigin = "Anonymous";
-      const PNG_TYPE = "image/png";
+      const crossOrigin = 'Anonymous';
+      const PNG_TYPE = 'image/png';
 
       img.crossOrigin = crossOrigin;
       img.onload = loadedImage.bind(null, img, resolve, PNG_TYPE);
       img.onerror = () => {
-        reject(new Error("ошибка при загрузке изображения"));
+        reject(new Error('ошибка при загрузке изображения'));
       };
 
       img.src = url;
     } catch (error) {
-      reject(new Error("Ошибка при выполнении сжатия"));
+      reject(new Error('Ошибка при выполнении сжатия'));
     }
   });
 }
@@ -129,7 +127,7 @@ export function resolvedBlob(resolveCallback, blob) {
 }
 
 export function createCanvas(newWidth, newHeight) {
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
 
   canvas.width = newWidth;
   canvas.height = newHeight;
@@ -137,7 +135,7 @@ export function createCanvas(newWidth, newHeight) {
 }
 
 export function drawCanvasImage(canvas, img, newWidth, newHeight) {
-  const canvasContext = canvas.getContext("2d");
+  const canvasContext = canvas.getContext('2d');
 
   canvasContext.drawImage(img, 0, 0, newWidth, newHeight);
   return canvas;
@@ -161,4 +159,20 @@ export function setSizes(img) {
     }
   }
   return [newWidth, newHeight];
+}
+
+export function scrollFunctionHeader(attributesConfig) {
+  const scrolledElement = document.querySelector('._scrollable');
+  const isScrolled =
+    scrolledElement.scrollTop > attributesConfig.scrollFunction.valueToChange;
+
+  if (isScrolled) {
+    this.style.width = attributesConfig.scrollFunction.cutWidth;
+    this.classList.add(attributesConfig.scrollFunction.classModificatorFixed);
+  } else {
+    this.classList.remove(
+      attributesConfig.scrollFunction.classModificatorFixed
+    );
+    this.style.width = attributesConfig.scrollFunction.fullWidth;
+  }
 }

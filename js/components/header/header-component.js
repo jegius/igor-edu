@@ -1,12 +1,17 @@
-import { generateStyles } from './header-component.style.js'
-import { generateTemplate } from './header-component.template.js'
+import {
+  addListeners,
+  removeListeners,
+  scrollFunctionHeader,
+  select,
+} from '../api/helpers.js';
+import { generateTemplate } from './header-component.template.js';
 const HEADER_ATTRIBUTES = {
   BASE_URL: 'base-url',
-}
+};
 
 const EVENT_ATTRIBUTES = {
   SCROLL_EVENT: 'scroll',
-}
+};
 
 const FUNCTION_ATTRIBUTES = {
   scrollFunction: {
@@ -16,86 +21,56 @@ const FUNCTION_ATTRIBUTES = {
     fullWidth: '100%',
     cutWidth: '95%',
   },
-}
+};
 
 export class HeaderComponent extends HTMLElement {
+  #listeners = [
+    [
+      select.bind(this, '._scrollable', window.document),
+      EVENT_ATTRIBUTES.SCROLL_EVENT,
+      scrollFunctionHeader.bind(this, FUNCTION_ATTRIBUTES),
+    ],
+  ];
   constructor() {
-    super()
-    this.attachShadow({ mode: 'open' })
+    super();
+    this.attachShadow({ mode: 'open' });
   }
 
   #ATTRIBUTE_MAPPING = new Map([
     [HEADER_ATTRIBUTES.BASE_URL, this.#getUrl.bind(this)],
-  ])
+  ]);
 
-  #baseUrl
+  #baseUrl;
 
   static get name() {
-    return 'header-component'
+    return 'header-component';
   }
 
   async connectedCallback() {
-    try {
-      this.#addPositionByScroll()
-    } catch (error) {
-      console.error('Ошибка при обработке события прокрутки: ' + error)
-    }
+    this.#listeners.forEach(addListeners);
   }
 
   disconnectedCallback() {
-    window.removeEventListener(
-      EVENT_ATTRIBUTES.SCROLL_EVENT,
-      this.#addPositionByScroll
-    )
-
-    console.log('removed event')
+    this.#listeners.forEach(removeListeners);
   }
 
   static get observedAttributes() {
-    return Object.values(HEADER_ATTRIBUTES)
-  }
-
-  #addPositionByScroll() {
-    window.addEventListener(
-      EVENT_ATTRIBUTES.SCROLL_EVENT,
-      this.#scrollFunction.bind(this)
-    )
-  }
-
-  #scrollFunction() {
-    const isScrolled =
-      window.scrollY > FUNCTION_ATTRIBUTES.scrollFunction.valueToChange
-    const header = this.shadowRoot.querySelector(
-      FUNCTION_ATTRIBUTES.scrollFunction.classNameHeader
-    )
-
-    if (isScrolled) {
-      header.classList.add(
-        FUNCTION_ATTRIBUTES.scrollFunction.classModificatorFixed
-      )
-      header.style.width = FUNCTION_ATTRIBUTES.scrollFunction.cutWidth
-    } else {
-      header.classList.remove(
-        FUNCTION_ATTRIBUTES.scrollFunction.classModificatorFixed
-      )
-      header.style.width = FUNCTION_ATTRIBUTES.scrollFunction.fullWidth
-    }
+    return Object.values(HEADER_ATTRIBUTES);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue !== newValue) {
-      const callback = this.#ATTRIBUTE_MAPPING.get(name)
-      callback(this, newValue)
+      this.#ATTRIBUTE_MAPPING.get(name)(this, newValue);
     }
   }
 
   async #getUrl(_, newUrl) {
     try {
-      const config = await this.#getHeaderConfig(newUrl)
-      this.#render(config)
+      const config = await this.#getHeaderConfig(newUrl);
+      this.#render(config);
     } catch (error) {
-      console.error(error)
-      this.#render()
+      console.error(error);
+      this.#render();
     }
   }
 
@@ -104,35 +79,25 @@ export class HeaderComponent extends HTMLElement {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
+    });
 
-    return await data.json()
+    return await data.json();
   }
 
   #render(config) {
-    const template = document.createElement('template')
+    const template = document.createElement('template');
 
     if (!config) {
-      template.innerHTML = `
-      ${generateStyles()}
-    <header class="header">
-      <div class="header__inner">
-        <div class='loader'>Загрузка содержимого страницы...</div>
-      </div>
-    </header>
-  `
-
-      setTimeout(() => {
-        this.shadowRoot.innerHTML = ` <header class="header">
-      <div class="header__inner">
-        <div>Не удалось загрузить header</div>
-      </div>
-    </header>`
-      }, 5000)
+      const errorConfig = [
+        {
+          type: 'error',
+        },
+      ];
+      template.innerHTML = generateTemplate(errorConfig);
     } else {
-      template.innerHTML = generateTemplate(config)
+      template.innerHTML = generateTemplate(config);
     }
 
-    this.shadowRoot.append(template.content.cloneNode(true))
+    this.shadowRoot.append(template.content.cloneNode(true));
   }
 }
