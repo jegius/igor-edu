@@ -24,17 +24,24 @@ const FUNCTION_ATTRIBUTES = {
 };
 
 export class HeaderComponent extends HTMLElement {
-  #listeners = [
-    [
-      select.bind(this, '._scrollable', window.document),
-      EVENT_ATTRIBUTES.SCROLL_EVENT,
-      scrollFunctionHeader.bind(this, FUNCTION_ATTRIBUTES),
-    ],
+  #ERROR_CONFIG = [
+    {
+      type: 'error',
+    },
   ];
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
   }
+
+  #listeners = [
+    [
+      select.bind(this, 'body', document),
+      EVENT_ATTRIBUTES.SCROLL_EVENT,
+      scrollFunctionHeader.bind(this, FUNCTION_ATTRIBUTES),
+    ],
+  ];
 
   #ATTRIBUTE_MAPPING = new Map([
     [HEADER_ATTRIBUTES.BASE_URL, this.#getUrl.bind(this)],
@@ -84,19 +91,10 @@ export class HeaderComponent extends HTMLElement {
     return await data.json();
   }
 
-  #render(config) {
+  #render(config = this.#ERROR_CONFIG) {
     const template = document.createElement('template');
 
-    if (!config) {
-      const errorConfig = [
-        {
-          type: 'error',
-        },
-      ];
-      template.innerHTML = generateTemplate(errorConfig);
-    } else {
-      template.innerHTML = generateTemplate(config);
-    }
+    template.innerHTML = generateTemplate(config);
 
     this.shadowRoot.append(template.content.cloneNode(true));
   }

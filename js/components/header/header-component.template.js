@@ -19,11 +19,7 @@ function renderingNav({ items }) {
 }
 
 function renderingErrorTemplate() {
-  return ` <header class="header">
-      <div class="header__inner">
-        <div class='loader'>Загрузка содержимого страницы...</div>
-      </div>
-    </header>`;
+  return ` <div class='loader'>Загрузка содержимого страницы...</div>`;
 }
 
 const configAttributes = {
@@ -46,12 +42,12 @@ export function generateTemplate(config) {
     'logo-component',
   ];
 
-  config.forEach(configElement => {
-    const type = configElement.type;
-
+  config.forEach(() => {
     customComponentsArray.forEach(component => {
-      if (!component.includes(type)) {
-        console.log(`компонент ${component} не зарегистрирован`);
+      if (customElements.get(component)) {
+        console.log(`Компонент ${component} уже зарегистрирован.`);
+      } else {
+        console.log(`Компонент ${component} еще не зарегистрирован.`);
       }
     });
   });

@@ -8,6 +8,8 @@ export function compose(...innerFunctions) {
 
 export function addListeners([node, event, listener]) {
   node()?.addEventListener(event, listener);
+  const elem = node();
+  console.log(elem);
 }
 
 export function removeListeners([node, event, listener]) {
@@ -161,8 +163,10 @@ export function setSizes(img) {
   return [newWidth, newHeight];
 }
 
-export function scrollFunctionHeader(attributesConfig) {
+export function scrollFunctionHeader(attributesConfig, event) {
+  console.log(event.target);
   const scrolledElement = document.querySelector('._scrollable');
+
   const isScrolled =
     scrolledElement.scrollTop > attributesConfig.scrollFunction.valueToChange;
 
