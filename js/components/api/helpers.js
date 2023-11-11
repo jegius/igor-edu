@@ -8,8 +8,6 @@ export function compose(...innerFunctions) {
 
 export function addListeners([node, event, listener]) {
   node()?.addEventListener(event, listener);
-  const elem = node();
-  console.log(elem);
 }
 
 export function removeListeners([node, event, listener]) {

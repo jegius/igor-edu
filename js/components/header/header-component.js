@@ -37,7 +37,7 @@ export class HeaderComponent extends HTMLElement {
 
   #listeners = [
     [
-      select.bind(this, 'body', document),
+      select.bind(this, '._scrollable', document),
       EVENT_ATTRIBUTES.SCROLL_EVENT,
       scrollFunctionHeader.bind(this, FUNCTION_ATTRIBUTES),
     ],
