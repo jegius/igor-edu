@@ -162,7 +162,6 @@ export function setSizes(img) {
 }
 
 export function scrollFunctionHeader(attributesConfig, event) {
-  console.log(event.target);
   const scrolledElement = document.querySelector('._scrollable');
 
   const isScrolled =
