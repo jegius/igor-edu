@@ -1,7 +1,22 @@
 import '../link/link-component.js';
+import { LinkComponent } from '../link/link-component.js';
 import '../logo/logo-component.js';
+import { LogoComponent } from '../logo/logo-component.js';
 import '../nav/nav-component.js';
+import { NavComponent } from '../nav/nav-component.js';
 import { generateStyles } from './header-component.style';
+
+const CUSTOM_COMPONENTS = new Map([
+  ['nav', { componentName: 'nav-element', componentConstructor: NavComponent }],
+  [
+    'link',
+    { componentName: 'link-element', componentConstructor: LinkComponent },
+  ],
+  [
+    'logo',
+    { componentName: 'logo-component', componentConstructor: LogoComponent },
+  ],
+]);
 
 function renderingLogo({ text, image }) {
   return `  <logo-component text=${text} .logo-href {  width: 4.948rem;   height: 1.315rem;} .logo-image  {background-image: url(${image}}"></logo-component>`;
@@ -36,20 +51,17 @@ const CONFIG_MAPPING = new Map([
 ]);
 
 export function generateTemplate(config) {
-  const customComponentsArray = [
-    'nav-element',
-    'link-element',
-    'logo-component',
-  ];
-
-  config.forEach(() => {
-    customComponentsArray.forEach(component => {
-      if (customElements.get(component)) {
-        console.log(`Компонент ${component} уже зарегистрирован.`);
-      } else {
-        console.log(`Компонент ${component} еще не зарегистрирован.`);
+  config.forEach(configComponent => {
+    const { type } = configComponent;
+    try {
+      if (!customElements.get(CUSTOM_COMPONENTS.get(type).componentName)) {
+        console.error(`нет компонента для ключа ${type} `);
       }
-    });
+    } catch (error) {
+      console.error(
+        `Некорректный type компонента, которого нет в списке компонентов или случай загрузки прелоадера ${error}`
+      );
+    }
   });
 
   const elements = config.reduce((result, elementConfig) => {
