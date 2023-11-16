@@ -7,15 +7,9 @@ import { NavComponent } from '../nav/nav-component.js';
 import { generateStyles } from './header-component.style';
 
 const CUSTOM_COMPONENTS = new Map([
-  ['nav', { componentName: 'nav-element', componentConstructor: NavComponent }],
-  [
-    'link',
-    { componentName: 'link-element', componentConstructor: LinkComponent },
-  ],
-  [
-    'logo',
-    { componentName: 'logo-component', componentConstructor: LogoComponent },
-  ],
+  ['nav', NavComponent],
+  ['link', LinkComponent],
+  ['logo', LogoComponent],
 ]);
 
 function renderingLogo({ text, image }) {
@@ -53,9 +47,14 @@ const CONFIG_MAPPING = new Map([
 export function generateTemplate(config) {
   config.forEach(configComponent => {
     const { type } = configComponent;
+
+    const componentInRegistry = CUSTOM_COMPONENTS.get(type);
+    const componentName = componentInRegistry.name;
+    const isComponentExisted = customElements.get(componentName);
+
     try {
-      if (!customElements.get(CUSTOM_COMPONENTS.get(type).componentName)) {
-        console.error(`нет компонента для ключа ${type} `);
+      if (!isComponentExisted) {
+        customElements.define(componentName, componentInRegistry);
       }
     } catch (error) {
       console.error(
