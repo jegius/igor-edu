@@ -1,18 +1,18 @@
+import { cleanNodes } from '../api/helpers.js';
 import {
   generateTemplateWithLink,
   generateTemplateWithoutLink,
-} from "./logo-component.template.js";
-import { cleanNodes } from "../api/helpers.js";
+} from './logo-component.template.js';
 
 const logoAttributes = {
-  HREF: "href",
-  TEXT: "text",
-  CUSTOM_STYLES: "custom-styles",
+  HREF: 'href',
+  TEXT: 'text',
+  CUSTOM_STYLES: 'custom-styles',
 };
 
 export class LogoComponent extends HTMLElement {
   static get name() {
-    return "logo-component";
+    return 'logo-component';
   }
 
   static get observedAttributes() {
@@ -31,7 +31,7 @@ export class LogoComponent extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback() {
@@ -71,7 +71,7 @@ export class LogoComponent extends HTMLElement {
     href = this.#href,
     text = this.#logoText
   ) {
-    const template = document.createElement("template");
+    const template = document.createElement('template');
 
     const templateGenerator = href
       ? generateTemplateWithLink
