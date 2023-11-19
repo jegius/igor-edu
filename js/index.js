@@ -1,4 +1,5 @@
 import { ButtonComponent } from './components/button/button-component.js';
+import { CardComponent } from './components/card/card-component.js';
 import { HeaderComponent } from './components/header/header-component.js';
 import { ImageComponent } from './components/image/image-component.js';
 import { LinkComponent } from './components/link/link-component.js';
@@ -16,4 +17,5 @@ import { TitleComponent } from './components/title/title-component.js';
   HeaderComponent,
   ImageComponent,
   ScrollComponent,
+  CardComponent,
 ].map(component => customElements.define(component.name, component));

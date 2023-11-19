@@ -1,10 +1,10 @@
 import generateStyles from './scroll-component.styles';
 
-export default function generateTemplate(contentNodes) {
+export default function generateTemplate() {
   return `
     ${generateStyles()}
     <div class='_scrollable'>
-        ${contentNodes}
+        <slot></slot>
     </div>
     `;
 }

@@ -1,4 +1,5 @@
 import { ButtonComponent } from '../js/components/button/button-component.js';
+import { CardComponent } from '../js/components/card/card-component.js';
 import { HeaderComponent } from '../js/components/header/header-component.js';
 import { ImageComponent } from '../js/components/image/image-component.js';
 import { LinkComponent } from '../js/components/link/link-component.js';
@@ -29,5 +30,6 @@ const preview = {
   ImageComponent,
   HeaderComponent,
   ScrollComponent,
+  CardComponent,
 ].map(component => customElements.define(component.name, component));
 export default preview;

@@ -20,20 +20,13 @@ export default {
 
 const Template = args => {
   return html`
-    <scroll-component class="_scrollable">
+    <scroll-component>
       <style>
         .section {
           height: 50rem;
           border: 0.068rem dashed #69a2ea;
           border-radius: 4rem;
           margin-top: 2rem;
-        }
-        .wrapper {
-          padding: 2rem;
-          height: 20rem;
-          overflow-y: scroll;
-          position: relative;
-          box-shadow: 0 0 0.5rem 0.3rem #eee inset;
         }
 
         .section:nth-child(odd) {
@@ -57,7 +50,7 @@ const Template = args => {
           href="#"
         ></link-element>
       </nav-element>
-      <div class="wrapper _scrollable">
+      <div>
         <div class="section" id="first"></div>
         <div class="section" id="second"></div>
         <div class="section" id="third"></div>
