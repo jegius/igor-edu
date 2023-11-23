@@ -177,7 +177,3 @@ export function scrollFunctionHeader(attributesConfig, event) {
     this.style.width = attributesConfig.scrollFunction.fullWidth;
   }
 }
-
-export function hoverEvent(hoveredElement) {
-  console.log(hoveredElement);
-}
