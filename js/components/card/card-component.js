@@ -1,33 +1,47 @@
-import { addListeners, cleanNodes, select } from '../api/helpers.js';
+import {
+  addListeners,
+  cleanNodes,
+  scrollContentToTop,
+  select,
+} from '../api/helpers.js';
 import generateTemplate from './card-component.template';
 
 const cardAttributes = {
   CARD_TITLE: 'title',
   CARD_CONTENT: 'content',
   GROUP_ID: 'group-id',
-  CUSTOM_EVENT: 'event',
+  EVENT_NAME: 'event-name',
+  EVENT_BODY: 'event-body',
+  IMAGE_URL: 'image-url',
 };
 
 export class CardComponent extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.#promise = new Promise((res, rej) => {
-      res(select('card-component', document));
-    });
   }
-
-  #promise;
+  #imageUrl;
   #titleText;
   #content;
-  #groupIdArray;
-  #customGroupId;
-  #listeners;
+  #groupId;
+  #eventName;
+  #eventBody;
+
+  #listeners = [
+    [
+      select.bind(this, '.card-component__link'),
+      'click',
+      this.#emitCustomEvent.bind(this),
+    ],
+  ];
 
   #ATTRIBUTE_MAPPING = new Map([
     [cardAttributes.CARD_TITLE, this.#setTitle.bind(this)],
     [cardAttributes.CARD_CONTENT, this.#setContent.bind(this)],
-    [cardAttributes.GROUP_ID, this.#setCustomGroupId.bind(this)],
+    [cardAttributes.GROUP_ID, this.#setGroupId.bind(this)],
+    [cardAttributes.IMAGE_URL, this.#getImageUrl.bind(this)],
+    [cardAttributes.EVENT_NAME, this.#setEventName.bind(this)],
+    [cardAttributes.EVENT_BODY, this.#setEventBody.bind(this)],
   ]);
 
   static get name() {
@@ -35,29 +49,12 @@ export class CardComponent extends HTMLElement {
   }
 
   async connectedCallback() {
-    try {
-      const data = await this.#promise;
-      if (data.nodeType !== 9) {
-        console.log(data);
-        this.#listeners = [
-          [
-            select.bind(this, data, document),
-            'click',
-            this.#addCustomEvent.bind(this, 'card-component'),
-          ],
-        ];
-        const cardConfig = await this.#getGroupId();
-        this.#groupIdArray = cardConfig;
-        this.#render();
-        this.#listeners.forEach(addListeners);
-      } else return;
-    } catch (error) {
-      console.log(error);
-    }
+    this.#render();
+    this.#listeners.forEach(addListeners);
   }
 
   disconnectedCallback() {
-    // this.#listeners.forEach(addListeners);
+    this.#listeners.forEach(addListeners);
   }
 
   static get observedAttributes() {
@@ -67,7 +64,21 @@ export class CardComponent extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (newValue !== oldValue) {
       const callback = this.#ATTRIBUTE_MAPPING.get(name);
-      if (callback) callback(this, newValue);
+      if (callback) {
+        callback(this, newValue);
+      }
+    }
+  }
+
+  #setEventName(_, newEventName) {
+    if (newEventName) {
+      this.#eventName = newEventName;
+    }
+  }
+
+  #setEventBody(_, newEventBody) {
+    if (newEventBody) {
+      this.#eventBody = JSON.parse(newEventBody);
     }
   }
 
@@ -79,38 +90,34 @@ export class CardComponent extends HTMLElement {
     this.#content = newContent;
   }
 
-  #setCustomGroupId(_, newId) {
-    this.#customGroupId = newId;
+  #setGroupId(_, newId) {
+    this.#groupId = newId;
   }
 
-  async #getGroupId() {
-    const data = await fetch(
-      'http://localhost:6006/js/components/card/images-config.json',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-    return await data.json();
+  #emitCustomEvent() {
+    const node = this.shadowRoot.querySelector('a');
+    const event = new CustomEvent(this.#eventName, {
+      detail: {
+        eventBody: this.#eventBody,
+        groupId: this.#groupId,
+      },
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+    });
+
+    node.dispatchEvent(event);
   }
 
-  #addCustomEvent(targetOfEvent) {
-    const node = this.shadowRoot.querySelector(targetOfEvent);
-    console.log('Custom event fn');
-    node.dispatchEvent(
-      new CustomEvent('str', {
-        bubbles: true,
-        detail: 'str',
-      })
-    );
+  #getImageUrl(_, newImageUrl) {
+    this.#imageUrl = newImageUrl;
   }
 
   #render(
     titleText = this.#titleText,
     content = this.#content,
-    groupId = this.#groupIdArray,
-    customGroupId = this.#customGroupId
+    groupId = this.#groupId,
+    imageUrl = this.#imageUrl
   ) {
     const template = document.createElement('template');
 
@@ -118,8 +125,9 @@ export class CardComponent extends HTMLElement {
       titleText,
       content,
       groupId,
-      customGroupId
+      imageUrl
     );
     cleanNodes(this.shadowRoot).append(template.content.cloneNode('true'));
+    scrollContentToTop(this.shadowRoot, '.service-card__content');
   }
 }

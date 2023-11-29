@@ -1,75 +1,81 @@
-export default function generateStyles(customGroupId) {
+export default function generateStyles(imageUrl) {
   return `
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600&display=swap');
+
     @import url('../common.css');
+
+    .card-component__link {
+        text-decoration: none; 
+        color: black; 
+        width: 20.625rem; 
+        display: inline-block;  
+        -ms-user-select: none; 
+        -moz-user-select: none; 
+        -webkit-user-select: none; 
+        user-select: none; 
+    }
+
     .service-card {
         width: 20.625rem;
         height: 28.125rem;
         font-family: "Inter";
         overflow: hidden;
-        transition: transform 0.5s ease-in-out;
-        position: relative;
-        border-radius: 1.25rem 1.25rem 1.25rem 1.25rem;
-        border: 0.063rem solid #E3E1D5;
+        transition: transform .5s ease-in-out;
+        border-radius: 1.25rem;
+        border: .063rem solid var(--cardBorderColor);
         background-repeat: no-repeat;
         background-size: contain;
         cursor: pointer;
+        position: relative;
     }
 
     .service-card:hover {
        transform: scale(1.05);
     }
 
-    
-
-    .underImage__title {
-        margin-top: 0.63rem;
+    .content__title {
+        margin-top: .63rem;
         font-size: 1.25rem;
-        color: var(--orangeColor);
+        color: var(--orange);
         font-weight: 700;
         text-align: center;
         margin: .4rem;
     }
 
-    .underImage__description {
-        margin-top: 0.62rem;
-        text-align: left;
+    .content__description {
+        margin-top: .62rem;
+        text-align: center;
         opacity: 0;
-        transition: opacity .8s ease-in-out;
-        padding: 10px;
+        transition: opacity .3s ease-in-out;
+        padding: .4rem;
     }
 
-    .service-card__underImage {
+    .service-card__content {
         text-align: center;
-        border-radius: 0rem 0rem 1.25rem 1.25rem;
-        border-top: none;
-        width: 20.625rem;
-        height: 6.25rem;
+        border-radius:  1.25rem 0 0;
+        height: 100%;
         overflow-y: scroll;
         word-wrap: break-word;
-        position: relative;
         position: absolute;
-        transform: translateY(40%);
-        transition: all .5s ease-out;
-        
+        transform: translateY(85%);
+        transition: transform .5s ease-out;
+        z-index: 1;
     }
 
     .service-card__image {
-        border-radius: 1.25rem 1.25rem 0rem 0rem;
+        border-radius: 0 0 1.25rem 1.25rem;
         width: 20.56269rem;
         height: 21.875rem;
-        background-image: url('../../../img/servicesCards/service_picture${customGroupId}.png');
-        transition: all .7s ease-out; 
+        background-image: url(${imageUrl});
+        transition: opacity .7s ease-out, transform .7s ease; 
         background-repeat: no-repeat;
     }   
 
-    .service-card:hover .service-card__underImage {
-        transform: translateY(-100%);
-        height: 100%;
+    .service-card:hover .service-card__content {
+         transform: translateY(1%)
     }
 
-       .service-card:hover .underImage__description {
+       .service-card:hover .content__description {
         opacity: 1;
         font-size: 1.2rem;
         font-weight: 400;
@@ -79,21 +85,8 @@ export default function generateStyles(customGroupId) {
         opacity: .2;
         background-size: cover;
         background-repeat: no-repeat;
-        height: 100%;
+        transform: scale(1.8);
       }
-
-      .service-card:not(:hover) {
-        transition: height 0.5s ease-in-out; 
-     }
-
-      .service-card:not(:hover) .service-card__underImage {
-         transition: height 0.5s ease-in-out; 
-    }
-
-      .service-card:not(:hover) .service-card__image {
-         transition: height 0.5s ease-in-out; 
-     }
-     
 
    </style>
     `;
