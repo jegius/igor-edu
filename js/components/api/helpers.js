@@ -17,7 +17,6 @@ export function removeListeners([node, event, listener]) {
 export function select(className, context) {
   const root = context ?? this.shadowRoot;
   const node = className ? root.querySelector(className) : null;
-  console.log(node ?? root);
   return node ?? root;
 }
 
@@ -179,10 +178,7 @@ export function scrollFunctionHeader(attributesConfig, event) {
   }
 }
 
-export function scrollContentToTop(context, className) {
-  const scrollElement = context.querySelector(className);
-
-  scrollElement.addEventListener('mouseleave', function () {
-    this.scrollTop = 0;
-  });
+export function scrollContentToTop(className) {
+  const scrollableNode = this.shadowRoot.querySelector(className);
+  scrollableNode.scrollTop = 0;
 }

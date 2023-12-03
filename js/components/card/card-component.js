@@ -9,7 +9,7 @@ import generateTemplate from './card-component.template';
 const cardAttributes = {
   CARD_TITLE: 'title',
   CARD_CONTENT: 'content',
-  GROUP_ID: 'group-id',
+  CARD_ID: 'card-id',
   EVENT_NAME: 'event-name',
   EVENT_BODY: 'event-body',
   IMAGE_URL: 'image-url',
@@ -23,17 +23,21 @@ export class CardComponent extends HTMLElement {
   #imageUrl;
   #titleText;
   #content;
-  #groupId;
+  #cardId;
   #eventName;
   #eventBody;
-
-  #listeners = [
-    [
-      select.bind(this, '.card-component__link'),
-      'click',
-      this.#emitCustomEvent.bind(this),
-    ],
-  ];
+  #listeners = {
+    emitCustomEvent: {
+      node: select.bind(this, 'card-component', this),
+      event: 'click',
+      listener: this.#emitCustomEvent.bind(this),
+    },
+    scrollToTop: {
+      node: select.bind(this, '.service-card__content', this.shadowRoot),
+      event: 'mouseleave',
+      listener: scrollContentToTop.bind(this, '.service-card__content'),
+    },
+  };
 
   #ATTRIBUTE_MAPPING = new Map([
     [cardAttributes.CARD_TITLE, this.#setTitle.bind(this)],
@@ -50,7 +54,10 @@ export class CardComponent extends HTMLElement {
 
   async connectedCallback() {
     this.#render();
-    this.#listeners.forEach(addListeners);
+
+    for (const [_, listenerConfig] of Object.entries(this.#listeners)) {
+      addListeners(Object.values(listenerConfig));
+    }
   }
 
   disconnectedCallback() {
@@ -91,22 +98,20 @@ export class CardComponent extends HTMLElement {
   }
 
   #setGroupId(_, newId) {
-    this.#groupId = newId;
+    this.#cardId = newId;
   }
 
   #emitCustomEvent() {
-    const node = this.shadowRoot.querySelector('a');
     const event = new CustomEvent(this.#eventName, {
       detail: {
         eventBody: this.#eventBody,
-        groupId: this.#groupId,
+        groupId: this.#cardId,
       },
       bubbles: true,
       cancelable: true,
       composed: true,
     });
-
-    node.dispatchEvent(event);
+    this.dispatchEvent(event);
   }
 
   #getImageUrl(_, newImageUrl) {
@@ -116,18 +121,12 @@ export class CardComponent extends HTMLElement {
   #render(
     titleText = this.#titleText,
     content = this.#content,
-    groupId = this.#groupId,
+    cardId = this.#cardId,
     imageUrl = this.#imageUrl
   ) {
     const template = document.createElement('template');
 
-    template.innerHTML = generateTemplate(
-      titleText,
-      content,
-      groupId,
-      imageUrl
-    );
+    template.innerHTML = generateTemplate(titleText, content, cardId, imageUrl);
     cleanNodes(this.shadowRoot).append(template.content.cloneNode('true'));
-    scrollContentToTop(this.shadowRoot, '.service-card__content');
   }
 }

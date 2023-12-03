@@ -48,13 +48,14 @@ export default function generateStyles(imageUrl) {
         opacity: 0;
         transition: opacity .3s ease-in-out;
         padding: .4rem;
+        overflow-y: scroll;
+        height: 23rem;
     }
 
     .service-card__content {
         text-align: center;
         border-radius:  1.25rem 0 0;
         height: 100%;
-        overflow-y: scroll;
         word-wrap: break-word;
         position: absolute;
         transform: translateY(85%);
@@ -63,7 +64,6 @@ export default function generateStyles(imageUrl) {
     }
 
     .service-card__image {
-        border-radius: 0 0 1.25rem 1.25rem;
         width: 20.56269rem;
         height: 21.875rem;
         background-image: url(${imageUrl});
@@ -75,18 +75,26 @@ export default function generateStyles(imageUrl) {
          transform: translateY(1%)
     }
 
-       .service-card:hover .content__description {
+    .service-card:hover .content__description {
         opacity: 1;
         font-size: 1.2rem;
         font-weight: 400;
     }
 
-      .service-card:hover .service-card__image {
+    .service-card:hover .service-card__image {
         opacity: .2;
         background-size: cover;
         background-repeat: no-repeat;
         transform: scale(1.8);
-      }
+    }
+
+     .service-card:hover .content__title {
+       
+     }
+     
+     .content__description-wrapper {
+        overflow-y: scroll;
+     }
 
    </style>
     `;
