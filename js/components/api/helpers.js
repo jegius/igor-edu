@@ -177,3 +177,8 @@ export function scrollFunctionHeader(attributesConfig, event) {
     this.style.width = attributesConfig.scrollFunction.fullWidth;
   }
 }
+
+export function scrollContentToTop(className) {
+  const scrollableNode = this.shadowRoot.querySelector(className);
+  scrollableNode.scrollTop = 0;
+}
