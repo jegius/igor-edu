@@ -12,9 +12,9 @@ const Template = args => {
   return `
         <section-component secondary=${args.secondary} id=${args.id}>
             <div>
-                <image-component url='../../../img/about_houseplant.png' image-height='20' image-width='20'/>
+                <image-component url='../../../img/about_houseplant.png' image-height='25' image-width='25'/>
             </div>
-            <div>
+            <div style='width: 30rem'>
                 <title-component level='1'>We grow <span class='title__secondary'>plants</span> for you</title-component>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                 <button-component text='click' active='true'/>
@@ -39,11 +39,11 @@ const templateWithScroll = args => {
                 href='#test'>
             </link-element>
             <section-component secondary=${args.secondary} id=${args.id}>
-            <div>
-                <image-component url='../../../img/about_houseplant.png' image-height='20' image-width='20'/>
+            <div style='width: 28.04969rem'>
+                <image-component url='../../../img/about_houseplant.png' image-height='25' image-width='25'/>
             </div>
-            <div>
-              <title-component level='1'>We grow <span class='title__secondary'>plants</span> for you</title-component>
+            <div style='width: 28rem'>
+              <title-component custom-style='.title: {font-size: 10rem}' level='1'>We grow <span class='title__secondary'>plants</span> for you</title-component>
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                 <button-component text='click' active='true'/>
             </div>

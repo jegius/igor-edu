@@ -11,10 +11,11 @@ const generateStyles = backgroundBoolean => {
                 justify-content: center;
                 height: 100vh;
                 overflow: hidden;
-                width: 700px;
+                width: auto;
             }
             
             .section-content {
+                padding: 0 3rem;
                 height: 100vh;
                 width: 100%;
                 display: flex;
