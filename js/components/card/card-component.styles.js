@@ -48,7 +48,6 @@ export default function generateStyles(imageUrl) {
     opacity: 0;
     transition: opacity .3s ease-in-out;
     padding: .4rem;
-    overflow-y: scroll;
     height: 23rem;
 }
 
@@ -90,7 +89,12 @@ export default function generateStyles(imageUrl) {
 
   .content__description-wrapper {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
+
+  .content__description-wrapper::-webkit-scrollbar {
+    display: none;
+  }
 
 </style>
 `;
