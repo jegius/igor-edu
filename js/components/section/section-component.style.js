@@ -4,8 +4,8 @@ const generateStyles = backgroundBoolean => {
   if (backgroundBoolean === 'false') flag = false;
   return `
         <style>
+            @import url('../common.css');
             .section { 
-                border: .2rem solid black;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -15,11 +15,14 @@ const generateStyles = backgroundBoolean => {
             }
             
             .section-content {
+                height: 100vh;
                 width: 100%;
                 display: flex;
                 align-items:center;
                 justify-content: space-between;
-                background-color: ${flag ? '#E3E1D5' : 'white'}
+                background-color: ${
+                  flag ? `var( --secondaryGray)` : `var(--white)`
+                }
             }
         </style>
     `;

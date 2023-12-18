@@ -15,8 +15,8 @@ const Template = args => {
                 <image-component url='../../../img/about_houseplant.png' image-height='20' image-width='20'/>
             </div>
             <div>
-                <title-component>we grow ldl,f;lsd k;ds  ld;;l</title-component>
-                <p>kkdjklfsjkflsmvdvks;dvk;kv;mvkl;mkqmjkjbflnsjhg;JKLN;N;LKLDMFLKDFKLDLKMLM;L</p>
+                <title-component level='1'>We grow <span class='title__secondary'>plants</span> for you</title-component>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                 <button-component text='click' active='true'/>
             </div>
         </section-component>
@@ -43,8 +43,8 @@ const templateWithScroll = args => {
                 <image-component url='../../../img/about_houseplant.png' image-height='20' image-width='20'/>
             </div>
             <div>
-                <title-component>we grow ldl,f;lsd k;ds  ld;;l</title-component>
-                <p>kkdjklfsjkflsmvdvks;dvk;kv;mvkl;mkqmjkjbflnsjhg;JKLN;N;LKLDMFLKDFKLDLKMLM;L</p>
+              <title-component level='1'>We grow <span class='title__secondary'>plants</span> for you</title-component>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                 <button-component text='click' active='true'/>
             </div>
         </section-component>

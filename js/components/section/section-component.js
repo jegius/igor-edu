@@ -8,7 +8,7 @@ const sectionComponentAttributes = {
 export class SectionComponent extends HTMLElement {
   #ATTRIBUTES_MAPPING = new Map([
     [sectionComponentAttributes.ID, this.#setId.bind(this)],
-    [sectionComponentAttributes.BACKGROUND, this.#setBackground.bind(this)],
+    [sectionComponentAttributes.BACKGROUND, this.#setSecondary.bind(this)],
   ]);
 
   #Id;
@@ -42,7 +42,7 @@ export class SectionComponent extends HTMLElement {
     this.#Id = newId;
   }
 
-  #setBackground(_, newBoolean) {
+  #setSecondary(_, newBoolean) {
     this.#secondary = newBoolean;
   }
 
