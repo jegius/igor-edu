@@ -1,23 +1,22 @@
-import template from "./button-component.template.js";
-import events from "../api/events.js";
-import { addListeners, removeListeners, select } from "../api/helpers.js";
+import { addListeners, removeListeners, select } from '../api/helpers.js';
+import template from './button-component.template.js';
 
 const buttonAttributes = {
-  BUTTON_TEXT: "text",
-  IS_ACTIVE: "active",
-  EVENT_BODY: "event-body",
-  EVENT_NAME: "event-name",
+  BUTTON_TEXT: 'text',
+  IS_ACTIVE: 'active',
+  EVENT_BODY: 'event-body',
+  EVENT_NAME: 'event-name',
 };
 
 export class ButtonComponent extends HTMLElement {
   static get name() {
-    return "button-component";
+    return 'button-component';
   }
   #button;
   #eventBody;
   #eventName;
   #listeners = [
-    [select.bind(this, ".button"), "click", this.#addEventListeners.bind(this)],
+    [select.bind(this, '.button'), 'click', this.#addEventListeners.bind(this)],
   ];
 
   #ATTRIBUTE_MAPPING = new Map([
@@ -29,7 +28,7 @@ export class ButtonComponent extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
   }
 
   static get observedAttributes() {
@@ -78,15 +77,15 @@ export class ButtonComponent extends HTMLElement {
   }
 
   static #setText(element, newText) {
-    element.setAttribute("value", newText);
+    element.setAttribute('value', newText);
   }
 
   static #setActive(element, newAttr) {
-    const isActive = newAttr === "true";
+    const isActive = newAttr === 'true';
     if (isActive) {
-      element.classList.add("_active");
+      element.classList.add('_active');
     } else {
-      element.classList.remove("_active");
+      element.classList.remove('_active');
     }
   }
 
@@ -100,10 +99,10 @@ export class ButtonComponent extends HTMLElement {
   }
 
   #render() {
-    const templateElem = document.createElement("template");
+    const templateElem = document.createElement('template');
     templateElem.innerHTML = template;
 
     this.shadowRoot.appendChild(templateElem.content.cloneNode(true));
-    this.#button = this.shadowRoot.querySelector(".button");
+    this.#button = this.shadowRoot.querySelector('.button');
   }
 }

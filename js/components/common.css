@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600&display=swap');
 :root {
-    --white: #ffffff;
-    --orange: #E06733;
-    --green: #EDF2EC;
-    --primaryGreen: #499A18;
-    --grey: #636060;
-    --mainGrey: #717171;
-    --black: #010201;
-    --lowGray: #717171;
-    --secondaryGray: #E3E1D5;
-    --onePixel: .063rem;
-    --twentyBR: 1.25rem;
-    --onePixelBorder: .063rem solid #E06733;
-    --twoPixelBorder:  .125rem solid #E06733;
+  --white: #ffffff;
+  --orange: #e06733;
+  --green: #edf2ec;
+  --primaryGreen: #499a18;
+  --grey: #636060;
+  --mainGrey: #717171;
+  --black: #010201;
+  --lowGray: #717171;
+  --secondaryGray: #e3e1d5;
+  --onePixel: 0.063rem;
+  --twentyBR: 1.25rem;
+  --onePixelBorder: 0.063rem solid #e06733;
+  --twoPixelBorder: 0.125rem solid #e06733;
+  --cardBorderColor: #e3e1d5;
 }
