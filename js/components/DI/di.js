@@ -11,5 +11,3 @@ export function inject(key) {
 
   throw new Error(`No provider for: ${key}`);
 }
-
-console.log(dependencies);
