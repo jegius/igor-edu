@@ -1,3 +1,4 @@
+import { provide } from '../DI/di.js';
 import {
   addListeners,
   cleanNodes,
@@ -39,6 +40,12 @@ export class CardComponent extends HTMLElement {
     },
   };
 
+  #test() {
+    return {
+      message: 'hello from container',
+    };
+  }
+
   #ATTRIBUTE_MAPPING = new Map([
     [cardAttributes.CARD_TITLE, this.#setTitle.bind(this)],
     [cardAttributes.CARD_CONTENT, this.#setContent.bind(this)],
@@ -58,6 +65,8 @@ export class CardComponent extends HTMLElement {
     for (const [_, listenerConfig] of Object.entries(this.#listeners)) {
       addListeners(Object.values(listenerConfig));
     }
+
+    provide('test', this.#test);
   }
 
   disconnectedCallback() {
