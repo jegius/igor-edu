@@ -1,3 +1,4 @@
+import { inject } from '../DI/di.js';
 import generateTemplate from './section-component.template';
 
 const sectionComponentAttributes = {
@@ -36,6 +37,8 @@ export class SectionComponent extends HTMLElement {
 
   connectedCallback() {
     this.#render();
+
+    console.log(inject('test'));
   }
 
   #setId(_, newId) {
